@@ -7,7 +7,8 @@
 <?import javafx.scene.layout.RowConstraints?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-            prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+            prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controllers.HomeController">
     <GridPane layoutX="28.0" layoutY="25.0" prefHeight="350.0" prefWidth="350.0">
         <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="43.75" minWidth="43.75"
@@ -46,196 +47,197 @@
                             vgrow="SOMETIMES"/>
         </rowConstraints>
         <Button id="board_0_0" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.halignment="CENTER" GridPane.valignment="CENTER"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER"/>
         <Button id="board_1_0" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="1" GridPane.halignment="CENTER"
+                GridPane.valignment="CENTER"/>
         <Button id="board_2_0" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="2"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="2"/>
         <Button id="board_3_0" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="3"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="3"/>
         <Button id="board_4_0" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="4"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="4"/>
         <Button id="board_5_0" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="5"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="5"/>
         <Button id="board_6_0" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="6"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="6"/>
         <Button id="board_7_0" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="7"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="7"/>
         <Button id="board_0_1" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.rowIndex="1"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.rowIndex="1"/>
         <Button id="board_1_1" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
         <Button id="board_2_1" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
         <Button id="board_3_1" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
         <Button id="board_4_1" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="4" GridPane.rowIndex="1"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="4" GridPane.rowIndex="1"/>
         <Button id="board_5_1" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="5" GridPane.rowIndex="1"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="5" GridPane.rowIndex="1"/>
         <Button id="board_6_1" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="6" GridPane.rowIndex="1"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="6" GridPane.rowIndex="1"/>
         <Button id="board_7_1" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="7" GridPane.rowIndex="1"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="7" GridPane.rowIndex="1"/>
         <Button id="board_0_2" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.rowIndex="2"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.rowIndex="2"/>
         <Button id="board_1_2" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
         <Button id="board_2_2" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
         <Button id="board_3_2" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
         <Button id="board_4_2" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="4" GridPane.rowIndex="2"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="4" GridPane.rowIndex="2"/>
         <Button id="board_5_2" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="5" GridPane.rowIndex="2"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="5" GridPane.rowIndex="2"/>
         <Button id="board_1_0" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="6" GridPane.rowIndex="2"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="6" GridPane.rowIndex="2"/>
         <Button id="board_7_2" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="7" GridPane.rowIndex="2"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="7" GridPane.rowIndex="2"/>
         <Button id="board_0_3" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.rowIndex="3"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.rowIndex="3"/>
         <Button id="board_1_3" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
         <Button id="board_2_3" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
         <Button id="board_3_3" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
         <Button id="board_4_3" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="4" GridPane.rowIndex="3"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="4" GridPane.rowIndex="3"/>
         <Button id="board_5_3" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="5" GridPane.rowIndex="3"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="5" GridPane.rowIndex="3"/>
         <Button id="board_6_3" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="6" GridPane.rowIndex="3"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="6" GridPane.rowIndex="3"/>
         <Button id="board_7_3" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="7" GridPane.rowIndex="3"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="7" GridPane.rowIndex="3"/>
         <Button id="board_0_4" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.rowIndex="4"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.rowIndex="4"/>
         <Button id="board_1_4" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
         <Button id="board_2_4" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="2" GridPane.rowIndex="4"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
         <Button id="board_3_4" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="3" GridPane.rowIndex="4"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="3" GridPane.rowIndex="4"/>
         <Button id="board_4_4" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="4" GridPane.rowIndex="4"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="4" GridPane.rowIndex="4"/>
         <Button id="board_5_4" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="5" GridPane.rowIndex="4"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="5" GridPane.rowIndex="4"/>
         <Button id="board_6_4" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="6" GridPane.rowIndex="4"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="6" GridPane.rowIndex="4"/>
         <Button id="board_7_4" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="7" GridPane.rowIndex="4"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="7" GridPane.rowIndex="4"/>
         <Button id="board_0_5" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.rowIndex="5"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.rowIndex="5"/>
         <Button id="board_1_5" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
         <Button id="board_2_5" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="2" GridPane.rowIndex="5"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="2" GridPane.rowIndex="5"/>
         <Button id="board_3_5" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="3" GridPane.rowIndex="5"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="3" GridPane.rowIndex="5"/>
         <Button id="board_4_5" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="4" GridPane.rowIndex="5"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="4" GridPane.rowIndex="5"/>
         <Button id="board_5_5" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="5" GridPane.rowIndex="5"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="5" GridPane.rowIndex="5"/>
         <Button id="board_6_5" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="6" GridPane.rowIndex="5"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="6" GridPane.rowIndex="5"/>
         <Button id="board_7_5" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="7" GridPane.rowIndex="5"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="7" GridPane.rowIndex="5"/>
         <Button id="board_0_6" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.rowIndex="6"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.rowIndex="6"/>
         <Button id="board_1_6" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
         <Button id="board_2_6" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="2" GridPane.rowIndex="6"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="2" GridPane.rowIndex="6"/>
         <Button id="board_3_6" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="3" GridPane.rowIndex="6"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="3" GridPane.rowIndex="6"/>
         <Button id="board_4_6" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="4" GridPane.rowIndex="6"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="4" GridPane.rowIndex="6"/>
         <Button id="board_5_6" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="5" GridPane.rowIndex="6"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="5" GridPane.rowIndex="6"/>
         <Button id="board_6_6" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="6" GridPane.rowIndex="6"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="6" GridPane.rowIndex="6"/>
         <Button id="board_6_7" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="7" GridPane.rowIndex="6"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="7" GridPane.rowIndex="6"/>
         <Button id="board_0_7" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.rowIndex="7"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.rowIndex="7"/>
         <Button id="board_1_7" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
         <Button id="board_2_7" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="2" GridPane.rowIndex="7"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="2" GridPane.rowIndex="7"/>
         <Button id="board_3_7" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="3" GridPane.rowIndex="7"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="3" GridPane.rowIndex="7"/>
         <Button id="board_4_7" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="4" GridPane.rowIndex="7"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="4" GridPane.rowIndex="7"/>
         <Button id="board_5_7" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="5" GridPane.rowIndex="7"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="5" GridPane.rowIndex="7"/>
         <Button id="board_6_7" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="6" GridPane.rowIndex="7"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="6" GridPane.rowIndex="7"/>
         <Button id="board_7_7" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0"
-                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"
-                GridPane.columnIndex="7" GridPane.rowIndex="7"/>
+                minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick"
+                prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="7" GridPane.rowIndex="7"/>
     </GridPane>
 </AnchorPane>
