@@ -1,20 +1,11 @@
 package models.game.piece;
 
-import javafx.scene.paint.Color;
-
 public class KnightPiece implements Piece
 {
-    private Color color;
-
     @Override
-    public void setColor(Color color)
+    public String getStyle()
     {
-
-    }
-
-    @Override
-    public Color getColor()
-    {
+        // FIXME: add Archer CSS and SVG string here
         return null;
     }
 
