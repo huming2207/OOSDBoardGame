@@ -1,13 +1,15 @@
 package models.game;
 
+import javafx.beans.property.SimpleMapProperty;
+import javafx.collections.MapChangeListener;
+import javafx.collections.ObservableMap;
 import models.game.piece.NullPiece;
 import models.game.piece.Piece;
 
-import java.util.HashMap;
 
 public class GameMap
 {
-    private HashMap<Coordinate, Piece> gameMap = new HashMap<>();
+    private ObservableMap<Coordinate, Piece> gameMap = new SimpleMapProperty<>();
 
     public GameMap()
     {
@@ -19,5 +21,13 @@ public class GameMap
         }
     }
 
+    public ObservableMap<Coordinate, Piece> getGameMap()
+    {
+        return gameMap;
+    }
 
+    public void setGameMap(ObservableMap<Coordinate, Piece> gameMap)
+    {
+        this.gameMap = gameMap;
+    }
 }
