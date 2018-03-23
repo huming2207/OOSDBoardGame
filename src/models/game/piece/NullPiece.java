@@ -6,7 +6,7 @@ public class NullPiece implements Piece
     public String getStyle()
     {
         // FIXME: add Archer CSS and SVG string here
-        return null;
+        return "-fx-border-color: #000000;";
     }
 
     @Override

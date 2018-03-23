@@ -6,7 +6,7 @@ public class KnightPiece implements Piece
     public String getStyle()
     {
         // FIXME: add Archer CSS and SVG string here
-        return null;
+        return "-fx-border-color: #0000ff;";
     }
 
 

@@ -6,7 +6,7 @@ public class MagePiece implements Piece
     public String getStyle()
     {
         // FIXME: add Archer CSS and SVG string here
-        return null;
+        return "-fx-border-color: #ff0000;";
     }
 
 

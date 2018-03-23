@@ -6,7 +6,7 @@ public class ArcherPiece implements Piece
     public String getStyle()
     {
         // FIXME: add Archer CSS and SVG string here
-        return null;
+        return "-fx-border-color: #00ff00;";
     }
 
 
