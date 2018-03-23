@@ -13,12 +13,12 @@ import java.util.Map;
 
 public class HomeController implements MapChangeListener<Coordinate, Piece>
 {
-    private GameMap gameMap;
+    private GameLogic gameMap;
     private Map<String, Object> controlMap;
 
     public HomeController()
     {
-        this.gameMap = new GameMap();
+        this.gameMap = new GameLogic();
     }
 
     @FXML
@@ -53,7 +53,7 @@ public class HomeController implements MapChangeListener<Coordinate, Piece>
     }
 
     /**
-     * Triggers when GameMap is changed
+     * Triggers when GameLogic is changed
      * @param change
      */
     @Override

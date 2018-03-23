@@ -7,11 +7,11 @@ import models.game.piece.NullPiece;
 import models.game.piece.Piece;
 
 
-public class GameMap
+public class GameLogic
 {
     private ObservableMap<Coordinate, Piece> gameMap = FXCollections.observableHashMap();
 
-    public GameMap()
+    public GameLogic()
     {
         // Initialize game map
         for(int posX = 0; posX <= 7; posX += 1) {
