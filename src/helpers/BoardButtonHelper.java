@@ -10,10 +10,11 @@ public class BoardButtonHelper
     {
         if(actionEvent == null) return null;
 
-        String[] splitedId = ((Button)actionEvent.getSource()).getId().split("_");
+        String buttonId = ((Button)actionEvent.getSource()).getId();
+        String[] splitedId = buttonId.split("_");
         int posX = Integer.valueOf(splitedId[1]);
         int posY = Integer.valueOf(splitedId[2]);
 
-        return new BoardButtonResult(posX, posY);
+        return new BoardButtonResult(posX, posY, buttonId);
     }
 }

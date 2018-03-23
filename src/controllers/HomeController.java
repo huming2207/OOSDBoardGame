@@ -5,30 +5,34 @@ import javafx.collections.MapChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import models.BoardButtonResult;
 import models.game.Coordinate;
 import models.game.piece.Piece;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
-public class HomeController implements MapChangeListener<Coordinate, Piece>
+public class HomeController
 {
-    private GameLogic gameMap;
+    private GameLogic gameLogic;
     private Map<String, Object> controlMap;
 
     public HomeController()
     {
-        this.gameMap = new GameLogic();
+        this.gameLogic = new GameLogic(this);
     }
 
     @FXML
     private void initialize()
     {
-        gameMap.getGameMap().addListener(this);
+
     }
 
     /**
      * Set the FXML Control map from the main class (i.e. from loader.getNamespace())
+     *
      * @param controlMap Map source to be set
      */
     public void setControlMap(Map<String, Object> controlMap)
@@ -38,6 +42,7 @@ public class HomeController implements MapChangeListener<Coordinate, Piece>
 
     /**
      * Handle all board button click event
+     *
      * @param clickEvent event input
      */
     @FXML
@@ -53,12 +58,28 @@ public class HomeController implements MapChangeListener<Coordinate, Piece>
     }
 
     /**
-     * Triggers when GameLogic is changed
-     * @param change
+     * Update the UI from game logic
+     *  - Query the controlMap to get the button, if null, raise an Alert dialog
+     *  - Apply style when a valid button
+     *
+     * @param coordinate Coordinate of a button
+     * @param style CSS style
      */
-    @Override
-    public void onChanged(Change<? extends Coordinate, ? extends Piece> change)
+    public void commitUIChanges(Coordinate coordinate, String style)
     {
+        // The ID format is "button_posX_posY"
+        Button button = (Button)controlMap.get(String.format("button_%d_%d",
+                coordinate.getPosX(), coordinate.getPosY()));
 
+        // In case the game algorithm goes wrong...
+        // Btw style string does not need to check since it is constant in the model.
+        if(button == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Operation out of range!");
+            alert.showAndWait();
+            return;
+        }
+
+        button.setStyle(style);
     }
+
 }
