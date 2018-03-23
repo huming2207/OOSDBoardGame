@@ -1,15 +1,15 @@
-package models.game;
+package controllers;
 
-import javafx.beans.property.SimpleMapProperty;
-import javafx.collections.MapChangeListener;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
+import models.game.Coordinate;
 import models.game.piece.NullPiece;
 import models.game.piece.Piece;
 
 
 public class GameMap
 {
-    private ObservableMap<Coordinate, Piece> gameMap = new SimpleMapProperty<>();
+    private ObservableMap<Coordinate, Piece> gameMap = FXCollections.observableHashMap();
 
     public GameMap()
     {
