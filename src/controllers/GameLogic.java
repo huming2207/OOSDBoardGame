@@ -13,7 +13,7 @@ import models.game.piece.Piece;
 public class GameLogic implements MapChangeListener<Coordinate, Piece>
 {
     private ObservableMap<Coordinate, Piece> gameMap = FXCollections.observableHashMap();
-    private HomeController parentController;
+    private HomeController homeController;
 
     public GameLogic(HomeController homeController)
     {
@@ -23,6 +23,12 @@ public class GameLogic implements MapChangeListener<Coordinate, Piece>
                 gameMap.put(new Coordinate(posX, posY), new NullPiece());
             }
         }
+
+        // Assign home controller
+        this.homeController = homeController;
+
+        // Add change listener
+        gameMap.addListener(this);
     }
 
     public void commitMapChanges(BoardButtonResult clickResult)
@@ -42,6 +48,6 @@ public class GameLogic implements MapChangeListener<Coordinate, Piece>
     @Override
     public void onChanged(Change<? extends Coordinate, ? extends Piece> change)
     {
-        parentController.commitUIChanges(change.getKey(), change.getValueAdded().getStyle());
+        homeController.commitUIChanges(change.getKey(), change.getValueAdded().getStyle());
     }
 }
