@@ -55,6 +55,8 @@ public class HomeController
                 String.format("Button at row %d col %d clicked!", buttonResult.getPosX(), buttonResult.getPosY()));
 
         alert.show();
+
+        gameLogic.commitMapChanges(buttonResult);
     }
 
     /**
@@ -68,7 +70,7 @@ public class HomeController
     public void commitUIChanges(Coordinate coordinate, String style)
     {
         // The ID format is "button_posX_posY"
-        Button button = (Button)controlMap.get(String.format("button_%d_%d",
+        Button button = (Button)controlMap.get(String.format("board_%d_%d",
                 coordinate.getPosX(), coordinate.getPosY()));
 
         // In case the game algorithm goes wrong...
