@@ -31,6 +31,10 @@ public class GameLogic implements MapChangeListener<Coordinate, Piece>
         gameMap.addListener(this);
     }
 
+    /**
+     * Commit changes to game map
+     * @param clickResult
+     */
     public void commitMapChanges(BoardButtonResult clickResult)
     {
         // TODO: Here's just a demo, need to replace with the real logic later...
