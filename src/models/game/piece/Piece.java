@@ -6,6 +6,8 @@ public interface Piece
      * Style string method of each piece
      * The style string is based on JavaFX CSS, we can also put in some SVG images.
      *
+     * TODO: bring a independent SVG parser instead of writing a constant JavaFX Style Sheet string inside the code
+     *
      * @return CSS String
      */
     String getStyle();

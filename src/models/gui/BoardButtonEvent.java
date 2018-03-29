@@ -1,26 +1,24 @@
-package models;
+package models.gui;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-import java.lang.management.BufferPoolMXBean;
-
-public class BoardButtonResult
+public class BoardButtonEvent
 {
     private IntegerProperty posX = new SimpleIntegerProperty();
     private IntegerProperty posY = new SimpleIntegerProperty();
     private StringProperty  id = new SimpleStringProperty();
 
-    public BoardButtonResult(IntegerProperty posX, IntegerProperty posY, StringProperty id)
+    public BoardButtonEvent(IntegerProperty posX, IntegerProperty posY, StringProperty id)
     {
         this.posX = posX;
         this.posY = posY;
         this.id = id;
     }
 
-    public BoardButtonResult(int posX, int posY, String id)
+    public BoardButtonEvent(int posX, int posY, String id)
     {
         this.posX.set(posX);
         this.posY.set(posY);
@@ -78,7 +76,7 @@ public class BoardButtonResult
     {
         if(o == null) return false;
 
-        BoardButtonResult otherResult = (BoardButtonResult)o;
+        BoardButtonEvent otherResult = (BoardButtonEvent)o;
         return this.posX.get() == otherResult.posX.get() && this.posY.get() == otherResult.posY.get();
     }
 

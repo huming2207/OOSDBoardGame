@@ -1,17 +1,13 @@
 package controllers;
 
 import helpers.BoardButtonHelper;
-import javafx.collections.MapChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import models.BoardButtonResult;
+import models.gui.BoardButtonEvent;
 import models.game.Coordinate;
-import models.game.piece.Piece;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 public class HomeController
@@ -48,7 +44,7 @@ public class HomeController
     @FXML
     private void handleBoardButtonClick(ActionEvent clickEvent)
     {
-        BoardButtonResult buttonResult = BoardButtonHelper.parseClickResult(clickEvent);
+        BoardButtonEvent buttonResult = BoardButtonHelper.parseClickResult(clickEvent);
 
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION,

@@ -2,7 +2,7 @@ package helpers;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
-import models.BoardButtonResult;
+import models.gui.BoardButtonEvent;
 
 public class BoardButtonHelper
 {
@@ -11,7 +11,7 @@ public class BoardButtonHelper
      * @param actionEvent Action event from a button
      * @return Button result, including x & y axis and button ID string.
      */
-    public static BoardButtonResult parseClickResult(ActionEvent actionEvent)
+    public static BoardButtonEvent parseClickResult(ActionEvent actionEvent)
     {
         if(actionEvent == null) return null;
 
@@ -20,6 +20,6 @@ public class BoardButtonHelper
         int posX = Integer.valueOf(splitedId[1]);
         int posY = Integer.valueOf(splitedId[2]);
 
-        return new BoardButtonResult(posX, posY, buttonId);
+        return new BoardButtonEvent(posX, posY, buttonId);
     }
 }
