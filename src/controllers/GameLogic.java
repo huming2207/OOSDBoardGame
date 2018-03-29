@@ -5,8 +5,7 @@ import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
 import models.BoardButtonResult;
 import models.game.Coordinate;
-import models.game.piece.MagePiece;
-import models.game.piece.NullPiece;
+import models.game.piece.EmptyPiece;
 import models.game.piece.Piece;
 
 
@@ -20,7 +19,7 @@ public class GameLogic implements MapChangeListener<Coordinate, Piece>
         // Initialize game map
         for(int posX = 0; posX <= 7; posX += 1) {
             for(int posY = 0; posY <= 7; posY += 1) {
-                gameMap.put(new Coordinate(posX, posY), new NullPiece());
+                gameMap.put(new Coordinate(posX, posY), new EmptyPiece());
             }
         }
 

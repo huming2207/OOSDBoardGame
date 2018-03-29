@@ -1,18 +1,17 @@
 package models.game.piece;
 
-public class MagePiece implements Piece
+public class EmptyPiece implements Piece
 {
     @Override
     public String getStyle()
     {
         // FIXME: add Archer CSS and SVG string here
-        return "-fx-border-color: #ff0000;";
+        return "-fx-border-color: #000000;";
     }
-
 
     @Override
     public PieceType getType()
     {
-        return PieceType.Mage;
+        return PieceType.Null;
     }
 }
