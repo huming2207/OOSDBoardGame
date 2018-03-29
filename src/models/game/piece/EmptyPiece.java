@@ -12,6 +12,18 @@ public class EmptyPiece implements Piece
     @Override
     public int getAttackLevel()
     {
-        return 0;
+        return -1;
+    }
+
+    @Override
+    public void applyAttack(int deduction)
+    {
+        // Do nothing?
+    }
+
+    @Override
+    public int getMark()
+    {
+        return -1;
     }
 }
