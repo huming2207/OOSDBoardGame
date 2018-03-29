@@ -5,8 +5,7 @@ import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
 import models.BoardButtonResult;
 import models.game.Coordinate;
-import models.game.piece.EmptyPiece;
-import models.game.piece.Piece;
+import models.game.piece.*;
 
 
 public class GameLogic implements MapChangeListener<Coordinate, Piece>
@@ -37,10 +36,10 @@ public class GameLogic implements MapChangeListener<Coordinate, Piece>
     public void commitMapChanges(BoardButtonResult clickResult)
     {
         // TODO: Here's just a demo, need to replace with the real logic later...
-        gameMap.put(new Coordinate(clickResult.getPosX() + 1, clickResult.getPosY() + 1 ), new MagePiece());
-        gameMap.put(new Coordinate(clickResult.getPosX() - 1, clickResult.getPosY() + 1 ), new MagePiece());
-        gameMap.put(new Coordinate(clickResult.getPosX() + 1, clickResult.getPosY() - 1 ), new MagePiece());
-        gameMap.put(new Coordinate(clickResult.getPosX() - 1, clickResult.getPosY() - 1 ), new MagePiece());
+        gameMap.put(new Coordinate(clickResult.getPosX() + 1, clickResult.getPosY() + 1 ), new GooglePiece());
+        gameMap.put(new Coordinate(clickResult.getPosX() - 1, clickResult.getPosY() + 1 ), new WeChatPiece());
+        gameMap.put(new Coordinate(clickResult.getPosX() + 1, clickResult.getPosY() - 1 ), new FacebookPiece());
+        gameMap.put(new Coordinate(clickResult.getPosX() - 1, clickResult.getPosY() - 1 ), new TwitterPiece());
     }
 
 
