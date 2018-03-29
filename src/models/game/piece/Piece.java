@@ -11,10 +11,10 @@ public interface Piece
     String getStyle();
 
     /**
-     * Supply piece type of each kind of piece
-     * Ref: {@link PieceType}
+     * Set the value of attack level
      *
-     * @return Piece type in Enum
+     * @return Attack level value in x/100 marks
      */
-    PieceType getType();
+    int getAttackLevel();
+
 }
