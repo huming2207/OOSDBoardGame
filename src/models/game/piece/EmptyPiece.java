@@ -10,8 +10,8 @@ public class EmptyPiece implements Piece
     }
 
     @Override
-    public PieceType getType()
+    public int getAttackLevel()
     {
-        return PieceType.Null;
+        return 0;
     }
 }
