@@ -71,18 +71,4 @@ public class BoardButtonEvent
         this.posY.set(posY);
     }
 
-    @Override
-    public boolean equals(Object o)
-    {
-        if(o == null) return false;
-
-        BoardButtonEvent otherResult = (BoardButtonEvent)o;
-        return this.posX.get() == otherResult.posX.get() && this.posY.get() == otherResult.posY.get();
-    }
-
-    @Override
-    public int hashCode()
-    {
-        return this.posX.get() * 100 + this.posX.get();
-    }
 }
