@@ -3,18 +3,19 @@ package models.game.player;
 import models.game.Coordinate;
 import models.game.piece.Piece;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Player
 {
     private String playerName;
-    private Map<Coordinate, Piece> pieceMap;
+    private ArrayList<Piece> pieceList;
 
     public Player(String playerName)
     {
         this.playerName = playerName;
-        this.pieceMap = new HashMap<>();
+        this.pieceList = new ArrayList<>();
     }
 
     public String getPlayerName()
@@ -27,13 +28,13 @@ public class Player
         this.playerName = playerName;
     }
 
-    public Map<Coordinate, Piece> getPieceMap()
+    public ArrayList<Piece> getPieceList()
     {
-        return pieceMap;
+        return this.pieceList;
     }
 
-    public void setPieceMap(Map<Coordinate, Piece> pieceMap)
+    public void setPieceMap(ArrayList<Piece> pieceList)
     {
-        this.pieceMap = pieceMap;
+        this.pieceList = pieceList;
     }
 }

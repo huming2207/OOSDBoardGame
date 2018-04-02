@@ -1,6 +1,7 @@
 package controllers;
 
 import helpers.BoardButtonHelper;
+import helpers.exceptions.DuplicatedPieceException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -52,7 +53,11 @@ public class HomeController
 
         alert.show();
 
-        gameLogic.commitMapChanges(buttonResult);
+        try {
+            gameLogic.commitMapChanges(buttonResult);
+        } catch (DuplicatedPieceException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

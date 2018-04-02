@@ -2,6 +2,8 @@ package models.game.piece;
 
 import models.game.Coordinate;
 
+import java.util.Objects;
+
 public abstract class Piece
 {
     private int mark;
@@ -75,4 +77,31 @@ public abstract class Piece
         this.coordinate = coordinate;
     }
 
+    @Override
+    public int hashCode()
+    {
+        // ...should be auto boxed to Integer object??
+        return Objects.hash(this.coordinate, this.attackLevel, this.mark);
+    }
+
+
+    @Override
+    public boolean equals(Object o)
+    {
+        // Self check
+        if(this == o) return true;
+
+        // Null check
+        if(o == null) return false;
+
+        // Type check
+        if(o.getClass() != this.getClass()) return false;
+
+        // Detailed check
+        Piece piece = (Piece) o;
+        return this.coordinate.getPosX() == piece.getCoordinate().getPosX()
+                && this.coordinate.getPosY() == piece.getCoordinate().getPosY()
+                && this.mark == piece.getMark()
+                && this.attackLevel == piece.getAttackLevel();
+    }
 }

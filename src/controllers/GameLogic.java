@@ -1,105 +1,110 @@
 package controllers;
 
-import javafx.collections.FXCollections;
-import javafx.collections.MapChangeListener;
-import javafx.collections.ObservableMap;
+import helpers.exceptions.DuplicatedPieceException;
+import javafx.collections.*;
+import models.game.piece.helpers.PieceFactory;
 import models.gui.BoardButtonEvent;
-import models.game.Coordinate;
 import models.game.piece.*;
 
-import java.util.HashMap;
-import java.util.Map;
 
-
-public class GameLogic implements MapChangeListener<Coordinate, Piece>
+public class GameLogic implements ListChangeListener<Piece>
 {
-    private ObservableMap<Coordinate, Piece> gameMap = FXCollections.observableHashMap();
+    private ObservableList<Piece> pieceList = FXCollections.observableArrayList();
     private HomeController homeController;
+    private Piece selectedPiece;
 
     public GameLogic(HomeController homeController)
     {
-        // Initialize game map
-        for(int posX = 0; posX <= 7; posX += 1) {
-            for(int posY = 0; posY <= 7; posY += 1) {
-                gameMap.put(new Coordinate(posX, posY), new EmptyPiece());
-            }
-        }
-
         // Assign home controller
         this.homeController = homeController;
 
         // Add change listener
-        gameMap.addListener(this);
+        pieceList.addListener(this);
+
+        // Add all from random piece factory
+        pieceList.addAll(PieceFactory.createRandomPieceList());
     }
 
     /**
      * Commit changes to game map
      * @param buttonEvent Supplied click result information
      */
-    public void commitMapChanges(BoardButtonEvent buttonEvent)
+    public void commitMapChanges(BoardButtonEvent buttonEvent) throws DuplicatedPieceException
     {
+        int posX = buttonEvent.getPosX();
+        int posY = buttonEvent.getPosY();
 
+        // Firstly, try find the piece
+        Piece pieceInList = getPieceFromList(posX, posY);
+
+        // Case 1: if it's null and the selected piece is null, then the user must have selected an empty piece,
+        //         simply ignore and terminate
+        if(pieceInList == null && this.selectedPiece == null) {
+            return;
+        }
+
+        // Case 2: if selectedPiece is null but piece found in list is not null, then the user must have
+        //         selecting a valid piece, simply passing it to selectedPiece.
+        if(pieceInList != null && this.selectedPiece == null) {
+            this.selectedPiece = pieceInList;
+            System.out.println(String.format("User selected piece at x %d, y %d", posX, posY));
+            return;
+        }
+
+        // Case 3: if selectedPiece is not null and piece found in list is null, then user is placing a valid piece
+        if(pieceInList == null && this.selectedPiece != null ) {
+
+            int index = this.pieceList.indexOf(this.selectedPiece);
+            this.selectedPiece.getCoordinate().setPosX(posX);
+            this.selectedPiece.getCoordinate().setPosY(posY);
+
+            // Replace modified
+            this.pieceList.set(index, this.selectedPiece);
+            return;
+        }
+
+        // Case 4: if selectedPiece is not null and the piece found in list is also not null, then it means the user
+        //         is placing a damn piece on a coordinate where it already filled by another piece.
+        //         Raise an exception here instead (no needS to evaluate any more)
+        throw new DuplicatedPieceException(
+                String.format("User putting pieces on a wrong place, x: %d, y: %d", posX, posY));
     }
 
 
+
+
     /**
-     * Trigger automatically when GameMap is changed.
+     * Trigger automatically when piece list is changed.
      * @param change items changed
      */
     @Override
-    public void onChanged(Change<? extends Coordinate, ? extends Piece> change)
+    public void onChanged(Change<? extends Piece> change)
     {
-        homeController.commitUIChanges(change.getKey(), change.getValueAdded().getStyle());
+        for(Piece piece : change.getRemoved()) {
+            homeController.commitUIChanges(piece.getCoordinate(), "");
+        }
+
+        for(Piece piece : change.getAddedSubList()) {
+            homeController.commitUIChanges(piece.getCoordinate(), piece.getStyle());
+        }
     }
 
+
     /**
-     * Detect pieces nearby
+     * Try find the piece in the list
      *
-     * @param coordinate Coordinate of the center piece
-     * @param piece Center piece
-     * @return a key-value map of piece information. If no piece found, return an empty list.
+     * @param posX X-axis of the piece
+     * @param posY Y-axis of the piece
+     * @return The piece object if it has been found, or null if it has not been found
      */
-    private Map<Coordinate, Piece> detectPiece(Coordinate coordinate, Piece piece)
+    private Piece getPieceFromList(int posX, int posY)
     {
-        HashMap<Coordinate, Piece> pieceMap = new HashMap<>();
-
-        // If null, return empty map
-        if(coordinate == null || piece == null) return pieceMap;
-
-        // If coordinate itself is wrong, return empty map
-        if(coordinate.getPosX() < 0 || coordinate.getPosX() > 7
-                || coordinate.getPosY() < 0 || coordinate.getPosY() > 7) return pieceMap;
-
-        /*
-          Assume
-            1. original piece is in point (0, 0);
-            2. this method should perform a search in 5x5 area, i.e. (-2, -2) to (2, 2).
-
-          Note
-            1. ignore original piece itself at (0, 0);
-            2. ignore overflow position (less than 0 or larger than 7);
-            3. ignore placeholder (EmptyPiece).
-         */
-
-        for(int offsetX = -2; offsetX <= 2; offsetX += 1) {
-            for(int offsetY = -2; offsetY <= 2; offsetY += 1) {
-                int posX = coordinate.getPosX() + offsetX;
-                int posY = coordinate.getPosY() + offsetY;
-
-                // Ignore original piece
-                if(posX == coordinate.getPosX() && posY == coordinate.getPosY()) continue;
-
-                // Try get the piece, it will be null if out of range.
-                Piece selectedPiece = gameMap.get(new Coordinate(posX, posY));
-
-                // Ignore non-existence (out of range) piece or placeholder
-                if(selectedPiece == null || selectedPiece instanceof EmptyPiece) continue;
-
-
-                pieceMap.put(new Coordinate(posX, posY), selectedPiece);
+        for(Piece piece : this.pieceList) {
+            if(piece.getCoordinate().getPosX() == posX && piece.getCoordinate().getPosY() == posY) {
+                return piece;
             }
         }
 
-        return pieceMap;
+        return null;
     }
 }
