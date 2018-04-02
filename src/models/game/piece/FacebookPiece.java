@@ -1,14 +1,12 @@
 package models.game.piece;
 
-public class FacebookPiece implements Piece
-{
-    private int mark;
-    private final int attackLevel;
+import models.game.Coordinate;
 
-    public FacebookPiece()
+public class FacebookPiece extends Piece
+{
+    public FacebookPiece(Coordinate coordinate)
     {
-        this.mark = 120;
-        this.attackLevel = 30;
+        super(coordinate, 120, 30);
     }
 
     @Override
@@ -22,23 +20,5 @@ public class FacebookPiece implements Piece
                 "0L434.548364 354.769455c0-79.918545 23.877818-137.495273 111.383273-137.495273l104.075636 0 0 " +
                 "97.745455-73.262545 0c-36.724364 0-45.056 24.389818-45.056 49.943273l0 49.058909 112.919273 " +
                 "0L629.201455 512l-97.512727 0 0 295.517091L434.548364 807.517091 434.548364 512 374.504727 512z\";";
-    }
-
-    @Override
-    public int getAttackLevel()
-    {
-        return this.attackLevel;
-    }
-
-    @Override
-    public void applyAttack(int deduction)
-    {
-        this.mark = this.mark - deduction;
-    }
-
-    @Override
-    public int getMark()
-    {
-        return this.mark;
     }
 }

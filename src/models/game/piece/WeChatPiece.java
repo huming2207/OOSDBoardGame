@@ -1,14 +1,12 @@
 package models.game.piece;
 
-public class WeChatPiece implements Piece
-{
-    private int mark;
-    private final int attackLevel;
+import models.game.Coordinate;
 
-    public WeChatPiece()
+public class WeChatPiece extends Piece
+{
+    public WeChatPiece(Coordinate coordinate)
     {
-        this.mark = 120;
-        this.attackLevel = 30;
+        super(coordinate, 120, 50);
     }
 
     @Override
@@ -37,23 +35,5 @@ public class WeChatPiece implements Piece
                 "499.105684zM586.657684 499.105684c-12.867368 0-25.923368 13.231158-25.923368 26.381474 0 13.204211 " +
                 "13.056 26.273684 25.923368 26.273684 19.712 0 32.525474-13.069474 32.525474-26.273684C619.183158 " +
                 "512.336842 606.369684 499.105684 586.657684 499.105684z\";";
-    }
-
-    @Override
-    public int getAttackLevel()
-    {
-        return this.attackLevel;
-    }
-
-    @Override
-    public void applyAttack(int deduction)
-    {
-        this.mark = this.mark - deduction;
-    }
-
-    @Override
-    public int getMark()
-    {
-        return this.mark;
     }
 }

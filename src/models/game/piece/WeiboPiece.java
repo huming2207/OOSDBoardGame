@@ -1,14 +1,12 @@
 package models.game.piece;
 
-public class WeiboPiece implements Piece
-{
-    private int mark;
-    private final int attackLevel;
+import models.game.Coordinate;
 
-    public WeiboPiece()
+public class WeiboPiece extends Piece
+{
+    public WeiboPiece(Coordinate coordinate)
     {
-        this.mark = 100;
-        this.attackLevel = 25;
+        super(coordinate, 100, 20);
     }
 
     @Override
@@ -47,23 +45,5 @@ public class WeiboPiece implements Piece
                 "80.476301-205.269873 36.904967-38.286332-20.805409-36.903944-61.586385-36.903944-61.586385s-" +
                 "15.888772-128.912087 121.684988-144.986064C532.512253 483.246634 557.114882 614.840617 " +
                 "515.215512 668.934885z\";";
-    }
-
-    @Override
-    public int getAttackLevel()
-    {
-        return this.attackLevel;
-    }
-
-    @Override
-    public void applyAttack(int deduction)
-    {
-        this.mark = this.mark - deduction;
-    }
-
-    @Override
-    public int getMark()
-    {
-        return this.mark;
     }
 }

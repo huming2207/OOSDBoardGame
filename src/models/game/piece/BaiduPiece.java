@@ -1,14 +1,13 @@
 package models.game.piece;
 
-public class BaiduPiece implements Piece
-{
-    private int mark;
-    private final int attackLevel;
+import models.game.Coordinate;
 
-    public BaiduPiece()
+public class BaiduPiece extends Piece
+{
+
+    public BaiduPiece(Coordinate coordinate)
     {
-        this.mark = 150;
-        this.attackLevel = 50;
+        super(coordinate, 150, 50);
     }
 
     @Override
@@ -35,23 +34,5 @@ public class BaiduPiece implements Piece
                 "42.912 61.472 116.384 118.368 116.384 118.368s55.072 43.008 19.904 125.952zM719.84 545.28c-70.464 " +
                 "1.6-73.472-47.616-73.472-82.88 0-36.928 7.584-89.184 64.32-89.184 56.64 0 71.872 55.36 71.872 73.728 " +
                 "0 18.528 7.712 96.8-62.752 98.336z\";";
-    }
-
-    @Override
-    public int getAttackLevel()
-    {
-        return this.attackLevel;
-    }
-
-    @Override
-    public void applyAttack(int deduction)
-    {
-        this.mark = this.mark - deduction;
-    }
-
-    @Override
-    public int getMark()
-    {
-        return this.mark;
     }
 }

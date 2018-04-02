@@ -1,14 +1,12 @@
 package models.game.piece;
 
-public class TwitterPiece implements Piece
-{
-    private int mark;
-    private final int attackLevel;
+import models.game.Coordinate;
 
-    public TwitterPiece()
+public class TwitterPiece extends Piece
+{
+    public TwitterPiece(Coordinate coordinate)
     {
-        this.mark = 100;
-        this.attackLevel = 25;
+        super(coordinate, 100, 20);
     }
 
     @Override
@@ -28,23 +26,5 @@ public class TwitterPiece implements Piece
                 "29.9008-5.87776 57.99936-16.81408 83.37408-31.86688-9.80992 30.65856-30.6176 56.40192-57.73312 " +
                 "72.64256 26.56256-3.1744 51.87584-10.24 75.40736-20.66432-17.59232 26.33728-39.85408 " +
                 "49.4592-65.51552 67.97312z\";";
-    }
-
-    @Override
-    public int getAttackLevel()
-    {
-        return this.attackLevel;
-    }
-
-    @Override
-    public void applyAttack(int deduction)
-    {
-        this.mark = this.mark - deduction;
-    }
-
-    @Override
-    public int getMark()
-    {
-        return this.mark;
     }
 }

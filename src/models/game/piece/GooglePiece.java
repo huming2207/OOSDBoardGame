@@ -1,14 +1,13 @@
 package models.game.piece;
 
-public class GooglePiece implements Piece
-{
-    private int mark;
-    private final int attackLevel;
+import models.game.Coordinate;
 
-    public GooglePiece()
+public class GooglePiece extends Piece
+{
+
+    public GooglePiece(Coordinate coordinate)
     {
-        this.mark = 150;
-        this.attackLevel = 50;
+        super(coordinate, 150, 50);
     }
 
     @Override
@@ -35,23 +34,5 @@ public class GooglePiece implements Piece
                 "35.369984-39.465984 0C537.884672 306.7904 552.64256 339.64032 552.64256 375.949312zM768.468992 " +
                 "366.660608l-69.35552 0 0 69.419008-34.670592 0 0-69.419008-69.280768 0L595.162112 331.922432l69.280768 " +
                 "0 0-69.489664 34.670592 0 0 69.489664 69.35552 0L768.468992 366.660608z\";";
-    }
-
-    @Override
-    public int getAttackLevel()
-    {
-        return this.attackLevel;
-    }
-
-    @Override
-    public void applyAttack(int deduction)
-    {
-        this.mark = this.mark - deduction;
-    }
-
-    @Override
-    public int getMark()
-    {
-        return this.mark;
     }
 }
