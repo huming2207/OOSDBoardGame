@@ -50,6 +50,7 @@ public class GameLogic
 
         // First turn: communism player (player A)
         this.currentPlayer = this.communismPlayer;
+        homeController.commitPlayerSelection(this.currentPlayer);
     }
 
     /**
