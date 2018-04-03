@@ -14,7 +14,7 @@ public class FacebookPiece extends Piece
     {
         // From Alibaba IconFont, free for personal & education purposes
         // Ref:  http://www.iconfont.cn/collections/detail?spm=a313x.7781069.1998910419.28
-        return "-fx-background-color:#000000;" +
+        return "-fx-background-color:#0000ff;" +
                 "-fx-shape: \"M1024 512c0-282.763636-229.236364-512-512-512C229.236364 0 0 229.236364 0 512s229.236364 512 512 " +
                 "512C794.763636 1024 1024 794.763636 1024 512zM374.504727 512 374.504727 414.021818l60.043636 " +
                 "0L434.548364 354.769455c0-79.918545 23.877818-137.495273 111.383273-137.495273l104.075636 0 0 " +
