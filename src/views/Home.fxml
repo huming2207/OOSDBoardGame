@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -83,7 +84,7 @@
         <Button fx:id="board_4_6" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0" minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick" prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
         <Button fx:id="board_5_6" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0" minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick" prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="5" GridPane.rowIndex="6" />
         <Button fx:id="board_6_6" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0" minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick" prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="6" GridPane.rowIndex="6" />
-        <Button fx:id="board_6_7" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0" minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick" prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="7" GridPane.rowIndex="6" />
+        <Button fx:id="board_7_6" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0" minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick" prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="7" GridPane.rowIndex="6" />
         <Button fx:id="board_0_7" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0" minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick" prefHeight="43.0" prefWidth="43.0" GridPane.rowIndex="7" />
         <Button fx:id="board_1_7" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0" minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick" prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
         <Button fx:id="board_2_7" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0" minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick" prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
@@ -93,4 +94,6 @@
         <Button fx:id="board_6_7" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0" minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick" prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="6" GridPane.rowIndex="7" />
         <Button fx:id="board_7_7" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0" minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick" prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="7" GridPane.rowIndex="7" />
     </GridPane>
+   <Label layoutX="424.0" layoutY="103.0" text="Selected piece:" />
+   <Button fx:id="selectedPiece" layoutX="530.0" layoutY="90.0" maxHeight="43.0" maxWidth="43.0" minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0" />
 </AnchorPane>
