@@ -1,12 +1,13 @@
 package models.game.piece;
 
 import models.game.Coordinate;
+import models.game.piece.type.RoleType;
 
 public class TwitterPiece extends Piece
 {
     public TwitterPiece(Coordinate coordinate)
     {
-        super(coordinate, 100, 20);
+        super(coordinate, 100, 20, RoleType.CAPITALISM_PIECE);
     }
 
     @Override

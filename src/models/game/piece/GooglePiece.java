@@ -1,13 +1,14 @@
 package models.game.piece;
 
 import models.game.Coordinate;
+import models.game.piece.type.RoleType;
 
 public class GooglePiece extends Piece
 {
 
     public GooglePiece(Coordinate coordinate)
     {
-        super(coordinate, 150, 50);
+        super(coordinate, 150, 50, RoleType.CAPITALISM_PIECE);
     }
 
     @Override

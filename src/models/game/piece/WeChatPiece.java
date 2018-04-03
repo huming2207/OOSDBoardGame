@@ -1,12 +1,13 @@
 package models.game.piece;
 
 import models.game.Coordinate;
+import models.game.piece.type.RoleType;
 
 public class WeChatPiece extends Piece
 {
     public WeChatPiece(Coordinate coordinate)
     {
-        super(coordinate, 120, 50);
+        super(coordinate, 120, 50, RoleType.COMMUNISM_PIECE);
     }
 
     @Override

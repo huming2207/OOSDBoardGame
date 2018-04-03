@@ -1,6 +1,7 @@
 package models.game.piece;
 
 import models.game.Coordinate;
+import models.game.piece.type.RoleType;
 
 import java.util.Objects;
 
@@ -9,12 +10,14 @@ public abstract class Piece
     private int mark;
     private Coordinate coordinate;
     private final int attackLevel;
+    private final RoleType type;
 
-    public Piece(Coordinate coordinate, int mark, int attackLevel)
+    public Piece(Coordinate coordinate, int mark, int attackLevel, RoleType type)
     {
         this.mark = mark;
         this.coordinate = coordinate;
         this.attackLevel = attackLevel;
+        this.type = type;
     }
 
     /**
@@ -75,6 +78,16 @@ public abstract class Piece
     public void setCoordinate(Coordinate coordinate)
     {
         this.coordinate = coordinate;
+    }
+
+    /**
+     * Get the type of the piece
+     *
+     * @return Role type for player's selection
+     */
+    public RoleType getRoleType()
+    {
+        return this.type;
     }
 
     @Override

@@ -1,12 +1,13 @@
 package models.game.piece;
 
 import models.game.Coordinate;
+import models.game.piece.type.RoleType;
 
 public class FacebookPiece extends Piece
 {
     public FacebookPiece(Coordinate coordinate)
     {
-        super(coordinate, 120, 30);
+        super(coordinate, 120, 30, RoleType.CAPITALISM_PIECE);
     }
 
     @Override
