@@ -1,8 +1,11 @@
 package controllers;
 
 import helpers.exceptions.DuplicatedPieceException;
+import helpers.exceptions.InvalidPieceSelectionException;
 import javafx.collections.*;
+import models.game.Coordinate;
 import models.game.piece.helpers.PieceFactory;
+import models.game.piece.type.RoleType;
 import models.game.player.Player;
 import models.gui.BoardButtonEvent;
 import models.game.piece.*;
@@ -42,8 +45,8 @@ public class GameLogic
         pieceList.addAll(PieceFactory.createRandomPieceList());
 
         // Player init (name written directly in code for now, change later on Assignment 2)
-        this.communismPlayer = new Player("Player A");
-        this.capitalismPlayer = new Player("Player B");
+        this.communismPlayer = new Player("Communism", RoleType.COMMUNISM_PIECE);
+        this.capitalismPlayer = new Player("Capitalism", RoleType.CAPITALISM_PIECE);
 
         // First turn: communism player (player A)
         this.currentPlayer = this.communismPlayer;
@@ -53,13 +56,13 @@ public class GameLogic
      * Commit changes to game map
      * @param buttonEvent Supplied click result information
      */
-    public void commitMapChanges(BoardButtonEvent buttonEvent) throws DuplicatedPieceException
+    public void commitMapChanges(BoardButtonEvent buttonEvent)
+            throws DuplicatedPieceException, InvalidPieceSelectionException
     {
-        int posX = buttonEvent.getPosX();
-        int posY = buttonEvent.getPosY();
+        Coordinate coordinate = new Coordinate(buttonEvent.getPosX(), buttonEvent.getPosY());
 
         // Firstly, try find the piece
-        Piece pieceInList = getPieceFromList(posX, posY);
+        Piece pieceInList = getPieceFromList(coordinate.getPosX(), coordinate.getPosY());
 
         // Case 1: if it's null and the selected piece is null, then the user must have selected an empty piece,
         //         simply ignore and terminate
@@ -70,37 +73,13 @@ public class GameLogic
         // Case 2: if selectedPiece is null but piece found in list is not null, then the user must
         //         selecting a valid piece, simply passing it to selectedPiece.
         if(pieceInList != null && this.currentPlayer.getSelectedPiece() == null) {
-            this.currentPlayer.setSelectedPiece(pieceInList);
-            homeController.commitPlayerSelection(this.currentPlayer);
-            this.pieceList.remove(pieceInList);
-
-            System.out.println(String.format("User selected piece at x %d, y %d", posX, posY));
+            selectPiece(pieceInList);
             return;
         }
 
         // Case 3: if selectedPiece is not null and piece found in list is null, then user is placing a valid piece
         if(pieceInList == null && this.currentPlayer.getSelectedPiece() != null ) {
-
-            int index = this.pieceList.indexOf(this.currentPlayer.getSelectedPiece());
-
-            this.currentPlayer.getSelectedPiece().getCoordinate().setPosX(posX);
-            this.currentPlayer.getSelectedPiece().getCoordinate().setPosY(posY);
-
-
-            System.out.println(String.format("User placed piece at x %d, y %d", posX, posY));
-
-            // Re-add modified piece
-            this.pieceList.add(this.currentPlayer.getSelectedPiece());
-
-            // Set current player to another player (another's turn)
-            this.currentPlayer = this.currentPlayer.getPlayerName().equals(this.communismPlayer.getPlayerName()) ?
-                    this.capitalismPlayer : this.communismPlayer;
-
-            // Commit to GUI
-            this.currentPlayer.setSelectedPiece(null);
-            homeController.commitPlayerSelection(this.currentPlayer);
-
-
+            placePiece(coordinate);
             return;
         }
 
@@ -108,7 +87,8 @@ public class GameLogic
         //         is placing a damn piece on a coordinate where it already filled by another piece.
         //         Raise an exception here instead (no needS to evaluate any more)
         throw new DuplicatedPieceException(
-                String.format("User putting pieces on a wrong place, x: %d, y: %d", posX, posY));
+                String.format("User putting pieces on a wrong place, x: %d, y: %d",
+                        coordinate.getPosX(), coordinate.getPosY()));
     }
 
     /**
@@ -127,5 +107,54 @@ public class GameLogic
         }
 
         return null;
+    }
+
+    /**
+     * Try select a piece to candidate position
+     * @param piece Piece to select
+     * @throws InvalidPieceSelectionException Occurs when user selecting a wrong piece which is not in the same role
+     */
+    private void selectPiece(Piece piece) throws InvalidPieceSelectionException
+    {
+        // Check their role type first...
+        if(piece.getRoleType() != this.currentPlayer.getRoleType()) {
+            throw new InvalidPieceSelectionException("Wrong piece selected, check your role please.");
+        } else {
+            this.currentPlayer.setSelectedPiece(piece);
+        }
+
+        homeController.commitPlayerSelection(this.currentPlayer);
+        this.pieceList.remove(piece);
+
+        System.out.println(String.format("User selected piece at x %d, y %d",
+                piece.getCoordinate().getPosX(), piece.getCoordinate().getPosY()));
+    }
+
+    /**
+     * Place a candidate piece to a certain position
+     * @param coordinate New coordinate for the candidate piece
+     */
+    private void placePiece(Coordinate coordinate)
+    {
+        // Set the new coordinate for the piece
+        this.currentPlayer.getSelectedPiece().getCoordinate().setPosX(coordinate.getPosX());
+        this.currentPlayer.getSelectedPiece().getCoordinate().setPosY(coordinate.getPosY());
+
+
+        System.out.println(String.format("User placed piece at x %d, y %d",
+                coordinate.getPosX(), coordinate.getPosY()));
+
+        // Re-add modified piece
+        this.pieceList.add(this.currentPlayer.getSelectedPiece());
+
+        // Set current player to another player (another's turn)
+        this.currentPlayer = this.currentPlayer.getPlayerName().equals(this.communismPlayer.getPlayerName()) ?
+                this.capitalismPlayer : this.communismPlayer;
+
+        // Clean up the candidate piece position
+        this.currentPlayer.setSelectedPiece(null);
+
+        // Commit to GUI
+        homeController.commitPlayerSelection(this.currentPlayer);
     }
 }

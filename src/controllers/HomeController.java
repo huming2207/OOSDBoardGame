@@ -2,6 +2,7 @@ package controllers;
 
 import helpers.BoardButtonHelper;
 import helpers.exceptions.DuplicatedPieceException;
+import helpers.exceptions.InvalidPieceSelectionException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -49,7 +50,9 @@ public class HomeController
             gameLogic.commitMapChanges(buttonResult);
         } catch (DuplicatedPieceException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "You're putting the piece on a non-empty place!");
-
+            alert.show();
+        } catch (InvalidPieceSelectionException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "You're selecting a piece in the wrong role!");
             alert.show();
         }
     }

@@ -1,23 +1,18 @@
 package models.game.player;
 
-import models.game.Coordinate;
 import models.game.piece.Piece;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import models.game.piece.type.RoleType;
 
 public class Player
 {
     private String playerName;
-    private ArrayList<Piece> pieceList;
-
+    private RoleType allowedType;
     private Piece selectedPiece;
 
-    public Player(String playerName)
+    public Player(String playerName, RoleType allowedType)
     {
         this.playerName = playerName;
-        this.pieceList = new ArrayList<>();
+        this.allowedType = allowedType;
     }
 
     public Piece getSelectedPiece()
@@ -40,13 +35,13 @@ public class Player
         this.playerName = playerName;
     }
 
-    public ArrayList<Piece> getPieceList()
+    public RoleType getRoleType()
     {
-        return this.pieceList;
+        return allowedType;
     }
 
-    public void setPieceMap(ArrayList<Piece> pieceList)
+    public void setRoleType(RoleType allowedType)
     {
-        this.pieceList = pieceList;
+        this.allowedType = allowedType;
     }
 }
