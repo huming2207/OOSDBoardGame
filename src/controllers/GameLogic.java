@@ -47,6 +47,7 @@ public class GameLogic implements ListChangeListener<Piece>
         //         selecting a valid piece, simply passing it to selectedPiece.
         if(pieceInList != null && this.selectedPiece == null) {
             this.selectedPiece = pieceInList;
+            this.pieceList.remove(pieceInList);
             System.out.println(String.format("User selected piece at x %d, y %d", posX, posY));
             return;
         }
@@ -57,9 +58,11 @@ public class GameLogic implements ListChangeListener<Piece>
             int index = this.pieceList.indexOf(this.selectedPiece);
             this.selectedPiece.getCoordinate().setPosX(posX);
             this.selectedPiece.getCoordinate().setPosY(posY);
+            System.out.println(String.format("User placed piece at x %d, y %d", posX, posY));
 
             // Replace modified
-            this.pieceList.set(index, this.selectedPiece);
+            this.pieceList.add(this.selectedPiece);
+            this.selectedPiece = null;
             return;
         }
 
@@ -80,12 +83,18 @@ public class GameLogic implements ListChangeListener<Piece>
     @Override
     public void onChanged(Change<? extends Piece> change)
     {
-        for(Piece piece : change.getRemoved()) {
-            homeController.commitUIChanges(piece.getCoordinate(), "");
-        }
+        while(change.next()) {
+            if(change.wasAdded()) {
+                for(Piece piece : change.getAddedSubList()) {
+                    homeController.commitUIChanges(piece.getCoordinate(), piece.getStyle());
+                }
+            }
 
-        for(Piece piece : change.getAddedSubList()) {
-            homeController.commitUIChanges(piece.getCoordinate(), piece.getStyle());
+            if(change.wasRemoved()) {
+                for(Piece piece : change.getRemoved()) {
+                    homeController.commitUIChanges(piece.getCoordinate(), "");
+                }
+            }
         }
     }
 

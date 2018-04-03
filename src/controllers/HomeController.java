@@ -16,11 +16,6 @@ public class HomeController
     private GameLogic gameLogic;
     private Map<String, Object> controlMap;
 
-    public HomeController()
-    {
-        this.gameLogic = new GameLogic(this);
-    }
-
     @FXML
     private void initialize()
     {
@@ -28,13 +23,14 @@ public class HomeController
     }
 
     /**
-     * Set the FXML Control map from the main class (i.e. from loader.getNamespace())
+     * Set the FXML Control map from the main class (i.e. from loader.getNamespace()) and initialise game logic
      *
      * @param controlMap Map source to be set
      */
-    public void setControlMap(Map<String, Object> controlMap)
+    public void gameInit(Map<String, Object> controlMap)
     {
         this.controlMap = controlMap;
+        this.gameLogic = new GameLogic(this);
     }
 
     /**
@@ -47,16 +43,12 @@ public class HomeController
     {
         BoardButtonEvent buttonResult = BoardButtonHelper.parseClickResult(clickEvent);
 
-
-        Alert alert = new Alert(Alert.AlertType.INFORMATION,
-                String.format("Button at row %d col %d clicked!", buttonResult.getPosX(), buttonResult.getPosY()));
-
-        alert.show();
-
         try {
             gameLogic.commitMapChanges(buttonResult);
         } catch (DuplicatedPieceException e) {
-            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "You're putting the piece on a non-empty place!");
+
+            alert.show();
         }
     }
 
