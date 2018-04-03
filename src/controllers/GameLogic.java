@@ -48,6 +48,7 @@ public class GameLogic implements ListChangeListener<Piece>
         if(pieceInList != null && this.selectedPiece == null) {
             this.selectedPiece = pieceInList;
             this.pieceList.remove(pieceInList);
+            homeController.commitPieceSelection(this.selectedPiece.getStyle());
             System.out.println(String.format("User selected piece at x %d, y %d", posX, posY));
             return;
         }
@@ -58,6 +59,7 @@ public class GameLogic implements ListChangeListener<Piece>
             int index = this.pieceList.indexOf(this.selectedPiece);
             this.selectedPiece.getCoordinate().setPosX(posX);
             this.selectedPiece.getCoordinate().setPosY(posY);
+            homeController.commitPieceSelection("");
             System.out.println(String.format("User placed piece at x %d, y %d", posX, posY));
 
             // Replace modified

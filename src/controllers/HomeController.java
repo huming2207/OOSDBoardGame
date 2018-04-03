@@ -17,6 +17,9 @@ public class HomeController
     private Map<String, Object> controlMap;
 
     @FXML
+    private Button selectedPiece;
+
+    @FXML
     private void initialize()
     {
 
@@ -75,6 +78,18 @@ public class HomeController
         }
 
         button.setStyle(style);
+    }
+
+    /**
+     * Set the selected piece to selectPiece button to tell user they've selected a piece in GUI
+     *
+     * @param style Style of the piece
+     *
+     */
+
+    public void commitPieceSelection(String style)
+    {
+        selectedPiece.setStyle(style);
     }
 
 }
