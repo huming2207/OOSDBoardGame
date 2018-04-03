@@ -94,6 +94,8 @@
         <Button fx:id="board_6_7" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0" minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick" prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="6" GridPane.rowIndex="7" />
         <Button fx:id="board_7_7" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0" minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick" prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="7" GridPane.rowIndex="7" />
     </GridPane>
-   <Label layoutX="424.0" layoutY="103.0" text="Selected piece:" />
-   <Button fx:id="selectedPiece" layoutX="530.0" layoutY="90.0" maxHeight="43.0" maxWidth="43.0" minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0" />
+   <Label layoutX="401.0" layoutY="116.0" text="Selected piece:" />
+   <Button fx:id="selectedPiece" layoutX="507.0" layoutY="103.0" maxHeight="43.0" maxWidth="43.0" minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0" />
+   <Label layoutX="414.0" layoutY="196.0" prefHeight="17.0" prefWidth="85.0" text="Current turn:" />
+   <Label fx:id="playerNameLabel" layoutX="507.0" layoutY="196.0" text="Unknown" />
 </AnchorPane>

@@ -6,6 +6,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import models.game.player.Player;
 import models.gui.BoardButtonEvent;
 import models.game.Coordinate;
 
@@ -20,10 +22,7 @@ public class HomeController
     private Button selectedPiece;
 
     @FXML
-    private void initialize()
-    {
-
-    }
+    private Label playerNameLabel;
 
     /**
      * Set the FXML Control map from the main class (i.e. from loader.getNamespace()) and initialise game logic
@@ -83,13 +82,21 @@ public class HomeController
     /**
      * Set the selected piece to selectPiece button to tell user they've selected a piece in GUI
      *
-     * @param style Style of the piece
+     * @param player Committed player
      *
      */
 
-    public void commitPieceSelection(String style)
+    public void commitPlayerSelection(Player player)
     {
-        selectedPiece.setStyle(style);
+        // Set the style of selectPiece button. If piece is null, then set a empty style.
+        if(player.getSelectedPiece() != null) {
+            this.selectedPiece.setStyle(player.getSelectedPiece().getStyle());
+        } else {
+            this.selectedPiece.setStyle("");
+        }
+
+        // Set the player name
+        this.playerNameLabel.setText(player.getPlayerName());
     }
 
 }

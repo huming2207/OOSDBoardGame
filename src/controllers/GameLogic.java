@@ -3,15 +3,18 @@ package controllers;
 import helpers.exceptions.DuplicatedPieceException;
 import javafx.collections.*;
 import models.game.piece.helpers.PieceFactory;
+import models.game.player.Player;
 import models.gui.BoardButtonEvent;
 import models.game.piece.*;
 
 
-public class GameLogic implements ListChangeListener<Piece>
+public class GameLogic
 {
     private ObservableList<Piece> pieceList = FXCollections.observableArrayList();
     private HomeController homeController;
-    private Piece selectedPiece;
+    private Player communismPlayer;
+    private Player capitalismPlayer;
+    private Player currentPlayer;
 
     public GameLogic(HomeController homeController)
     {
@@ -19,10 +22,31 @@ public class GameLogic implements ListChangeListener<Piece>
         this.homeController = homeController;
 
         // Add change listener
-        pieceList.addListener(this);
+        pieceList.addListener((ListChangeListener<Piece>) change -> {
+            while(change.next()) {
+                if(change.wasAdded()) {
+                    for(Piece piece : change.getAddedSubList()) {
+                        homeController.commitUIChanges(piece.getCoordinate(), piece.getStyle());
+                    }
+                }
+
+                if(change.wasRemoved()) {
+                    for(Piece piece : change.getRemoved()) {
+                        homeController.commitUIChanges(piece.getCoordinate(), "");
+                    }
+                }
+            }
+        });
 
         // Add all from random piece factory
         pieceList.addAll(PieceFactory.createRandomPieceList());
+
+        // Player init (name written directly in code for now, change later on Assignment 2)
+        this.communismPlayer = new Player("Player A");
+        this.capitalismPlayer = new Player("Player B");
+
+        // First turn: communism player (player A)
+        this.currentPlayer = this.communismPlayer;
     }
 
     /**
@@ -39,32 +63,44 @@ public class GameLogic implements ListChangeListener<Piece>
 
         // Case 1: if it's null and the selected piece is null, then the user must have selected an empty piece,
         //         simply ignore and terminate
-        if(pieceInList == null && this.selectedPiece == null) {
+        if(pieceInList == null && this.currentPlayer.getSelectedPiece() == null) {
             return;
         }
 
-        // Case 2: if selectedPiece is null but piece found in list is not null, then the user must have
+        // Case 2: if selectedPiece is null but piece found in list is not null, then the user must
         //         selecting a valid piece, simply passing it to selectedPiece.
-        if(pieceInList != null && this.selectedPiece == null) {
-            this.selectedPiece = pieceInList;
+        if(pieceInList != null && this.currentPlayer.getSelectedPiece() == null) {
+            this.currentPlayer.setSelectedPiece(pieceInList);
+            homeController.commitPlayerSelection(this.currentPlayer);
             this.pieceList.remove(pieceInList);
-            homeController.commitPieceSelection(this.selectedPiece.getStyle());
+
             System.out.println(String.format("User selected piece at x %d, y %d", posX, posY));
             return;
         }
 
         // Case 3: if selectedPiece is not null and piece found in list is null, then user is placing a valid piece
-        if(pieceInList == null && this.selectedPiece != null ) {
+        if(pieceInList == null && this.currentPlayer.getSelectedPiece() != null ) {
 
-            int index = this.pieceList.indexOf(this.selectedPiece);
-            this.selectedPiece.getCoordinate().setPosX(posX);
-            this.selectedPiece.getCoordinate().setPosY(posY);
-            homeController.commitPieceSelection("");
+            int index = this.pieceList.indexOf(this.currentPlayer.getSelectedPiece());
+
+            this.currentPlayer.getSelectedPiece().getCoordinate().setPosX(posX);
+            this.currentPlayer.getSelectedPiece().getCoordinate().setPosY(posY);
+
+
             System.out.println(String.format("User placed piece at x %d, y %d", posX, posY));
 
-            // Replace modified
-            this.pieceList.add(this.selectedPiece);
-            this.selectedPiece = null;
+            // Re-add modified piece
+            this.pieceList.add(this.currentPlayer.getSelectedPiece());
+
+            // Set current player to another player (another's turn)
+            this.currentPlayer = this.currentPlayer.getPlayerName().equals(this.communismPlayer.getPlayerName()) ?
+                    this.capitalismPlayer : this.communismPlayer;
+
+            // Commit to GUI
+            this.currentPlayer.setSelectedPiece(null);
+            homeController.commitPlayerSelection(this.currentPlayer);
+
+
             return;
         }
 
@@ -74,32 +110,6 @@ public class GameLogic implements ListChangeListener<Piece>
         throw new DuplicatedPieceException(
                 String.format("User putting pieces on a wrong place, x: %d, y: %d", posX, posY));
     }
-
-
-
-
-    /**
-     * Trigger automatically when piece list is changed.
-     * @param change items changed
-     */
-    @Override
-    public void onChanged(Change<? extends Piece> change)
-    {
-        while(change.next()) {
-            if(change.wasAdded()) {
-                for(Piece piece : change.getAddedSubList()) {
-                    homeController.commitUIChanges(piece.getCoordinate(), piece.getStyle());
-                }
-            }
-
-            if(change.wasRemoved()) {
-                for(Piece piece : change.getRemoved()) {
-                    homeController.commitUIChanges(piece.getCoordinate(), "");
-                }
-            }
-        }
-    }
-
 
     /**
      * Try find the piece in the list

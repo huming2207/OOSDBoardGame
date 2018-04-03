@@ -12,10 +12,22 @@ public class Player
     private String playerName;
     private ArrayList<Piece> pieceList;
 
+    private Piece selectedPiece;
+
     public Player(String playerName)
     {
         this.playerName = playerName;
         this.pieceList = new ArrayList<>();
+    }
+
+    public Piece getSelectedPiece()
+    {
+        return selectedPiece;
+    }
+
+    public void setSelectedPiece(Piece selectedPiece)
+    {
+        this.selectedPiece = selectedPiece;
     }
 
     public String getPlayerName()
