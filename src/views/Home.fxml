@@ -7,8 +7,8 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
-    <GridPane layoutX="28.0" layoutY="25.0" prefHeight="350.0" prefWidth="350.0">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/1.8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
+    <GridPane layoutX="28.0" layoutY="25.0" prefHeight="350.0" prefWidth="350.0" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="220.0" AnchorPane.topAnchor="25.0">
         <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="43.75" minWidth="43.75" prefWidth="43.75" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="43.75" minWidth="43.75" prefWidth="43.75" />
@@ -94,8 +94,8 @@
         <Button fx:id="board_6_7" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0" minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick" prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="6" GridPane.rowIndex="7" />
         <Button fx:id="board_7_7" alignment="CENTER" contentDisplay="CENTER" maxHeight="43.0" maxWidth="43.0" minHeight="43.0" minWidth="43.0" mnemonicParsing="false" onAction="#handleBoardButtonClick" prefHeight="43.0" prefWidth="43.0" GridPane.columnIndex="7" GridPane.rowIndex="7" />
     </GridPane>
-   <Label layoutX="401.0" layoutY="116.0" text="Selected piece:" />
-   <Button fx:id="selectedPiece" layoutX="507.0" layoutY="103.0" maxHeight="43.0" maxWidth="43.0" minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0" />
-   <Label layoutX="414.0" layoutY="196.0" prefHeight="17.0" prefWidth="85.0" text="Current turn:" />
-   <Label fx:id="playerNameLabel" layoutX="507.0" layoutY="196.0" text="Unknown" />
+   <Label layoutX="401.0" layoutY="116.0" text="Selected piece:" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="116.0" />
+   <Button fx:id="selectedPiece" layoutX="507.0" layoutY="103.0" maxHeight="43.0" maxWidth="43.0" minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="103.0" />
+   <Label layoutX="414.0" layoutY="196.0" prefHeight="17.0" prefWidth="85.0" text="Current turn:" AnchorPane.rightAnchor="101.0" AnchorPane.topAnchor="196.0" />
+   <Label fx:id="playerNameLabel" layoutX="507.0" layoutY="196.0" text="Unknown" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="196.0" />
 </AnchorPane>
