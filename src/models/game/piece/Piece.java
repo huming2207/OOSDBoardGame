@@ -40,7 +40,7 @@ public abstract class Piece
      *
      * @return Attack level value in x/100 marks
      */
-    public int getATTACK_LEVEL()
+    public int getAttackLevel()
     {
         return this.ATTACK_LEVEL;
     }
@@ -120,6 +120,6 @@ public abstract class Piece
         return this.coordinate.getPosX() == piece.getCoordinate().getPosX()
                 && this.coordinate.getPosY() == piece.getCoordinate().getPosY()
                 && this.mark == piece.getMark()
-                && this.ATTACK_LEVEL == piece.getATTACK_LEVEL();
+                && this.ATTACK_LEVEL == piece.getAttackLevel();
     }
 }
