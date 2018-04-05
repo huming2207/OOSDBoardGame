@@ -4,15 +4,19 @@ import models.game.Coordinate;
 import models.game.piece.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class PieceFactory
 {
-    public static List<Piece> createRandomPieceList()
+    /**
+     * Create a random piece list for game logic
+     * @return Collection of 6 pieces
+     */
+    public static Collection<Piece> createRandomPieceList()
     {
-        List<Piece> pieceList = new ArrayList<>();
+        Collection<Piece> pieceList = new ArrayList<>();
         LinkedList<Coordinate> coordinates = createRandomCoordinateArray();
 
         pieceList.add(new BaiduPiece(coordinates.pop()));
@@ -25,6 +29,10 @@ public class PieceFactory
         return pieceList;
     }
 
+    /**
+     * Create a queue of random coordinate
+     * @return linked List (queue) of random coordinates
+     */
     private static LinkedList<Coordinate> createRandomCoordinateArray()
     {
         LinkedList<Coordinate> coordinateList = new LinkedList<>();

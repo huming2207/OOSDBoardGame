@@ -14,8 +14,6 @@ public class BaiduPiece extends Piece
     @Override
     public final String getStyle()
     {
-        // From Alibaba IconFont, free for personal & education purposes
-        // Ref:  http://www.iconfont.cn/collections/detail?spm=a313x.7781069.1998910419.28
         return "-fx-background-color:#ff0000;" +
                 "-fx-shape: \"M610.752 697.504l-45.6 0c0 0-5.856-3.616-5.856-13.824l0-95.68-51.456 0.672 0 106.432c0 " +
                 "0 4.96 28.16 42.272 28.16l86.4 0 0-128.672-25.728 0 0 102.912zM456.352 594.56l-48.256 0c0 " +

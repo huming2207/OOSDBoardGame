@@ -24,6 +24,11 @@ public abstract class Piece
      * Style string method of each piece
      * The style string is based on JavaFX CSS, we can also put in some SVG images.
      *
+     * PS: Icon collection used in this project comes from Alibaba IconFont and their contributors,
+     *      free for personal & education purposes.
+     *
+     * Ref:  http://www.iconfont.cn/collections/detail?spm=a313x.7781069.1998910419.28
+     *
      * TODO: bring a independent SVG parser instead of writing a constant JavaFX Style Sheet string inside the code
      *
      * @return CSS String

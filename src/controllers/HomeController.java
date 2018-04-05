@@ -88,7 +88,6 @@ public class HomeController
      * @param player Committed player
      *
      */
-
     public void commitPlayerSelection(Player player)
     {
         // Set the style of selectPiece button. If piece is null, then set a empty style.
