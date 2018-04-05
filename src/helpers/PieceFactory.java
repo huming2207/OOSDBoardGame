@@ -1,4 +1,4 @@
-package models.game.piece.helpers;
+package helpers;
 
 import models.game.Coordinate;
 import models.game.piece.*;

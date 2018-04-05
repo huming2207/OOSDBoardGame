@@ -4,7 +4,7 @@ import helpers.exceptions.DuplicatedPieceException;
 import helpers.exceptions.InvalidPieceSelectionException;
 import javafx.collections.*;
 import models.game.Coordinate;
-import models.game.piece.helpers.PieceFactory;
+import helpers.PieceFactory;
 import models.game.piece.type.RoleType;
 import models.game.player.Player;
 import models.gui.BoardButtonEvent;
