@@ -17,7 +17,7 @@ public class PieceFactory
     public static Collection<Piece> createRandomPieceList()
     {
         Collection<Piece> pieceList = new ArrayList<>();
-        LinkedList<Coordinate> coordinates = createRandomCoordinateArray();
+        LinkedList<Coordinate> coordinates = createRandomCoordinateQueue();
 
         pieceList.add(new BaiduPiece(coordinates.pop()));
         pieceList.add(new FacebookPiece(coordinates.pop()));
@@ -33,7 +33,7 @@ public class PieceFactory
      * Create a queue of random coordinate
      * @return linked List (queue) of random coordinates
      */
-    private static LinkedList<Coordinate> createRandomCoordinateArray()
+    private static LinkedList<Coordinate> createRandomCoordinateQueue()
     {
         LinkedList<Coordinate> coordinateList = new LinkedList<>();
 
