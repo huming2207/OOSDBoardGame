@@ -9,15 +9,15 @@ public abstract class Piece
 {
     private int mark;
     private Coordinate coordinate;
-    private final int attackLevel;
-    private final RoleType type;
+    private final int ATTACK_LEVEL;
+    private final RoleType TYPE;
 
     public Piece(Coordinate coordinate, int mark, int attackLevel, RoleType type)
     {
         this.mark = mark;
         this.coordinate = coordinate;
-        this.attackLevel = attackLevel;
-        this.type = type;
+        this.ATTACK_LEVEL = attackLevel;
+        this.TYPE = type;
     }
 
     /**
@@ -40,9 +40,9 @@ public abstract class Piece
      *
      * @return Attack level value in x/100 marks
      */
-    public int getAttackLevel()
+    public int getATTACK_LEVEL()
     {
-        return this.attackLevel;
+        return this.ATTACK_LEVEL;
     }
 
     /**
@@ -86,20 +86,20 @@ public abstract class Piece
     }
 
     /**
-     * Get the type of the piece
+     * Get the TYPE of the piece
      *
-     * @return Role type for player's selection
+     * @return Role TYPE for player's selection
      */
     public RoleType getRoleType()
     {
-        return this.type;
+        return this.TYPE;
     }
 
     @Override
     public int hashCode()
     {
         // ...should be auto boxed to Integer object??
-        return Objects.hash(this.coordinate, this.attackLevel, this.mark);
+        return Objects.hash(this.coordinate, this.ATTACK_LEVEL, this.mark);
     }
 
 
@@ -120,6 +120,6 @@ public abstract class Piece
         return this.coordinate.getPosX() == piece.getCoordinate().getPosX()
                 && this.coordinate.getPosY() == piece.getCoordinate().getPosY()
                 && this.mark == piece.getMark()
-                && this.attackLevel == piece.getAttackLevel();
+                && this.ATTACK_LEVEL == piece.getATTACK_LEVEL();
     }
 }
