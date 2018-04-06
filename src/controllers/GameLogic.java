@@ -59,7 +59,7 @@ public class GameLogic
         Coordinate coordinate = new Coordinate(buttonEvent.getPosX(), buttonEvent.getPosY());
 
         // Firstly, try find the piece
-        Piece pieceInList = getPieceFromList(coordinate.getPosX(), coordinate.getPosY());
+        Piece pieceInList = board.getPieceFromList(coordinate.getPosX(), coordinate.getPosY());
 
         // Case 1: if it's null and the selected piece is null, then the user must have selected an empty piece,
         //         simply ignore and terminate
@@ -88,23 +88,6 @@ public class GameLogic
                         coordinate.getPosX(), coordinate.getPosY()));
     }
 
-    /**
-     * Try find the piece in the list
-     *
-     * @param posX X-axis of the piece
-     * @param posY Y-axis of the piece
-     * @return The piece object if it has been found, or null if it has not been found
-     */
-    private Piece getPieceFromList(int posX, int posY)
-    {
-        for(Piece piece : board.getPieceList()) {
-            if(piece.getCoordinate().getPosX() == posX && piece.getCoordinate().getPosY() == posY) {
-                return piece;
-            }
-        }
-
-        return null;
-    }
 
     /**
      * Try select a piece to candidate position

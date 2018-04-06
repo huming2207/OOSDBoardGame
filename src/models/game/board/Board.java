@@ -59,4 +59,23 @@ public class Board
     {
         this.pieceList = pieceList;
     }
+
+
+    /**
+     * Try find the piece in the list
+     *
+     * @param posX X-axis of the piece
+     * @param posY Y-axis of the piece
+     * @return The piece object if it has been found, or null if it has not been found
+     */
+    public Piece getPieceFromList(int posX, int posY)
+    {
+        for(Piece piece : this.pieceList) {
+            if(piece.getCoordinate().getPosX() == posX && piece.getCoordinate().getPosY() == posY) {
+                return piece;
+            }
+        }
+
+        return null;
+    }
 }
