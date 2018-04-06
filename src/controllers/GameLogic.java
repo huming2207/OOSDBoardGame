@@ -4,28 +4,28 @@ import helpers.exceptions.DuplicatedPieceException;
 import helpers.exceptions.InvalidPieceSelectionException;
 import javafx.collections.*;
 import models.game.Coordinate;
+import models.game.board.Board;
 import models.game.piece.helpers.PieceFactory;
-import models.game.piece.type.RoleType;
-import models.game.player.Player;
 import models.gui.BoardButtonEvent;
 import models.game.piece.*;
 
 
 public class GameLogic
 {
-    private ObservableList<Piece> pieceList = FXCollections.observableArrayList();
     private HomeController homeController;
-    private Player communismPlayer;
-    private Player capitalismPlayer;
-    private Player currentPlayer;
+    private Board board;
+
 
     public GameLogic(HomeController homeController)
     {
         // Assign home controller
         this.homeController = homeController;
+        
+        // Initialise board model
+        this.board = new Board("Communism", "Capitalism");
 
         // Add change listener
-        pieceList.addListener((ListChangeListener<Piece>) change -> {
+        board.getPieceList().addListener((ListChangeListener<Piece>) change -> {
             while(change.next()) {
                 if(change.wasAdded()) {
                     for(Piece piece : change.getAddedSubList()) {
@@ -42,15 +42,11 @@ public class GameLogic
         });
 
         // Add all from random piece factory
-        pieceList.addAll(PieceFactory.createRandomPieceList());
-
-        // Player init (name written directly in code for now, change later on Assignment 2)
-        this.communismPlayer = new Player("Communism", RoleType.COMMUNISM_PIECE);
-        this.capitalismPlayer = new Player("Capitalism", RoleType.CAPITALISM_PIECE);
+        board.getPieceList().addAll(PieceFactory.createRandomPieceList());
 
         // First turn: communism player (player A)
-        this.currentPlayer = this.communismPlayer;
-        homeController.commitPlayerSelection(this.currentPlayer);
+        board.setCurrentPlayer(board.getCommunismPlayer());
+        homeController.commitPlayerSelection(board.getCurrentPlayer());
     }
 
     /**
@@ -67,19 +63,19 @@ public class GameLogic
 
         // Case 1: if it's null and the selected piece is null, then the user must have selected an empty piece,
         //         simply ignore and terminate
-        if(pieceInList == null && this.currentPlayer.getSelectedPiece() == null) {
+        if(pieceInList == null && board.getCurrentPlayer().getSelectedPiece() == null) {
             return;
         }
 
         // Case 2: if selectedPiece is null but piece found in list is not null, then the user must
         //         selecting a valid piece, simply passing it to selectedPiece.
-        if(pieceInList != null && this.currentPlayer.getSelectedPiece() == null) {
+        if(pieceInList != null && board.getCurrentPlayer().getSelectedPiece() == null) {
             selectPiece(pieceInList);
             return;
         }
 
         // Case 3: if selectedPiece is not null and piece found in list is null, then user is placing a valid piece
-        if(pieceInList == null && this.currentPlayer.getSelectedPiece() != null ) {
+        if(pieceInList == null && board.getCurrentPlayer().getSelectedPiece() != null ) {
             placePiece(coordinate);
             return;
         }
@@ -101,7 +97,7 @@ public class GameLogic
      */
     private Piece getPieceFromList(int posX, int posY)
     {
-        for(Piece piece : this.pieceList) {
+        for(Piece piece : board.getPieceList()) {
             if(piece.getCoordinate().getPosX() == posX && piece.getCoordinate().getPosY() == posY) {
                 return piece;
             }
@@ -118,14 +114,14 @@ public class GameLogic
     private void selectPiece(Piece piece) throws InvalidPieceSelectionException
     {
         // Check their role type first...
-        if(piece.getRoleType() != this.currentPlayer.getRoleType()) {
+        if(piece.getRoleType() != board.getCurrentPlayer().getRoleType()) {
             throw new InvalidPieceSelectionException("Wrong piece selected, check your role please.");
         } else {
-            this.currentPlayer.setSelectedPiece(piece);
+            board.getCurrentPlayer().setSelectedPiece(piece);
         }
 
-        homeController.commitPlayerSelection(this.currentPlayer);
-        this.pieceList.remove(piece);
+        homeController.commitPlayerSelection(board.getCurrentPlayer());
+        board.getPieceList().remove(piece);
 
         System.out.println(String.format("User selected piece at x %d, y %d",
                 piece.getCoordinate().getPosX(), piece.getCoordinate().getPosY()));
@@ -138,24 +134,26 @@ public class GameLogic
     private void placePiece(Coordinate coordinate)
     {
         // Set the new coordinate for the piece
-        this.currentPlayer.getSelectedPiece().getCoordinate().setPosX(coordinate.getPosX());
-        this.currentPlayer.getSelectedPiece().getCoordinate().setPosY(coordinate.getPosY());
+        board.getCurrentPlayer().getSelectedPiece().getCoordinate().setPosX(coordinate.getPosX());
+        board.getCurrentPlayer().getSelectedPiece().getCoordinate().setPosY(coordinate.getPosY());
 
 
         System.out.println(String.format("User placed piece at x %d, y %d",
                 coordinate.getPosX(), coordinate.getPosY()));
 
         // Re-add modified piece
-        this.pieceList.add(this.currentPlayer.getSelectedPiece());
+        board.getPieceList().add(board.getCurrentPlayer().getSelectedPiece());
 
         // Set current player to another player (another's turn)
-        this.currentPlayer = this.currentPlayer.getPlayerName().equals(this.communismPlayer.getPlayerName()) ?
-                this.capitalismPlayer : this.communismPlayer;
+        board.setCurrentPlayer(board.getCurrentPlayer().getPlayerName().equals(
+                board.getCommunismPlayer().getPlayerName()) ?
+                board.getCapitalismPlayer() : board.getCommunismPlayer()
+        );
 
         // Clean up the candidate piece position
-        this.currentPlayer.setSelectedPiece(null);
+        board.getCurrentPlayer().setSelectedPiece(null);
 
         // Commit to GUI
-        homeController.commitPlayerSelection(this.currentPlayer);
+        homeController.commitPlayerSelection(board.getCurrentPlayer());
     }
 }
