@@ -1,5 +1,7 @@
 package models.game.board;
 
+import com.google.java.contract.Ensures;
+import com.google.java.contract.Requires;
 import controllers.HomeController;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -16,6 +18,7 @@ public class Board implements ListChangeListener<Piece>
     private ObservableList<Piece> pieceList;
     private HomeController homeController;
 
+    @Requires("")
     public Board(HomeController homeController, String communismPlayerName, String capitalismPlayerName)
     {
         this.homeController = homeController;
@@ -24,7 +27,6 @@ public class Board implements ListChangeListener<Piece>
         this.pieceList = FXCollections.observableArrayList();
         this.pieceList.addListener(this);
     }
-
 
     public Player getCommunismPlayer()
     {

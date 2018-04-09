@@ -294,3 +294,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# Avoid ignoring Cofoja
+!cofoja.jar
