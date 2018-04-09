@@ -22,24 +22,7 @@ public class GameLogic
         this.homeController = homeController;
         
         // Initialise board model
-        this.board = new Board("Communism", "Capitalism");
-
-        // Add change listener
-        board.getPieceList().addListener((ListChangeListener<Piece>) change -> {
-            while(change.next()) {
-                if(change.wasAdded()) {
-                    for(Piece piece : change.getAddedSubList()) {
-                        homeController.commitUIChanges(piece.getCoordinate(), piece.getStyle());
-                    }
-                }
-
-                if(change.wasRemoved()) {
-                    for(Piece piece : change.getRemoved()) {
-                        homeController.commitUIChanges(piece.getCoordinate(), "");
-                    }
-                }
-            }
-        });
+        this.board = new Board(homeController,"Communism", "Capitalism");
 
         // Add all from random piece factory
         board.getPieceList().addAll(PieceFactory.createRandomPieceList());

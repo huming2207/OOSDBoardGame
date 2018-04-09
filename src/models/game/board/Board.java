@@ -1,24 +1,30 @@
 package models.game.board;
 
+import controllers.HomeController;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import models.game.piece.Piece;
 import models.game.piece.type.RoleType;
 import models.game.player.Player;
 
-public class Board
+public class Board implements ListChangeListener<Piece>
 {
     private Player communismPlayer;
     private Player capitalismPlayer;
     private Player currentPlayer;
     private ObservableList<Piece> pieceList;
+    private HomeController homeController;
 
-    public Board(String communismPlayerName, String capitalismPlayerName)
+    public Board(HomeController homeController, String communismPlayerName, String capitalismPlayerName)
     {
+        this.homeController = homeController;
         this.communismPlayer = new Player(communismPlayerName, RoleType.COMMUNISM_PIECE);
         this.capitalismPlayer = new Player(capitalismPlayerName, RoleType.CAPITALISM_PIECE);
         this.pieceList = FXCollections.observableArrayList();
+        this.pieceList.addListener(this);
     }
+
 
     public Player getCommunismPlayer()
     {
@@ -77,5 +83,24 @@ public class Board
         }
 
         return null;
+    }
+
+
+    @Override
+    public void onChanged(Change<? extends Piece> change)
+    {
+        while(change.next()) {
+            if(change.wasAdded()) {
+                for(Piece piece : change.getAddedSubList()) {
+                    this.homeController.commitUIChanges(piece.getCoordinate(), piece.getStyle());
+                }
+            }
+
+            if(change.wasRemoved()) {
+                for(Piece piece : change.getRemoved()) {
+                    this.homeController.commitUIChanges(piece.getCoordinate(), "");
+                }
+            }
+        }
     }
 }
