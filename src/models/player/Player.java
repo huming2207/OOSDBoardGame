@@ -1,9 +1,9 @@
-package models.game.player;
+package models.player;
 
 import com.google.java.contract.Ensures;
 import com.google.java.contract.Requires;
-import models.game.piece.Piece;
-import models.game.piece.type.RoleType;
+import models.piece.Piece;
+import models.piece.type.RoleType;
 
 public class Player
 {

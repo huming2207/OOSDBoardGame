@@ -4,7 +4,7 @@ import com.google.java.contract.Ensures;
 import com.google.java.contract.Requires;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
-import models.game.coordinate.BoardCellCoordinate;
+import models.coordinate.BoardCellCoordinate;
 
 public class BoardButtonHelper
 {

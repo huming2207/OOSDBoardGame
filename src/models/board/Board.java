@@ -1,4 +1,4 @@
-package models.game.board;
+package models.board;
 
 import com.google.java.contract.Ensures;
 import com.google.java.contract.Requires;
@@ -6,9 +6,9 @@ import controllers.HomeController;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import models.game.piece.Piece;
-import models.game.piece.type.RoleType;
-import models.game.player.Player;
+import models.piece.Piece;
+import models.piece.type.RoleType;
+import models.player.Player;
 
 public class Board implements ListChangeListener<Piece>
 {

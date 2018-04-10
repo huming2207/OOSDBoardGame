@@ -1,9 +1,9 @@
-package models.game.piece;
+package models.piece;
 
 import com.google.java.contract.Ensures;
 import com.google.java.contract.Requires;
-import models.game.coordinate.Coordinate;
-import models.game.piece.type.RoleType;
+import models.coordinate.Coordinate;
+import models.piece.type.RoleType;
 
 import java.util.Objects;
 

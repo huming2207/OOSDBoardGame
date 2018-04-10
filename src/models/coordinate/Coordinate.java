@@ -1,4 +1,4 @@
-package models.game.coordinate;
+package models.coordinate;
 
 import com.google.java.contract.Ensures;
 import com.google.java.contract.Requires;

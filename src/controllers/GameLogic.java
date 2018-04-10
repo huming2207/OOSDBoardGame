@@ -3,11 +3,11 @@ package controllers;
 import com.google.java.contract.Requires;
 import helpers.exceptions.DuplicatedPieceException;
 import helpers.exceptions.InvalidPieceSelectionException;
-import models.game.coordinate.Coordinate;
+import models.coordinate.Coordinate;
 import helpers.PieceFactory;
-import models.game.board.Board;
-import models.game.coordinate.BoardCellCoordinate;
-import models.game.piece.*;
+import models.board.Board;
+import models.coordinate.BoardCellCoordinate;
+import models.piece.Piece;
 
 
 public class GameLogic

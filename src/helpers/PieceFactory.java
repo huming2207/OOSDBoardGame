@@ -1,8 +1,8 @@
 package helpers;
 
 import com.google.java.contract.Ensures;
-import models.game.coordinate.Coordinate;
-import models.game.piece.*;
+import models.coordinate.Coordinate;
+import models.piece.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
