@@ -18,7 +18,7 @@ public class Board implements ListChangeListener<Piece>
     private ObservableList<Piece> pieceList;
     private HomeController homeController;
 
-    @Requires("")
+    @Requires({"homeController != null", "!communismPlayerName.isEmpty()"})
     public Board(HomeController homeController, String communismPlayerName, String capitalismPlayerName)
     {
         this.homeController = homeController;
@@ -28,11 +28,13 @@ public class Board implements ListChangeListener<Piece>
         this.pieceList.addListener(this);
     }
 
+    @Ensures("communismPlayer != null")
     public Player getCommunismPlayer()
     {
         return communismPlayer;
     }
 
+    @Requires("communismPlayer != null")
     public void setCommunismPlayer(Player communismPlayer)
     {
         this.communismPlayer = communismPlayer;

@@ -1,6 +1,6 @@
 package models.game.piece;
 
-import models.game.Coordinate;
+import models.gui.Coordinate;
 import models.game.piece.type.RoleType;
 
 public class FacebookPiece extends Piece

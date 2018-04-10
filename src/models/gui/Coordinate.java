@@ -1,4 +1,7 @@
-package models.game;
+package models.gui;
+
+import com.google.java.contract.Ensures;
+import com.google.java.contract.Requires;
 
 import java.util.Objects;
 
@@ -7,27 +10,32 @@ public class Coordinate
     private int posX;
     private int posY;
 
+    @Requires({"posX >= 0", "posX <= 7", "posY >= 0", "posY <= 7"})
     public Coordinate(int posX, int posY)
     {
         this.posX = posX;
         this.posY = posY;
     }
 
+    @Ensures({"result >= 0", "result <= 7"})
     public int getPosX()
     {
         return posX;
     }
 
+    @Requires({"posX >= 0", "posX <= 7"})
     public void setPosX(int posX)
     {
         this.posX = posX;
     }
 
+    @Ensures({"result >= 0", "result <= 7"})
     public int getPosY()
     {
         return posY;
     }
 
+    @Requires({"posY >= 0", "posY <= 7"})
     public void setPosY(int posY)
     {
         this.posY = posY;

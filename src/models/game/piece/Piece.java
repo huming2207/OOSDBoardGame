@@ -1,6 +1,8 @@
 package models.game.piece;
 
-import models.game.Coordinate;
+import com.google.java.contract.Ensures;
+import com.google.java.contract.Requires;
+import models.gui.Coordinate;
 import models.game.piece.type.RoleType;
 
 import java.util.Objects;
@@ -33,6 +35,7 @@ public abstract class Piece
      *
      * @return CSS String
      */
+    @Ensures("!result.isEmpty()")
     public abstract String getStyle();
 
     /**
@@ -40,6 +43,7 @@ public abstract class Piece
      *
      * @return Attack level value in x/100 marks
      */
+    @Ensures("result > 0")
     public int getAttackLevel()
     {
         return this.ATTACK_LEVEL;
@@ -50,6 +54,7 @@ public abstract class Piece
      *
      * @param deduction HP value (mark) deduction
      */
+    @Requires("deduction > 0")
     public void applyAttack(int deduction)
     {
         this.mark = this.mark - deduction;
@@ -70,6 +75,7 @@ public abstract class Piece
      *
      * @return current coordinate of the piece
      */
+    @Ensures({"result.getPosX() <= 7", "result.getPosX() >= 0", "result.getPosY() <= 7", "result.getPosY() >= 0"})
     public Coordinate getCoordinate()
     {
         return this.coordinate;
@@ -80,6 +86,8 @@ public abstract class Piece
      *
      * @param coordinate coordinate of the piece to set
      */
+    @Requires({"coordinate.getPosX() <= 7", "coordinate.getPosX() >= 0",
+            "coordinate.getPosY() <= 7", "coordinate.getPosY() >= 0"})
     public void setCoordinate(Coordinate coordinate)
     {
         this.coordinate = coordinate;
