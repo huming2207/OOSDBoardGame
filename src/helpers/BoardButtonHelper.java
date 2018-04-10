@@ -4,9 +4,7 @@ import com.google.java.contract.Ensures;
 import com.google.java.contract.Requires;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
-import models.gui.BoardButtonEvent;
-
-import javax.xml.bind.annotation.XmlEnum;
+import models.game.coordinate.BoardCellCoordinate;
 
 public class BoardButtonHelper
 {
@@ -17,15 +15,19 @@ public class BoardButtonHelper
      */
     @Requires("actionEvent != null")
     @Ensures({"result.getPosX() <= 7", "result.getPosX() >= 0", "result.getPosY() <= 7", "result.getPosY() >= 0"})
-    public static BoardButtonEvent parseClickResult(ActionEvent actionEvent)
+    public static BoardCellCoordinate parseClickResult(ActionEvent actionEvent)
     {
         if(actionEvent == null) return null;
 
-        String buttonId = ((Button)actionEvent.getSource()).getId();
+        Button buttonClicked = (Button)actionEvent.getSource();
+        String buttonId = buttonClicked.getId();
+
+        // Button ID includes a prefix, X axis and Y axis, separated by "_" symbol
+        // e.g. board_0_1 is a button at (0, 1)
         String[] splitedId = buttonId.split("_");
         int posX = Integer.valueOf(splitedId[1]);
         int posY = Integer.valueOf(splitedId[2]);
 
-        return new BoardButtonEvent(posX, posY, buttonId);
+        return new BoardCellCoordinate(posX, posY, buttonClicked);
     }
 }

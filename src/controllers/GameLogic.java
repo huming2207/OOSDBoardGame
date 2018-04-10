@@ -3,10 +3,10 @@ package controllers;
 import com.google.java.contract.Requires;
 import helpers.exceptions.DuplicatedPieceException;
 import helpers.exceptions.InvalidPieceSelectionException;
-import models.gui.Coordinate;
+import models.game.coordinate.Coordinate;
 import helpers.PieceFactory;
 import models.game.board.Board;
-import models.gui.BoardButtonEvent;
+import models.game.coordinate.BoardCellCoordinate;
 import models.game.piece.*;
 
 
@@ -37,7 +37,7 @@ public class GameLogic
      * @param buttonEvent Supplied click result information
      */
     @Requires("buttonEvent != null")
-    public void commitMapChanges(BoardButtonEvent buttonEvent)
+    public void commitMapChanges(BoardCellCoordinate buttonEvent)
             throws DuplicatedPieceException, InvalidPieceSelectionException
     {
         if(buttonEvent == null) return;

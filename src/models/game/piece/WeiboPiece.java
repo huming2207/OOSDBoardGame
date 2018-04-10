@@ -1,6 +1,6 @@
 package models.game.piece;
 
-import models.gui.Coordinate;
+import models.game.coordinate.Coordinate;
 import models.game.piece.type.RoleType;
 
 public class WeiboPiece extends Piece

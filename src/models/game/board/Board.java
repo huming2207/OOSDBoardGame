@@ -18,6 +18,12 @@ public class Board implements ListChangeListener<Piece>
     private ObservableList<Piece> pieceList;
     private HomeController homeController;
 
+    /**
+     * Create a new board
+     * @param homeController Home controller
+     * @param communismPlayerName Communism player's nick name
+     * @param capitalismPlayerName Capitalism player's nick name
+     */
     @Requires({"homeController != null", "!communismPlayerName.isEmpty()"})
     public Board(HomeController homeController, String communismPlayerName, String capitalismPlayerName)
     {
@@ -28,43 +34,75 @@ public class Board implements ListChangeListener<Piece>
         this.pieceList.addListener(this);
     }
 
+    /**
+     * Get communism player
+     * @return communism player
+     */
     @Ensures("communismPlayer != null")
     public Player getCommunismPlayer()
     {
         return communismPlayer;
     }
 
+    /**
+     * Set communism player
+     * @param communismPlayer communism player
+     */
     @Requires("communismPlayer != null")
     public void setCommunismPlayer(Player communismPlayer)
     {
         this.communismPlayer = communismPlayer;
     }
 
+    /**
+     * Get capitalism player
+     * @return capitalism player
+     */
     public Player getCapitalismPlayer()
     {
         return capitalismPlayer;
     }
 
+    /**
+     * Set capitalism player
+     * @param capitalismPlayer capitalism player
+     */
     public void setCapitalismPlayer(Player capitalismPlayer)
     {
         this.capitalismPlayer = capitalismPlayer;
     }
 
+    /**
+     * Get current player which is in his/her turn
+     * @return current player
+     */
     public Player getCurrentPlayer()
     {
         return currentPlayer;
     }
 
+    /**
+     * Set current player which is in his/her turn
+     * @param currentPlayer current player
+     */
     public void setCurrentPlayer(Player currentPlayer)
     {
         this.currentPlayer = currentPlayer;
     }
 
+    /**
+     * Get piece list
+     * @return piece list
+     */
     public ObservableList<Piece> getPieceList()
     {
         return pieceList;
     }
 
+    /**
+     * Set piece list
+     * @param pieceList piece list
+     */
     public void setPieceList(ObservableList<Piece> pieceList)
     {
         this.pieceList = pieceList;
@@ -90,6 +128,10 @@ public class Board implements ListChangeListener<Piece>
     }
 
 
+    /**
+     * This method triggers when any changes is made in the piece list. It will update UI via home controller.
+     * @param change Piece changes in the list
+     */
     @Override
     public void onChanged(Change<? extends Piece> change)
     {

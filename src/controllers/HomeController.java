@@ -10,8 +10,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import models.game.player.Player;
-import models.gui.BoardButtonEvent;
-import models.gui.Coordinate;
+import models.game.coordinate.BoardCellCoordinate;
+import models.game.coordinate.Coordinate;
 
 import java.util.Map;
 
@@ -45,7 +45,7 @@ public class HomeController
     @FXML
     private void handleBoardButtonClick(ActionEvent clickEvent)
     {
-        BoardButtonEvent buttonResult = BoardButtonHelper.parseClickResult(clickEvent);
+        BoardCellCoordinate buttonResult = BoardButtonHelper.parseClickResult(clickEvent);
 
         try {
             gameLogic.commitMapChanges(buttonResult);

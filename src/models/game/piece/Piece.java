@@ -2,7 +2,7 @@ package models.game.piece;
 
 import com.google.java.contract.Ensures;
 import com.google.java.contract.Requires;
-import models.gui.Coordinate;
+import models.game.coordinate.Coordinate;
 import models.game.piece.type.RoleType;
 
 import java.util.Objects;

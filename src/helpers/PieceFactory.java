@@ -1,7 +1,7 @@
 package helpers;
 
 import com.google.java.contract.Ensures;
-import models.gui.Coordinate;
+import models.game.coordinate.Coordinate;
 import models.game.piece.*;
 
 import java.util.ArrayList;

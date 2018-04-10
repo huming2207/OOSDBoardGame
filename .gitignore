@@ -96,7 +96,7 @@ tramp
 .\#*
 
 # Org-mode
-.org-id-locations
+.org-buttonId-locations
 *_archive
 
 # flymake-mode

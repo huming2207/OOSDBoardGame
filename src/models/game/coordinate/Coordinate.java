@@ -1,4 +1,4 @@
-package models.gui;
+package models.game.coordinate;
 
 import com.google.java.contract.Ensures;
 import com.google.java.contract.Requires;
@@ -10,6 +10,11 @@ public class Coordinate
     private int posX;
     private int posY;
 
+    /**
+     * Create a coordinate for a piece
+     * @param posX X axis
+     * @param posY Y axis
+     */
     @Requires({"posX >= 0", "posX <= 7", "posY >= 0", "posY <= 7"})
     public Coordinate(int posX, int posY)
     {
@@ -17,24 +22,40 @@ public class Coordinate
         this.posY = posY;
     }
 
+    /**
+     * Get X axis
+     * @return X axis value
+     */
     @Ensures({"result >= 0", "result <= 7"})
     public int getPosX()
     {
         return posX;
     }
 
+    /**
+     * Set X axis
+     * @param posX X axis value
+     */
     @Requires({"posX >= 0", "posX <= 7"})
     public void setPosX(int posX)
     {
         this.posX = posX;
     }
 
+    /**
+     * Get Y axis
+     * @return Y axis value
+     */
     @Ensures({"result >= 0", "result <= 7"})
     public int getPosY()
     {
         return posY;
     }
 
+    /**
+     * Set Y axis
+     * @param posY Y axis value
+     */
     @Requires({"posY >= 0", "posY <= 7"})
     public void setPosY(int posY)
     {
