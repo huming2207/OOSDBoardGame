@@ -1,131 +1,99 @@
 package controllers;
 
+import com.google.java.contract.Requires;
 import helpers.exceptions.DuplicatedPieceException;
 import helpers.exceptions.InvalidPieceSelectionException;
-import javafx.collections.*;
-import models.game.Coordinate;
-import models.game.piece.helpers.PieceFactory;
-import models.game.piece.type.RoleType;
-import models.game.player.Player;
-import models.gui.BoardButtonEvent;
-import models.game.piece.*;
+import models.coordinate.Coordinate;
+import helpers.PieceFactory;
+import models.board.Board;
+import models.coordinate.BoardCellCoordinate;
+import models.piece.Piece;
 
 
 public class GameLogic
 {
-    private ObservableList<Piece> pieceList = FXCollections.observableArrayList();
     private HomeController homeController;
-    private Player communismPlayer;
-    private Player capitalismPlayer;
-    private Player currentPlayer;
+    private Board board;
 
     public GameLogic(HomeController homeController)
     {
         // Assign home controller
         this.homeController = homeController;
-
-        // Add change listener
-        pieceList.addListener((ListChangeListener<Piece>) change -> {
-            while(change.next()) {
-                if(change.wasAdded()) {
-                    for(Piece piece : change.getAddedSubList()) {
-                        homeController.commitUIChanges(piece.getCoordinate(), piece.getStyle());
-                    }
-                }
-
-                if(change.wasRemoved()) {
-                    for(Piece piece : change.getRemoved()) {
-                        homeController.commitUIChanges(piece.getCoordinate(), "");
-                    }
-                }
-            }
-        });
+        
+        // Initialise board model
+        this.board = new Board(homeController,"Communism", "Capitalism");
 
         // Add all from random piece factory
-        pieceList.addAll(PieceFactory.createRandomPieceList());
-
-        // Player init (name written directly in code for now, change later on Assignment 2)
-        this.communismPlayer = new Player("Communism", RoleType.COMMUNISM_PIECE);
-        this.capitalismPlayer = new Player("Capitalism", RoleType.CAPITALISM_PIECE);
+        board.getPieceList().addAll(PieceFactory.createRandomPieceList());
 
         // First turn: communism player (player A)
-        this.currentPlayer = this.communismPlayer;
-        homeController.commitPlayerSelection(this.currentPlayer);
+        board.setCurrentPlayer(board.getCommunismPlayer());
+        homeController.commitPlayerSelection(board.getCurrentPlayer());
     }
 
     /**
      * Commit changes to game map
      * @param buttonEvent Supplied click result information
      */
-    public void commitMapChanges(BoardButtonEvent buttonEvent)
+
+    protected void commitMapChanges(BoardCellCoordinate buttonEvent)
             throws DuplicatedPieceException, InvalidPieceSelectionException
     {
-        Coordinate coordinate = new Coordinate(buttonEvent.getPosX(), buttonEvent.getPosY());
+        if(buttonEvent == null) return;
+
+        Coordinate coordinate = new Coordinate(
+                buttonEvent.getCoordinate().getPosX(),
+                buttonEvent.getCoordinate().getPosY());
 
         // Firstly, try find the piece
-        Piece pieceInList = getPieceFromList(coordinate.getPosX(), coordinate.getPosY());
+        Piece pieceInList = board.getPieceFromList(coordinate.getPosX(), coordinate.getPosY());
+        Piece selectedPiece = board.getCurrentPlayer().getSelectedPiece();
 
-        // Case 1: if it's null and the selected piece is null, then the user must have selected an empty piece,
-        //         simply ignore and terminate
-        if(pieceInList == null && this.currentPlayer.getSelectedPiece() == null) {
+        // Possible error 1: if selected piece and the piece found in list are both null, then
+        //
+        if(pieceInList == null && selectedPiece == null) {
             return;
         }
 
-        // Case 2: if selectedPiece is null but piece found in list is not null, then the user must
-        //         selecting a valid piece, simply passing it to selectedPiece.
-        if(pieceInList != null && this.currentPlayer.getSelectedPiece() == null) {
+        // Possible error 2: if selectedPiece is not null and the piece found in list is also not null,
+        //                   then it means the user is placing a damn piece on a coordinate where it already
+        //                   filled by another piece.
+        //                   Raise an exception here instead (no needS to evaluate any more)
+        if(pieceInList != null && selectedPiece != null) {
+            throw new DuplicatedPieceException(
+                    String.format("User putting pieces on a wrong place, x: %d, y: %d",
+                            coordinate.getPosX(), coordinate.getPosY()));
+        }
+
+        // If selected piece is null, then the user still haven't select a piece yet, go select one instead
+        // If not, then go place a piece.
+        if(selectedPiece == null) {
             selectPiece(pieceInList);
-            return;
-        }
-
-        // Case 3: if selectedPiece is not null and piece found in list is null, then user is placing a valid piece
-        if(pieceInList == null && this.currentPlayer.getSelectedPiece() != null ) {
+        } else {
             placePiece(coordinate);
-            return;
         }
 
-        // Case 4: if selectedPiece is not null and the piece found in list is also not null, then it means the user
-        //         is placing a damn piece on a coordinate where it already filled by another piece.
-        //         Raise an exception here instead (no needS to evaluate any more)
-        throw new DuplicatedPieceException(
-                String.format("User putting pieces on a wrong place, x: %d, y: %d",
-                        coordinate.getPosX(), coordinate.getPosY()));
+
     }
 
-    /**
-     * Try find the piece in the list
-     *
-     * @param posX X-axis of the piece
-     * @param posY Y-axis of the piece
-     * @return The piece object if it has been found, or null if it has not been found
-     */
-    private Piece getPieceFromList(int posX, int posY)
-    {
-        for(Piece piece : this.pieceList) {
-            if(piece.getCoordinate().getPosX() == posX && piece.getCoordinate().getPosY() == posY) {
-                return piece;
-            }
-        }
-
-        return null;
-    }
 
     /**
      * Try select a piece to candidate position
      * @param piece Piece to select
      * @throws InvalidPieceSelectionException Occurs when user selecting a wrong piece which is not in the same role
      */
+    @Requires({"piece != null", "!board.getPieceList().isEmpty()"})
     private void selectPiece(Piece piece) throws InvalidPieceSelectionException
     {
         // Check their role type first...
-        if(piece.getRoleType() != this.currentPlayer.getRoleType()) {
+        if(piece.getRoleType() != board.getCurrentPlayer().getRoleType()) {
             throw new InvalidPieceSelectionException("Wrong piece selected, check your role please.");
         } else {
-            this.currentPlayer.setSelectedPiece(piece);
+            board.getCurrentPlayer().setSelectedPiece(piece);
         }
 
-        homeController.commitPlayerSelection(this.currentPlayer);
-        this.pieceList.remove(piece);
+        homeController.commitPlayerSelection(board.getCurrentPlayer());
+        board.getPieceList().remove(piece);
 
         System.out.println(String.format("User selected piece at x %d, y %d",
                 piece.getCoordinate().getPosX(), piece.getCoordinate().getPosY()));
@@ -135,27 +103,30 @@ public class GameLogic
      * Place a candidate piece to a certain position
      * @param coordinate New coordinate for the candidate piece
      */
+    @Requires({"coordinate != null", "board.getCurrentPlayer() != null"})
     private void placePiece(Coordinate coordinate)
     {
         // Set the new coordinate for the piece
-        this.currentPlayer.getSelectedPiece().getCoordinate().setPosX(coordinate.getPosX());
-        this.currentPlayer.getSelectedPiece().getCoordinate().setPosY(coordinate.getPosY());
+        board.getCurrentPlayer().getSelectedPiece().getCoordinate().setPosX(coordinate.getPosX());
+        board.getCurrentPlayer().getSelectedPiece().getCoordinate().setPosY(coordinate.getPosY());
 
 
         System.out.println(String.format("User placed piece at x %d, y %d",
                 coordinate.getPosX(), coordinate.getPosY()));
 
         // Re-add modified piece
-        this.pieceList.add(this.currentPlayer.getSelectedPiece());
+        board.getPieceList().add(board.getCurrentPlayer().getSelectedPiece());
 
         // Set current player to another player (another's turn)
-        this.currentPlayer = this.currentPlayer.getPlayerName().equals(this.communismPlayer.getPlayerName()) ?
-                this.capitalismPlayer : this.communismPlayer;
+        board.setCurrentPlayer(board.getCurrentPlayer().getPlayerName().equals(
+                board.getCommunismPlayer().getPlayerName()) ?
+                board.getCapitalismPlayer() : board.getCommunismPlayer()
+        );
 
         // Clean up the candidate piece position
-        this.currentPlayer.setSelectedPiece(null);
+        board.getCurrentPlayer().setSelectedPiece(null);
 
         // Commit to GUI
-        homeController.commitPlayerSelection(this.currentPlayer);
+        homeController.commitPlayerSelection(board.getCurrentPlayer());
     }
 }

@@ -1,7 +1,7 @@
-package models.game.piece;
+package models.piece;
 
-import models.game.Coordinate;
-import models.game.piece.type.RoleType;
+import models.coordinate.Coordinate;
+import models.piece.type.RoleType;
 
 public class FacebookPiece extends Piece
 {

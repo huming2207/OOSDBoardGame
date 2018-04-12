@@ -1,7 +1,8 @@
-package models.game.piece.helpers;
+package helpers;
 
-import models.game.Coordinate;
-import models.game.piece.*;
+import com.google.java.contract.Ensures;
+import models.coordinate.Coordinate;
+import models.piece.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,10 +15,11 @@ public class PieceFactory
      * Create a random piece list for game logic
      * @return Collection of 6 pieces
      */
+    @Ensures("result.size() == 6")
     public static Collection<Piece> createRandomPieceList()
     {
         Collection<Piece> pieceList = new ArrayList<>();
-        LinkedList<Coordinate> coordinates = createRandomCoordinateArray();
+        LinkedList<Coordinate> coordinates = createRandomCoordinateQueue();
 
         pieceList.add(new BaiduPiece(coordinates.pop()));
         pieceList.add(new FacebookPiece(coordinates.pop()));
@@ -33,7 +35,8 @@ public class PieceFactory
      * Create a queue of random coordinate
      * @return linked List (queue) of random coordinates
      */
-    private static LinkedList<Coordinate> createRandomCoordinateArray()
+    @Ensures("result.size() == 6")
+    private static LinkedList<Coordinate> createRandomCoordinateQueue()
     {
         LinkedList<Coordinate> coordinateList = new LinkedList<>();
 

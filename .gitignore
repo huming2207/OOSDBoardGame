@@ -96,7 +96,7 @@ tramp
 .\#*
 
 # Org-mode
-.org-id-locations
+.org-buttonId-locations
 *_archive
 
 # flymake-mode
@@ -294,3 +294,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# Avoid ignoring Cofoja
+!cofoja.jar

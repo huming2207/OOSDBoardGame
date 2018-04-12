@@ -1,5 +1,6 @@
 package controllers;
 
+import com.google.java.contract.Requires;
 import helpers.BoardButtonHelper;
 import helpers.exceptions.DuplicatedPieceException;
 import helpers.exceptions.InvalidPieceSelectionException;
@@ -8,9 +9,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import models.game.player.Player;
-import models.gui.BoardButtonEvent;
-import models.game.Coordinate;
+import models.player.Player;
+import models.coordinate.BoardCellCoordinate;
+import models.coordinate.Coordinate;
 
 import java.util.Map;
 
@@ -44,7 +45,7 @@ public class HomeController
     @FXML
     private void handleBoardButtonClick(ActionEvent clickEvent)
     {
-        BoardButtonEvent buttonResult = BoardButtonHelper.parseClickResult(clickEvent);
+        BoardCellCoordinate buttonResult = BoardButtonHelper.parseClickResult(clickEvent);
 
         try {
             gameLogic.commitMapChanges(buttonResult);
@@ -65,6 +66,8 @@ public class HomeController
      * @param coordinate Coordinate of a button
      * @param style CSS style
      */
+    @Requires({"coordinate.getPosX() <= 7", "coordinate.getPosX() >= 0",
+            "coordinate.getPosY() <= 7", "coordinate.getPosX() >= 0"})
     public void commitUIChanges(Coordinate coordinate, String style)
     {
         // The ID format is "button_posX_posY"
@@ -88,6 +91,7 @@ public class HomeController
      * @param player Committed player
      *
      */
+    @Requires("player != null")
     public void commitPlayerSelection(Player player)
     {
         // Set the style of selectPiece button. If piece is null, then set a empty style.

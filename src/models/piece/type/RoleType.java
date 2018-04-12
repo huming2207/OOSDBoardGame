@@ -1,4 +1,4 @@
-package models.game.piece.type;
+package models.piece.type;
 
 public enum RoleType
 {
