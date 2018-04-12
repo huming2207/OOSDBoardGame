@@ -15,7 +15,6 @@ public class GameLogic
     private HomeController homeController;
     private Board board;
 
-    @Requires("homeController != null")
     public GameLogic(HomeController homeController)
     {
         // Assign home controller
@@ -36,13 +35,15 @@ public class GameLogic
      * Commit changes to game map
      * @param buttonEvent Supplied click result information
      */
-    @Requires("buttonEvent != null")
-    public void commitMapChanges(BoardCellCoordinate buttonEvent)
+
+    protected void commitMapChanges(BoardCellCoordinate buttonEvent)
             throws DuplicatedPieceException, InvalidPieceSelectionException
     {
         if(buttonEvent == null) return;
 
-        Coordinate coordinate = new Coordinate(buttonEvent.getPosX(), buttonEvent.getPosY());
+        Coordinate coordinate = new Coordinate(
+                buttonEvent.getCoordinate().getPosX(),
+                buttonEvent.getCoordinate().getPosY());
 
         // Firstly, try find the piece
         Piece pieceInList = board.getPieceFromList(coordinate.getPosX(), coordinate.getPosY());

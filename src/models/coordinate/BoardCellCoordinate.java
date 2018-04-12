@@ -4,9 +4,10 @@ import com.google.java.contract.Ensures;
 import com.google.java.contract.Requires;
 import javafx.scene.control.Button;
 
-public class BoardCellCoordinate extends Coordinate
+public class BoardCellCoordinate
 {
     private Button button;
+    private Coordinate coordinate;
 
     /**
      * Create a new board cell coordinate
@@ -17,8 +18,26 @@ public class BoardCellCoordinate extends Coordinate
     @Requires({"posX >= 0", "posX <= 7", "posY >= 0", "posY <= 7", "button != null"})
     public BoardCellCoordinate(int posX, int posY, Button button)
     {
-        super(posX, posY);
+        this.coordinate = new Coordinate(posX, posY);
         this.button = button;
+    }
+
+    /**
+     * Get coordinate
+     * @return coordinate of this clicked cell
+     */
+    public Coordinate getCoordinate()
+    {
+        return this.coordinate;
+    }
+
+    /**
+     * Set coordinate
+     * @param coordinate coordinate of this clicked cell
+     */
+    public void setCoordinate(Coordinate coordinate)
+    {
+        this.coordinate = coordinate;
     }
 
     /**
