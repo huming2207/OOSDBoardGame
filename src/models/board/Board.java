@@ -24,7 +24,7 @@ public class Board implements ListChangeListener<Piece>
      * @param communismPlayerName Communism player's nick name
      * @param capitalismPlayerName Capitalism player's nick name
      */
-    @Requires({"homeController != null", "!communismPlayerName.isEmpty()"})
+    @Requires({"homeController != null", "!communismPlayerName.isEmpty()", "!capitalismPlayerName.isEmpty()"})
     public Board(HomeController homeController, String communismPlayerName, String capitalismPlayerName)
     {
         this.homeController = homeController;
@@ -94,6 +94,7 @@ public class Board implements ListChangeListener<Piece>
      * Get piece list
      * @return piece list
      */
+    @Ensures("result.size() > 0")
     public ObservableList<Piece> getPieceList()
     {
         return pieceList;
@@ -103,6 +104,7 @@ public class Board implements ListChangeListener<Piece>
      * Set piece list
      * @param pieceList piece list
      */
+    @Requires("pieceList.size() > 0")
     public void setPieceList(ObservableList<Piece> pieceList)
     {
         this.pieceList = pieceList;
@@ -116,6 +118,7 @@ public class Board implements ListChangeListener<Piece>
      * @param posY Y-axis of the piece
      * @return The piece object if it has been found, or null if it has not been found
      */
+    @Requires({"posX >= 0", "posX <= 7", "posY >= 0", "posY <= 7"})
     public Piece getPieceFromList(int posX, int posY)
     {
         for(Piece piece : this.pieceList) {

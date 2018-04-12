@@ -44,7 +44,6 @@ public class BoardCellCoordinate
      * Get the clicked button
      * @return Button clicked
      */
-    @Ensures("result != null")
     public Button getButton()
     {
         return button;
@@ -54,7 +53,6 @@ public class BoardCellCoordinate
      * Set to clicked button
      * @param button Button clicked
      */
-    @Requires("button != null")
     public void setButton(Button button)
     {
         this.button = button;
