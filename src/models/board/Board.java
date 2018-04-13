@@ -48,7 +48,6 @@ public class Board implements ListChangeListener<Piece>
      * Get communism player
      * @return communism player
      */
-    @Ensures("communismPlayer != null")
     public Player getCommunismPlayer()
     {
         return communismPlayer;
@@ -58,7 +57,6 @@ public class Board implements ListChangeListener<Piece>
      * Set communism player
      * @param communismPlayer communism player
      */
-    @Requires("communismPlayer != null")
     public void setCommunismPlayer(Player communismPlayer)
     {
         this.communismPlayer = communismPlayer;
@@ -140,11 +138,15 @@ public class Board implements ListChangeListener<Piece>
         return null;
     }
 
+    /**
+     * Initialise and start the timeout countdown timer
+     * @param piece - Piece selected in the candidate area
+     */
     public void beginCountdown(Piece piece)
     {
         System.out.println("Timeout countdown begins");
 
-        // Fixed 5 seconds countdown for now, will add a parser later for user config
+        // Fixed 5 seconds countdown for now, will add a parser later for user config in assignment 2
         turnTimeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
             System.out.println("5 seconds reached, timeout!");
             gameLogic.timeout(piece);
@@ -154,6 +156,9 @@ public class Board implements ListChangeListener<Piece>
         turnTimeline.play();
     }
 
+    /**
+     * Stop the timeout timer
+     */
     public void stopCountdown()
     {
         System.out.println("Timeout countdown stops");

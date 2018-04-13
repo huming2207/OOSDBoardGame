@@ -65,7 +65,6 @@ public class Player
      * Get role type
      * @return role type
      */
-    @Ensures("result != null")
     public RoleType getRoleType()
     {
         return allowedType;
@@ -75,7 +74,6 @@ public class Player
      * Set role type
      * @param allowedType role type
      */
-    @Requires("allowedType != null")
     public void setRoleType(RoleType allowedType)
     {
         this.allowedType = allowedType;

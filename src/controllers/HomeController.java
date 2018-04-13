@@ -88,6 +88,8 @@ public class HomeController
     /**
      * Set the selected piece to selectPiece button to tell user they've selected a piece in GUI
      *
+     * PS: here using cofoja for null checking is useful,
+     *      just in case if someone use this method when currentPlayer is not initialised.
      * @param player Committed player
      *
      */
