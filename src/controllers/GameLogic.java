@@ -36,15 +36,16 @@ public class GameLogic
      * Commit changes to game map
      * @param buttonEvent Supplied click result information
      */
-
+    @Requires({"buttonEvent.getPosX() <= 0", "buttonEvent.getPosX() >= 7",
+            "buttonEvent.getPosY() <= 0", "buttonEvent.getPosY() >= 7"})
     protected void commitMapChanges(BoardCellCoordinate buttonEvent)
             throws DuplicatedPieceException, InvalidPieceSelectionException
     {
         if(buttonEvent == null) return;
 
         Coordinate coordinate = new Coordinate(
-                buttonEvent.getCoordinate().getPosX(),
-                buttonEvent.getCoordinate().getPosY());
+                buttonEvent.getPosX(),
+                buttonEvent.getPosY());
 
         // Firstly, try find the piece
         Piece pieceInList = board.getPieceFromList(coordinate.getPosX(), coordinate.getPosY());
@@ -79,6 +80,8 @@ public class GameLogic
      * Trigger by Board model
      * @param piece Piece selected
      */
+    @Requires({"piece != null", "piece.getCoordinate().getPosX() <= 0", "piece.getCoordinate().getPosX() >= 7",
+            "piece.getCoordinate().getPosY() <= 0", "piece.getCoordinate().getPosY() >= 7"})
     public void timeout(Piece piece)
     {
         // Put back to original place when timeout
@@ -107,7 +110,9 @@ public class GameLogic
      * @param piece Piece to select
      * @throws InvalidPieceSelectionException Occurs when user selecting a wrong piece which is not in the same role
      */
-    @Requires({"piece != null", "!board.getPieceList().isEmpty()"})
+    @Requires({"piece != null", "piece.getCoordinate().getPosX() <= 0", "piece.getCoordinate().getPosX() >= 7",
+            "piece.getCoordinate().getPosY() <= 0", "piece.getCoordinate().getPosY() >= 7",
+            "!board.getPieceList().isEmpty()"})
     private void selectPiece(Piece piece) throws InvalidPieceSelectionException
     {
         // Check their role type first...
@@ -129,6 +134,8 @@ public class GameLogic
      * Place a candidate piece to a certain position
      * @param coordinate New coordinate for the candidate piece
      */
+    @Requires({"coordinate.getPosX() >= 0", "coordinate.getPosX() <= 7",
+            "coordinate.getPosY() >= 0", "coordinate.getPosY() <= 7"})
     private void placePiece(Coordinate coordinate)
     {
         // Stop timer

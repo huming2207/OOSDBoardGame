@@ -5,7 +5,7 @@ import com.google.java.contract.Requires;
 
 import java.util.Objects;
 
-public class Coordinate
+public class Coordinate implements ICoordinate
 {
     private int posX;
     private int posY;
