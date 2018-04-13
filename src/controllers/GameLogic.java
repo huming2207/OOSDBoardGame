@@ -3,6 +3,7 @@ package controllers;
 import com.google.java.contract.Requires;
 import helpers.exceptions.DuplicatedPieceException;
 import helpers.exceptions.InvalidPieceSelectionException;
+import javafx.scene.control.Alert;
 import models.coordinate.Coordinate;
 import helpers.PieceFactory;
 import models.board.Board;
@@ -21,7 +22,7 @@ public class GameLogic
         this.homeController = homeController;
         
         // Initialise board model
-        this.board = new Board(homeController,"Communism", "Capitalism");
+        this.board = new Board(this,"Communism", "Capitalism");
 
         // Add all from random piece factory
         board.getPieceList().addAll(PieceFactory.createRandomPieceList());
@@ -50,15 +51,13 @@ public class GameLogic
         Piece selectedPiece = board.getCurrentPlayer().getSelectedPiece();
 
         // Possible error 1: if selected piece and the piece found in list are both null, then
-        //
-        if(pieceInList == null && selectedPiece == null) {
-            return;
-        }
+        //                   just forget about it lol...
+        if(pieceInList == null && selectedPiece == null) return;
 
         // Possible error 2: if selectedPiece is not null and the piece found in list is also not null,
         //                   then it means the user is placing a damn piece on a coordinate where it already
         //                   filled by another piece.
-        //                   Raise an exception here instead (no needS to evaluate any more)
+        //                   Raise an exception here instead (no need to evaluate any more)
         if(pieceInList != null && selectedPiece != null) {
             throw new DuplicatedPieceException(
                     String.format("User putting pieces on a wrong place, x: %d, y: %d",
@@ -76,6 +75,32 @@ public class GameLogic
 
     }
 
+    /**
+     * Trigger by Board model
+     * @param piece Piece selected
+     */
+    public void timeout(Piece piece)
+    {
+        // Put back to original place when timeout
+        placePiece(piece.getCoordinate());
+
+        // Show timeout alert
+        Alert alert = new Alert(Alert.AlertType.ERROR,
+                "5 seconds holding timeout! Try again in the next turn!");
+        alert.show();
+
+        board.stopCountdown();
+    }
+
+    /**
+     * Get the current GUI controller
+     * @return GUI controller
+     */
+    public HomeController getGuiController()
+    {
+        return this.homeController;
+    }
+
 
     /**
      * Try select a piece to candidate position
@@ -89,6 +114,7 @@ public class GameLogic
         if(piece.getRoleType() != board.getCurrentPlayer().getRoleType()) {
             throw new InvalidPieceSelectionException("Wrong piece selected, check your role please.");
         } else {
+            board.beginCountdown(piece);
             board.getCurrentPlayer().setSelectedPiece(piece);
         }
 
@@ -103,13 +129,13 @@ public class GameLogic
      * Place a candidate piece to a certain position
      * @param coordinate New coordinate for the candidate piece
      */
-    @Requires({"coordinate != null", "board.getCurrentPlayer() != null"})
     private void placePiece(Coordinate coordinate)
     {
-        // Set the new coordinate for the piece
-        board.getCurrentPlayer().getSelectedPiece().getCoordinate().setPosX(coordinate.getPosX());
-        board.getCurrentPlayer().getSelectedPiece().getCoordinate().setPosY(coordinate.getPosY());
+        // Stop timer
+        board.stopCountdown();
 
+        // Set the new coordinate for the piece
+        board.getCurrentPlayer().getSelectedPiece().setCoordinate(coordinate);
 
         System.out.println(String.format("User placed piece at x %d, y %d",
                 coordinate.getPosX(), coordinate.getPosY()));
@@ -128,5 +154,7 @@ public class GameLogic
 
         // Commit to GUI
         homeController.commitPlayerSelection(board.getCurrentPlayer());
+
+
     }
 }

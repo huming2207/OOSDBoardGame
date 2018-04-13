@@ -1,6 +1,5 @@
 package models.coordinate;
 
-import com.google.java.contract.Ensures;
 import com.google.java.contract.Requires;
 import javafx.scene.control.Button;
 

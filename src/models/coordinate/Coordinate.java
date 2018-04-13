@@ -23,6 +23,18 @@ public class Coordinate
     }
 
     /**
+     * Protected coordinate constructor to be cloned
+     * @param oldCoordinate original coordinate to be cloned...
+     */
+    @Requires({"oldCoordinate.getPosX() >= 0", "oldCoordinate.getPosX() <= 7",
+            "oldCoordinate.getPosY() >= 0", "oldCoordinate.getPosY() <= 7"})
+    protected Coordinate(Coordinate oldCoordinate)
+    {
+        this.posX = oldCoordinate.getPosX();
+        this.posY = oldCoordinate.getPosY();
+    }
+
+    /**
      * Get X axis
      * @return X axis value
      */

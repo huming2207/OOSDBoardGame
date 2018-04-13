@@ -2,13 +2,22 @@ package models.board;
 
 import com.google.java.contract.Ensures;
 import com.google.java.contract.Requires;
+import controllers.GameLogic;
 import controllers.HomeController;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.util.Duration;
+import models.coordinate.Coordinate;
 import models.piece.Piece;
 import models.piece.type.RoleType;
 import models.player.Player;
+
+import java.util.Timer;
 
 public class Board implements ListChangeListener<Piece>
 {
@@ -16,18 +25,19 @@ public class Board implements ListChangeListener<Piece>
     private Player capitalismPlayer;
     private Player currentPlayer;
     private ObservableList<Piece> pieceList;
-    private HomeController homeController;
+    private GameLogic gameLogic;
+    private Timeline turnTimeline;
 
     /**
      * Create a new board
-     * @param homeController Home controller
+     * @param gameLogic Game logic controller
      * @param communismPlayerName Communism player's nick name
      * @param capitalismPlayerName Capitalism player's nick name
      */
-    @Requires({"homeController != null", "!communismPlayerName.isEmpty()", "!capitalismPlayerName.isEmpty()"})
-    public Board(HomeController homeController, String communismPlayerName, String capitalismPlayerName)
+    @Requires({"gameLogic != null", "!communismPlayerName.isEmpty()", "!capitalismPlayerName.isEmpty()"})
+    public Board(GameLogic gameLogic, String communismPlayerName, String capitalismPlayerName)
     {
-        this.homeController = homeController;
+        this.gameLogic = gameLogic;
         this.communismPlayer = new Player(communismPlayerName, RoleType.COMMUNISM_PIECE);
         this.capitalismPlayer = new Player(capitalismPlayerName, RoleType.CAPITALISM_PIECE);
         this.pieceList = FXCollections.observableArrayList();
@@ -130,6 +140,28 @@ public class Board implements ListChangeListener<Piece>
         return null;
     }
 
+    public void beginCountdown(Piece piece)
+    {
+        System.out.println("Timeout countdown begins");
+
+        // Fixed 5 seconds countdown for now, will add a parser later for user config
+        turnTimeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
+            System.out.println("5 seconds reached, timeout!");
+            gameLogic.timeout(piece);
+            this.currentPlayer.setSelectedPiece(null);
+        }));
+
+        turnTimeline.play();
+    }
+
+    public void stopCountdown()
+    {
+        System.out.println("Timeout countdown stops");
+
+        if(turnTimeline == null)
+            return;
+        turnTimeline.stop();
+    }
 
     /**
      * This method triggers when any changes is made in the piece list. It will update UI via home controller.
@@ -141,13 +173,13 @@ public class Board implements ListChangeListener<Piece>
         while(change.next()) {
             if(change.wasAdded()) {
                 for(Piece piece : change.getAddedSubList()) {
-                    this.homeController.commitUIChanges(piece.getCoordinate(), piece.getStyle());
+                    this.gameLogic.getGuiController().commitUIChanges(piece.getCoordinate(), piece.getStyle());
                 }
             }
 
             if(change.wasRemoved()) {
                 for(Piece piece : change.getRemoved()) {
-                    this.homeController.commitUIChanges(piece.getCoordinate(), "");
+                    this.gameLogic.getGuiController().commitUIChanges(piece.getCoordinate(), "");
                 }
             }
         }
