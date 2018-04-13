@@ -36,16 +36,16 @@ public class GameLogic
      * Commit changes to game map
      * @param buttonEvent Supplied click result information
      */
-    @Requires({"buttonEvent.getCoordinate().getPosX() <= 0", "buttonEvent.getCoordinate().getPosX() >= 7",
-            "buttonEvent.getCoordinate().getPosY() <= 0", "buttonEvent.getCoordinate().getPosY() >= 7"})
+    @Requires({"buttonEvent.getPosX() <= 0", "buttonEvent.getPosX() >= 7",
+            "buttonEvent.getPosY() <= 0", "buttonEvent.getPosY() >= 7"})
     protected void commitMapChanges(BoardCellCoordinate buttonEvent)
             throws DuplicatedPieceException, InvalidPieceSelectionException
     {
         if(buttonEvent == null) return;
 
         Coordinate coordinate = new Coordinate(
-                buttonEvent.getCoordinate().getPosX(),
-                buttonEvent.getCoordinate().getPosY());
+                buttonEvent.getPosX(),
+                buttonEvent.getPosY());
 
         // Firstly, try find the piece
         Piece pieceInList = board.getPieceFromList(coordinate.getPosX(), coordinate.getPosY());
