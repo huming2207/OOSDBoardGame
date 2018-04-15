@@ -26,6 +26,8 @@ public class BoardCellCoordinate implements ICoordinate
 
     /**
      * Get the clicked button
+     * Note: this method is not yet been used due to out of scope for Assignment 1 stage
+     *
      * @return Button clicked
      */
     public Button getButton()
@@ -35,6 +37,8 @@ public class BoardCellCoordinate implements ICoordinate
 
     /**
      * Set to clicked button
+     * Note: this method is not yet been used due to out of scope for Assignment 1 stage
+     *
      * @param button Button clicked
      */
     public void setButton(Button button)
