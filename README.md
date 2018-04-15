@@ -2,7 +2,18 @@
 
 OOSD Board Game, for Object Oriented Software Design (ISYS1083), Group G3.
 
-FOR TEACHERS: Please refer to PDF version of this document if you can't render markdown in your environment. Thanks.
+## IMPORTANT NOTICE FOR TEACHERS 
+
+ * Please refer to PDF version of this document if you can't render markdown in your environment. Thanks.
+ * **The following Design Principle sections in this README document are just a for another reference, as it was written for a draft by Ming Hu for other group members without extra checking. If there is any conflicts against with the Design Principle section in the report, please refer to the report instead, not this README.**
+
+## Author (Assignment 1 branch)
+
+Code written and debugged by Ming Hu (s3554025), partially reviewed by other group members, which are:
+
+- Xuan Gia Khanh Nguyen (s3636905)
+- Yixiong Shen (s3700889)
+- Nguyen Tuan Manh (s3574923)
 
 ## Build environment
 
@@ -12,13 +23,6 @@ If you are using OpenJDK in some Linux distro, please remember to configure Java
 
 You may also need to set Cofoja separately before compile. Please refer to [this tutorial](https://stackoverflow.com/questions/31235078/using-cofoja-annotations-in-intellij) for more information. 
 
-## Author (Assignment 1 branch)
-
-Code written and debugged by Ming Hu (s3554025), partially reviewed by other group members, which are:
-
-- Xuan Gia Khanh Nguyen (s3636905)
-- Yixiong Shen (s3700889)
-- Nguyen Tuan Manh (s3574923)
 
 ## Main features implemented
 
@@ -73,7 +77,9 @@ Code written and debugged by Ming Hu (s3554025), partially reviewed by other gro
     - `Player::getPlayerName`
     - `Player::setPlayerName`
 
-## GRASP features / design structures
+## GRASP principles
+
+**The following Design Principle sections are just a for a reference as it was written for a draft by Ming Hu for other group members. If there is any conflicts against with the Design Principle section in the report, please refer to the report instead, not this README.**
 
 ### Low coupling
 
@@ -107,7 +113,9 @@ Code written and debugged by Ming Hu (s3554025), partially reviewed by other gro
 - If models need to control UI, they need to talk to `HomeController` first to ensure no invalid data is updated to UI.
     
 
-## SOLID features / design structures
+## SOLID principles
+
+**The following Design Principle sections are just a for a reference as it was written for a draft by Ming Hu for other group members. If there is any conflicts against with the Design Principle section in the report, please refer to the report instead, not this README.**
 
 ### Open/Close Principle
 - `GameLogic::selectPiece` and `GameLogic::placePiece` are in **private** level
@@ -123,6 +131,7 @@ Code written and debugged by Ming Hu (s3554025), partially reviewed by other gro
 ### Dependency Inversion Principle
 
 - `ICoordinate` interface and `Piece` abstract class
+- The way of `GameLogic` class and piece list in `Board` class dealing with different pieces.
 
 
 ### The Don’t Repeat Yourself Principle
@@ -130,7 +139,4 @@ Code written and debugged by Ming Hu (s3554025), partially reviewed by other gro
 - `Piece` is abstract class, not interface. Common attributes (e.g. coordinates, marks, attack level) can stays in abstract class without re-implement them again in the sub-classes. 
 - It significantly reduces extra code.
 
-### Dependency Inversion
-
-- The way of `GameLogic` class and piece list in `Board` class dealing with different pieces.
 
