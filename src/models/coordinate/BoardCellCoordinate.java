@@ -4,10 +4,11 @@ import com.google.java.contract.Ensures;
 import com.google.java.contract.Requires;
 import javafx.scene.control.Button;
 
-public class BoardCellCoordinate
+public class BoardCellCoordinate implements ICoordinate
 {
     private Button button;
-    private Coordinate coordinate;
+    private int posX;
+    private int posY;
 
     /**
      * Create a new board cell coordinate
@@ -18,30 +19,15 @@ public class BoardCellCoordinate
     @Requires({"posX >= 0", "posX <= 7", "posY >= 0", "posY <= 7", "button != null"})
     public BoardCellCoordinate(int posX, int posY, Button button)
     {
-        this.coordinate = new Coordinate(posX, posY);
+        this.posX = posX;
+        this.posY = posY;
         this.button = button;
     }
 
     /**
-     * Get coordinate
-     * @return coordinate of this clicked cell
-     */
-    public Coordinate getCoordinate()
-    {
-        return this.coordinate;
-    }
-
-    /**
-     * Set coordinate
-     * @param coordinate coordinate of this clicked cell
-     */
-    public void setCoordinate(Coordinate coordinate)
-    {
-        this.coordinate = coordinate;
-    }
-
-    /**
      * Get the clicked button
+     * Note: this method is not yet been used due to out of scope for Assignment 1 stage
+     *
      * @return Button clicked
      */
     public Button getButton()
@@ -51,11 +37,53 @@ public class BoardCellCoordinate
 
     /**
      * Set to clicked button
+     * Note: this method is not yet been used due to out of scope for Assignment 1 stage
+     *
      * @param button Button clicked
      */
     public void setButton(Button button)
     {
         this.button = button;
+    }
+
+    /**
+     * Get X axis
+     * @return X axis value
+     */
+    @Ensures({"result >= 0", "result <= 7"})
+    public int getPosX()
+    {
+        return this.posX;
+    }
+
+    /**
+     * Set X axis
+     * @param posX X axis value
+     */
+    @Requires({"posX >= 0", "posX <= 7"})
+    public void setPosX(int posX)
+    {
+        this.posX = posX;
+    }
+
+    /**
+     * Get Y axis
+     * @return Y axis value
+     */
+    @Ensures({"result >= 0", "result <= 7"})
+    public int getPosY()
+    {
+        return posY;
+    }
+
+    /**
+     * Set Y axis
+     * @param posY Y axis value
+     */
+    @Requires({"posY >= 0", "posY <= 7"})
+    public void setPosY(int posY)
+    {
+        this.posY = posY;
     }
 
 }

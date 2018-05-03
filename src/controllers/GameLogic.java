@@ -3,6 +3,7 @@ package controllers;
 import com.google.java.contract.Requires;
 import helpers.exceptions.DuplicatedPieceException;
 import helpers.exceptions.InvalidPieceSelectionException;
+import javafx.scene.control.Alert;
 import models.coordinate.Coordinate;
 import helpers.PieceFactory;
 import models.board.Board;
@@ -21,7 +22,7 @@ public class GameLogic
         this.homeController = homeController;
         
         // Initialise board model
-        this.board = new Board(homeController,"Communism", "Capitalism");
+        this.board = new Board(this,"Communism", "Capitalism");
 
         // Add all from random piece factory
         board.getPieceList().addAll(PieceFactory.createRandomPieceList());
@@ -35,30 +36,29 @@ public class GameLogic
      * Commit changes to game map
      * @param buttonEvent Supplied click result information
      */
-
+    @Requires({"buttonEvent.getPosX() <= 0", "buttonEvent.getPosX() >= 7",
+            "buttonEvent.getPosY() <= 0", "buttonEvent.getPosY() >= 7"})
     protected void commitMapChanges(BoardCellCoordinate buttonEvent)
             throws DuplicatedPieceException, InvalidPieceSelectionException
     {
         if(buttonEvent == null) return;
 
         Coordinate coordinate = new Coordinate(
-                buttonEvent.getCoordinate().getPosX(),
-                buttonEvent.getCoordinate().getPosY());
+                buttonEvent.getPosX(),
+                buttonEvent.getPosY());
 
         // Firstly, try find the piece
         Piece pieceInList = board.getPieceFromList(coordinate.getPosX(), coordinate.getPosY());
         Piece selectedPiece = board.getCurrentPlayer().getSelectedPiece();
 
         // Possible error 1: if selected piece and the piece found in list are both null, then
-        //
-        if(pieceInList == null && selectedPiece == null) {
-            return;
-        }
+        //                   just forget about it lol...
+        if(pieceInList == null && selectedPiece == null) return;
 
         // Possible error 2: if selectedPiece is not null and the piece found in list is also not null,
         //                   then it means the user is placing a damn piece on a coordinate where it already
         //                   filled by another piece.
-        //                   Raise an exception here instead (no needS to evaluate any more)
+        //                   Raise an exception here instead (no need to evaluate any more)
         if(pieceInList != null && selectedPiece != null) {
             throw new DuplicatedPieceException(
                     String.format("User putting pieces on a wrong place, x: %d, y: %d",
@@ -76,19 +76,50 @@ public class GameLogic
 
     }
 
+    /**
+     * Trigger by Board model
+     * @param piece Piece selected
+     */
+    @Requires({"piece != null", "piece.getCoordinate().getPosX() <= 0", "piece.getCoordinate().getPosX() >= 7",
+            "piece.getCoordinate().getPosY() <= 0", "piece.getCoordinate().getPosY() >= 7"})
+    public void timeout(Piece piece)
+    {
+        // Put back to original place when timeout
+        placePiece(piece.getCoordinate());
+
+        // Show timeout alert
+        Alert alert = new Alert(Alert.AlertType.ERROR,
+                "5 seconds holding timeout! Try again in the next turn!");
+        alert.show();
+
+        board.stopCountdown();
+    }
+
+    /**
+     * Get the current GUI controller
+     * @return GUI controller
+     */
+    public HomeController getGuiController()
+    {
+        return this.homeController;
+    }
+
 
     /**
      * Try select a piece to candidate position
      * @param piece Piece to select
      * @throws InvalidPieceSelectionException Occurs when user selecting a wrong piece which is not in the same role
      */
-    @Requires({"piece != null", "!board.getPieceList().isEmpty()"})
+    @Requires({"piece != null", "piece.getCoordinate().getPosX() <= 0", "piece.getCoordinate().getPosX() >= 7",
+            "piece.getCoordinate().getPosY() <= 0", "piece.getCoordinate().getPosY() >= 7",
+            "!board.getPieceList().isEmpty()"})
     private void selectPiece(Piece piece) throws InvalidPieceSelectionException
     {
         // Check their role type first...
         if(piece.getRoleType() != board.getCurrentPlayer().getRoleType()) {
             throw new InvalidPieceSelectionException("Wrong piece selected, check your role please.");
         } else {
+            board.beginCountdown(piece);
             board.getCurrentPlayer().setSelectedPiece(piece);
         }
 
@@ -103,13 +134,15 @@ public class GameLogic
      * Place a candidate piece to a certain position
      * @param coordinate New coordinate for the candidate piece
      */
-    @Requires({"coordinate != null", "board.getCurrentPlayer() != null"})
+    @Requires({"coordinate.getPosX() >= 0", "coordinate.getPosX() <= 7",
+            "coordinate.getPosY() >= 0", "coordinate.getPosY() <= 7"})
     private void placePiece(Coordinate coordinate)
     {
-        // Set the new coordinate for the piece
-        board.getCurrentPlayer().getSelectedPiece().getCoordinate().setPosX(coordinate.getPosX());
-        board.getCurrentPlayer().getSelectedPiece().getCoordinate().setPosY(coordinate.getPosY());
+        // Stop timer
+        board.stopCountdown();
 
+        // Set the new coordinate for the piece
+        board.getCurrentPlayer().getSelectedPiece().setCoordinate(coordinate);
 
         System.out.println(String.format("User placed piece at x %d, y %d",
                 coordinate.getPosX(), coordinate.getPosY()));
@@ -128,5 +161,7 @@ public class GameLogic
 
         // Commit to GUI
         homeController.commitPlayerSelection(board.getCurrentPlayer());
+
+
     }
 }
