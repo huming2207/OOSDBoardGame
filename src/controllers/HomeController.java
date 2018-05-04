@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.TilePane;
 import models.player.Player;
 import models.coordinate.BoardCellCoordinate;
 import models.coordinate.Coordinate;
@@ -26,6 +27,9 @@ public class HomeController
     @FXML
     private Label playerNameLabel;
 
+    @FXML
+    private TilePane mainBoard;
+
     /**
      * Set the FXML Control map from the main class (i.e. from loader.getNamespace()) and initialise game logic
      *
@@ -42,7 +46,6 @@ public class HomeController
      *
      * @param clickEvent event input
      */
-    @FXML
     private void handleBoardButtonClick(ActionEvent clickEvent)
     {
         BoardCellCoordinate buttonResult = BoardButtonHelper.parseClickResult(clickEvent);
