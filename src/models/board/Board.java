@@ -28,7 +28,6 @@ public class Board implements ListChangeListener<Piece>
     private ObservableList<Piece> pieceList;
     private GameLogic gameLogic;
     private Timeline turnTimeline;
-    private TilePane boardGui;
 
     /**
      * Create a new board
@@ -37,14 +36,13 @@ public class Board implements ListChangeListener<Piece>
      * @param capitalismPlayerName Capitalism player's nick name
      */
     @Requires({"gameLogic != null", "!communismPlayerName.isEmpty()", "!capitalismPlayerName.isEmpty()"})
-    public Board(GameLogic gameLogic, String communismPlayerName, String capitalismPlayerName, TilePane pane)
+    public Board(GameLogic gameLogic, String communismPlayerName, String capitalismPlayerName)
     {
         this.gameLogic = gameLogic;
         this.communismPlayer = new Player(communismPlayerName, RoleType.COMMUNISM_PIECE);
         this.capitalismPlayer = new Player(capitalismPlayerName, RoleType.CAPITALISM_PIECE);
         this.pieceList = FXCollections.observableArrayList();
         this.pieceList.addListener(this);
-        this.boardGui = pane;
     }
 
     /**
