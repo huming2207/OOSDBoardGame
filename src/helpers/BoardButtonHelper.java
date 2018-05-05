@@ -14,7 +14,7 @@ public class BoardButtonHelper
      * @return Button result, including x & y axis and button ID string.
      */
     @Requires("actionEvent != null")
-    @Ensures({"result.getPosX() <= 7", "result.getPosX() >= 0", "result.getPosY() <= 7", "result.getPosY() >= 0"})
+    @Ensures({"result.getPosX() >= 0", "result.getPosY() >= 0"})
     public static BoardCellCoordinate parseClickResult(ActionEvent actionEvent)
     {
         if(actionEvent == null) return null;
