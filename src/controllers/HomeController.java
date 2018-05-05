@@ -38,13 +38,13 @@ public class HomeController
      * We shouldn't use constructor here because the FXML loader may not recognise and handle it correctly.
      *
      */
-    public void gameInit(int boardX, int boardY)
+    public void gameInit(int boardSize)
     {
         this.buttonMap = FXCollections.observableHashMap();
         this.gameLogic = new GameLogic(this);
 
         // Board pane initialisation
-        this.initBoardGui(this.mainBoard, boardX, boardY);
+        this.initBoardGui(this.mainBoard, boardSize);
     }
 
     /**
@@ -118,29 +118,28 @@ public class HomeController
     /**
      *  Initialise the board with specific size and button
      * @param pane Tile pane, i.e. GUI of the board
-     * @param boardX X axis of the board
-     * @param boardY Y axis of the board
+     * @param boardSize size of the board
      */
-    @Requires({"pane != null", "boardX > 0", "boardY > 0"})
-    public void initBoardGui(TilePane pane, int boardX, int boardY)
+    @Requires({"pane != null", "boardSize > 0"})
+    public void initBoardGui(TilePane pane, int boardSize)
     {
         // Disable gaps
         pane.setHgap(0);
         pane.setVgap(0);
 
         // Set to specific size of the pane
-        pane.setPrefColumns(boardX);
-        pane.setPrefRows(boardY);
+        pane.setPrefColumns(boardSize);
+        pane.setPrefRows(boardSize);
 
-        for(int buttonXCounter = 0; buttonXCounter < boardX; buttonXCounter += 1) {
-            for(int buttonYCounter = 0; buttonYCounter < boardY; buttonYCounter += 1) {
+        for(int buttonXCounter = 0; buttonXCounter < boardSize; buttonXCounter += 1) {
+            for(int buttonYCounter = 0; buttonYCounter < boardSize; buttonYCounter += 1) {
 
                 // Initialise a button
                 Button button = new Button();
 
                 // Set the size of it, we have to -1 to make sure it can display correctly
-                button.setPrefSize((this.mainBoard.getPrefWidth() / boardX) - 1,
-                        (this.mainBoard.getPrefHeight() / boardX) - 1);
+                button.setPrefSize((this.mainBoard.getPrefWidth() / boardSize) - 1,
+                        (this.mainBoard.getPrefHeight() / boardSize) - 1);
 
                 // Set board button's CSS pseudo class to "board-button"
                 button.getStyleClass().add("board-button");
