@@ -13,8 +13,8 @@ public class PieceFactory
 {
     /**
      * Create a random piece list for game logic
-     * @param boardX Size of X axis in the board, e.g. for a 8x8 board, boardX should be 7
-     * @param boardY Size of Y axis in the board, e.g. for a 8x8 board, boardY should be 7
+     * @param boardX Size of X axis in the board, e.g. for a 8x8 board, boardX should be 8
+     * @param boardY Size of Y axis in the board, e.g. for a 8x8 board, boardY should be 8
      * @return Collection of 6 pieces
      */
     @Ensures("result.size() == 6")
@@ -35,8 +35,8 @@ public class PieceFactory
 
     /**
      * Create a queue of random coordinate
-     * @param boardX Size of X axis in the board, e.g. for a 8x8 board, boardX should be 7
-     * @param boardY Size of Y axis in the board, e.g. for a 8x8 board, boardY should be 7
+     * @param boardX Size of X axis in the board, e.g. for a 8x8 board, boardX should be 8
+     * @param boardY Size of Y axis in the board, e.g. for a 8x8 board, boardY should be 8
      * @return linked List (queue) of random coordinates
      */
     @Ensures("result.size() == 6")
@@ -47,8 +47,8 @@ public class PieceFactory
         // Only stop looping when coordinate is enough (6 for now)
         while (coordinateList.size() < 6) {
 
-            int posX = ThreadLocalRandom.current().nextInt(0, boardX + 1);
-            int posY = ThreadLocalRandom.current().nextInt(0, boardY + 1);
+            int posX = ThreadLocalRandom.current().nextInt(0, boardX);
+            int posY = ThreadLocalRandom.current().nextInt(0, boardY);
 
             if (coordinateList.size() < 1) {
                 coordinateList.push(new Coordinate(posX, posY));
