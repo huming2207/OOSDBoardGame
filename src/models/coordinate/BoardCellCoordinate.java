@@ -16,7 +16,7 @@ public class BoardCellCoordinate implements ICoordinate
      * @param posY Y axis
      * @param button Button clicked
      */
-    @Requires({"posX >= 0", "posY >= 0", "button != null"})
+    @Requires({"posX > 0", "posY > 0", "button != null"})
     public BoardCellCoordinate(int posX, int posY, Button button)
     {
         this.posX = posX;
@@ -50,7 +50,7 @@ public class BoardCellCoordinate implements ICoordinate
      * Get X axis
      * @return X axis value
      */
-    @Ensures({"result >= 0"})
+    @Ensures({"result > 0"})
     public int getPosX()
     {
         return this.posX;
@@ -60,7 +60,7 @@ public class BoardCellCoordinate implements ICoordinate
      * Set X axis
      * @param posX X axis value
      */
-    @Requires({"posX >= 0"})
+    @Requires({"posX > 0"})
     public void setPosX(int posX)
     {
         this.posX = posX;
@@ -70,7 +70,7 @@ public class BoardCellCoordinate implements ICoordinate
      * Get Y axis
      * @return Y axis value
      */
-    @Ensures({"result >= 0"})
+    @Ensures({"result > 0"})
     public int getPosY()
     {
         return posY;
@@ -80,7 +80,7 @@ public class BoardCellCoordinate implements ICoordinate
      * Set Y axis
      * @param posY Y axis value
      */
-    @Requires({"posY >= 0"})
+    @Requires({"posY > 0"})
     public void setPosY(int posY)
     {
         this.posY = posY;

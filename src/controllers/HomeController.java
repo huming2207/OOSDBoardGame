@@ -69,8 +69,7 @@ public class HomeController
      * @param coordinate Coordinate of a button
      * @param style CSS style
      */
-    @Requires({"coordinate.getPosX() <= 7", "coordinate.getPosX() >= 0",
-            "coordinate.getPosY() <= 7", "coordinate.getPosX() >= 0"})
+    @Requires({"coordinate.getPosX() > 0", "coordinate.getPosX() > 0"})
     public void commitUIChanges(Coordinate coordinate, String style)
     {
         // The ID format is "button_posX_posY"

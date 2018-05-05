@@ -11,6 +11,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
 import models.coordinate.Coordinate;
 import models.piece.Piece;
@@ -27,6 +28,7 @@ public class Board implements ListChangeListener<Piece>
     private ObservableList<Piece> pieceList;
     private GameLogic gameLogic;
     private Timeline turnTimeline;
+    private TilePane boardGui;
 
     /**
      * Create a new board
@@ -35,13 +37,14 @@ public class Board implements ListChangeListener<Piece>
      * @param capitalismPlayerName Capitalism player's nick name
      */
     @Requires({"gameLogic != null", "!communismPlayerName.isEmpty()", "!capitalismPlayerName.isEmpty()"})
-    public Board(GameLogic gameLogic, String communismPlayerName, String capitalismPlayerName)
+    public Board(GameLogic gameLogic, String communismPlayerName, String capitalismPlayerName, TilePane pane)
     {
         this.gameLogic = gameLogic;
         this.communismPlayer = new Player(communismPlayerName, RoleType.COMMUNISM_PIECE);
         this.capitalismPlayer = new Player(capitalismPlayerName, RoleType.CAPITALISM_PIECE);
         this.pieceList = FXCollections.observableArrayList();
         this.pieceList.addListener(this);
+        this.boardGui = pane;
     }
 
     /**
@@ -126,7 +129,7 @@ public class Board implements ListChangeListener<Piece>
      * @param posY Y-axis of the piece
      * @return The piece object if it has been found, or null if it has not been found
      */
-    @Requires({"posX >= 0", "posX <= 7", "posY >= 0", "posY <= 7"})
+    @Requires({"posX > 0", "posY > 0"})
     public Piece getPieceFromList(int posX, int posY)
     {
         for(Piece piece : this.pieceList) {
