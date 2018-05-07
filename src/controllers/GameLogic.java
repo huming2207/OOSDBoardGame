@@ -25,8 +25,9 @@ public class GameLogic
         this.board = new Board(this,"Communism", "Capitalism");
 
         // Add all from random piece factory
-        // TODO: temporarily set the value to 9x9
-        board.getPieceList().addAll(PieceFactory.createRandomPieceList(9, 9));
+        board.getPieceList().addAll(PieceFactory.createRandomPieceList(
+                this.homeController.getBoardSize(),
+                this.homeController.getBoardSize()));
 
         // First turn: communism player (player A)
         board.setCurrentPlayer(board.getCommunismPlayer());

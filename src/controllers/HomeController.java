@@ -22,6 +22,7 @@ public class HomeController
 {
     private GameLogic gameLogic;
     private ObservableMap<String, Button> buttonMap;
+    private int boardSize;
 
     @FXML
     private Button selectedPiece;
@@ -41,10 +42,13 @@ public class HomeController
     public void gameInit(int boardSize)
     {
         this.buttonMap = FXCollections.observableHashMap();
-        this.gameLogic = new GameLogic(this);
 
         // Board pane initialisation
         this.initBoardGui(this.mainBoard, boardSize);
+        this.boardSize = boardSize;
+
+        // Initialise game logic
+        this.gameLogic = new GameLogic(this);
     }
 
     /**
@@ -161,6 +165,11 @@ public class HomeController
     public ObservableMap<String, Button> getButtonMap()
     {
         return this.buttonMap;
+    }
+
+    public int getBoardSize()
+    {
+        return this.boardSize;
     }
 
 }

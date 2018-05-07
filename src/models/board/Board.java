@@ -185,6 +185,7 @@ public class Board implements ListChangeListener<Piece>
 
             if(change.wasRemoved()) {
                 for(Piece piece : change.getRemoved()) {
+                    // Put an empty string to the style (may need to set a default button style later on)
                     this.gameLogic.getGuiController().commitUIChanges(piece.getCoordinate(), "");
                 }
             }
