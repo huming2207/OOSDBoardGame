@@ -15,7 +15,7 @@ public class Coordinate implements ICoordinate
      * @param posX X axis
      * @param posY Y axis
      */
-    @Requires({"posX >= 0", "posX <= 7", "posY >= 0", "posY <= 7"})
+    @Requires({"posX > 0", "posY > 0"})
     public Coordinate(int posX, int posY)
     {
         this.posX = posX;
@@ -26,8 +26,7 @@ public class Coordinate implements ICoordinate
      * Protected coordinate constructor to be cloned
      * @param oldCoordinate original coordinate to be cloned...
      */
-    @Requires({"oldCoordinate.getPosX() >= 0", "oldCoordinate.getPosX() <= 7",
-            "oldCoordinate.getPosY() >= 0", "oldCoordinate.getPosY() <= 7"})
+    @Requires({"oldCoordinate.getPosX() > 0", "oldCoordinate.getPosY() > 0"})
     protected Coordinate(Coordinate oldCoordinate)
     {
         this.posX = oldCoordinate.getPosX();
@@ -38,7 +37,7 @@ public class Coordinate implements ICoordinate
      * Get X axis
      * @return X axis value
      */
-    @Ensures({"result >= 0", "result <= 7"})
+    @Ensures({"result > 0"})
     public int getPosX()
     {
         return posX;
@@ -48,7 +47,7 @@ public class Coordinate implements ICoordinate
      * Set X axis
      * @param posX X axis value
      */
-    @Requires({"posX >= 0", "posX <= 7"})
+    @Requires({"posX > 0"})
     public void setPosX(int posX)
     {
         this.posX = posX;
@@ -58,7 +57,7 @@ public class Coordinate implements ICoordinate
      * Get Y axis
      * @return Y axis value
      */
-    @Ensures({"result >= 0", "result <= 7"})
+    @Ensures({"result > 0"})
     public int getPosY()
     {
         return posY;
@@ -68,7 +67,7 @@ public class Coordinate implements ICoordinate
      * Set Y axis
      * @param posY Y axis value
      */
-    @Requires({"posY >= 0", "posY <= 7"})
+    @Requires({"posY > 0"})
     public void setPosY(int posY)
     {
         this.posY = posY;
