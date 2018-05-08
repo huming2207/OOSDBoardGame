@@ -23,7 +23,11 @@ public class BoardGameMain extends Application
             loader.setLocation(getClass().getResource("views/Home.fxml"));
 
             // Set the scene by getting the Parent scene from FXMLLoader
-            primaryStage.setScene(new Scene(loader.load()));
+            Scene scene = new Scene(loader.load());
+
+            // Load main CSS for home view
+            scene.getStylesheets().add(getClass().getResource("views/css/BoardButton.css").toExternalForm());
+            primaryStage.setScene(scene);
 
             // Get the controller from loader, then set the object map to it.
             // We can also use loader.setController() but we can't set "fx:controller" parameter in FXML any more,
