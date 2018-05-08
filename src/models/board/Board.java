@@ -11,6 +11,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
 import models.coordinate.Coordinate;
 import models.piece.Piece;
@@ -126,7 +127,7 @@ public class Board implements ListChangeListener<Piece>
      * @param posY Y-axis of the piece
      * @return The piece object if it has been found, or null if it has not been found
      */
-    @Requires({"posX >= 0", "posX <= 7", "posY >= 0", "posY <= 7"})
+    @Requires({"posX > 0", "posY > 0"})
     public Piece getPieceFromList(int posX, int posY)
     {
         for(Piece piece : this.pieceList) {
@@ -184,6 +185,7 @@ public class Board implements ListChangeListener<Piece>
 
             if(change.wasRemoved()) {
                 for(Piece piece : change.getRemoved()) {
+                    // Put an empty string to the style (may need to set a default button style later on)
                     this.gameLogic.getGuiController().commitUIChanges(piece.getCoordinate(), "");
                 }
             }

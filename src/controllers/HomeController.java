@@ -4,11 +4,14 @@ import com.google.java.contract.Requires;
 import helpers.BoardButtonHelper;
 import helpers.exceptions.DuplicatedPieceException;
 import helpers.exceptions.InvalidPieceSelectionException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.TilePane;
 import models.player.Player;
 import models.coordinate.BoardCellCoordinate;
 import models.coordinate.Coordinate;
@@ -18,7 +21,8 @@ import java.util.Map;
 public class HomeController
 {
     private GameLogic gameLogic;
-    private Map<String, Object> controlMap;
+    private ObservableMap<String, Button> buttonMap;
+    private int boardSize;
 
     @FXML
     private Button selectedPiece;
@@ -26,14 +30,24 @@ public class HomeController
     @FXML
     private Label playerNameLabel;
 
+    @FXML
+    private TilePane mainBoard;
+
     /**
-     * Set the FXML Control map from the main class (i.e. from loader.getNamespace()) and initialise game logic
+     * Set the FXML Control map from the main class (i.e. from loader.getNamespace()) and initialise game logic.
      *
-     * @param controlMap Map source to be set
+     * We shouldn't use constructor here because the FXML loader may not recognise and handle it correctly.
+     *
      */
-    public void gameInit(Map<String, Object> controlMap)
+    public void gameInit(int boardSize)
     {
-        this.controlMap = controlMap;
+        this.buttonMap = FXCollections.observableHashMap();
+
+        // Board pane initialisation
+        this.initBoardGui(this.mainBoard, boardSize);
+        this.boardSize = boardSize;
+
+        // Initialise game logic
         this.gameLogic = new GameLogic(this);
     }
 
@@ -42,7 +56,6 @@ public class HomeController
      *
      * @param clickEvent event input
      */
-    @FXML
     private void handleBoardButtonClick(ActionEvent clickEvent)
     {
         BoardCellCoordinate buttonResult = BoardButtonHelper.parseClickResult(clickEvent);
@@ -66,12 +79,11 @@ public class HomeController
      * @param coordinate Coordinate of a button
      * @param style CSS style
      */
-    @Requires({"coordinate.getPosX() <= 7", "coordinate.getPosX() >= 0",
-            "coordinate.getPosY() <= 7", "coordinate.getPosX() >= 0"})
+    @Requires({"coordinate.getPosX() > 0", "coordinate.getPosX() > 0"})
     public void commitUIChanges(Coordinate coordinate, String style)
     {
         // The ID format is "button_posX_posY"
-        Button button = (Button)controlMap.get(String.format("board_%d_%d",
+        Button button = this.buttonMap.get(String.format("board_%d_%d",
                 coordinate.getPosX(), coordinate.getPosY()));
 
         // In case the game algorithm goes wrong...
@@ -105,6 +117,59 @@ public class HomeController
 
         // Set the player name
         this.playerNameLabel.setText(player.getPlayerName());
+    }
+
+    /**
+     *  Initialise the board with specific size and button
+     * @param pane Tile pane, i.e. GUI of the board
+     * @param boardSize size of the board
+     */
+    @Requires({"pane != null", "boardSize > 0"})
+    public void initBoardGui(TilePane pane, int boardSize)
+    {
+        // Disable gaps
+        pane.setHgap(0);
+        pane.setVgap(0);
+
+        // Set to specific size of the pane
+        pane.setPrefColumns(boardSize);
+        pane.setPrefRows(boardSize);
+
+        for(int buttonXCounter = 0; buttonXCounter < boardSize; buttonXCounter += 1) {
+            for(int buttonYCounter = 0; buttonYCounter < boardSize; buttonYCounter += 1) {
+
+                // Initialise a button
+                Button button = new Button();
+
+                // Set the size of it, we have to -1 to make sure it can display correctly
+                button.setPrefSize((this.mainBoard.getPrefWidth() / boardSize) - 1,
+                        (this.mainBoard.getPrefHeight() / boardSize) - 1);
+
+                // Set board button's CSS pseudo class to "board-button"
+                button.getStyleClass().add("board-button");
+
+                // Add button event listener
+                button.setOnAction(this::handleBoardButtonClick);
+
+                // Add button to the button map with specific name
+                String buttonId = String.format("board_%d_%d", buttonXCounter, buttonYCounter);
+                button.setId(buttonId);
+                this.buttonMap.put(buttonId, button);
+
+                // Add button to the GUI
+                this.mainBoard.getChildren().add(button);
+            }
+        }
+    }
+
+    public ObservableMap<String, Button> getButtonMap()
+    {
+        return this.buttonMap;
+    }
+
+    public int getBoardSize()
+    {
+        return this.boardSize;
     }
 
 }
