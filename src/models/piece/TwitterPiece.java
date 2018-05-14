@@ -6,9 +6,7 @@ import models.piece.type.RoleType;
 public class TwitterPiece extends Piece
 {
     public TwitterPiece(Coordinate coordinate)
-    {
-        super(coordinate, 100, 20, RoleType.CAPITALISM_PIECE);
-    }
+    { super(coordinate, 6103,111,100, 20, RoleType.CAPITALISM_PIECE); }
 
     @Override
     public final String getStyle()

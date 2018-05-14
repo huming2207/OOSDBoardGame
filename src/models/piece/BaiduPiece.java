@@ -8,7 +8,7 @@ public class BaiduPiece extends Piece
 
     public BaiduPiece(Coordinate coordinate)
     {
-        super(coordinate, 150, 50, RoleType.COMMUNISM_PIECE);
+        super(coordinate,8601,1, 150, 50, RoleType.COMMUNISM_PIECE);
     }
 
     @Override

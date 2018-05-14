@@ -8,7 +8,7 @@ public class GooglePiece extends Piece
 
     public GooglePiece(Coordinate coordinate)
     {
-        super(coordinate, 150, 50, RoleType.CAPITALISM_PIECE);
+        super(coordinate, 6101,1,150, 50, RoleType.CAPITALISM_PIECE);
     }
 
     @Override

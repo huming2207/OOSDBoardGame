@@ -7,15 +7,34 @@ import models.piece.type.RoleType;
 
 import java.util.Objects;
 
+/**
+ * ID      typeID          piece
+ * 8601    1               baidu
+ * 8602    11              wechat
+ * 8603    111             weibo
+ * 6101    1               google
+ * 6102    11              facebook
+ * 6103    111             twitter
+ */
+
+
+
+
 public abstract class Piece
 {
+    private int ID;
+
+    private int typeID;
+
     private int mark;
     private Coordinate coordinate;
     private final int ATTACK_LEVEL;
     private final RoleType TYPE;
 
-    public Piece(Coordinate coordinate, int mark, int attackLevel, RoleType type)
+    public Piece(Coordinate coordinate,int ID,int typeID, int mark, int attackLevel, RoleType type)
     {
+        this.ID = ID;
+        this.typeID = typeID;
         this.mark = mark;
         this.coordinate = coordinate;
         this.ATTACK_LEVEL = attackLevel;
@@ -46,6 +65,7 @@ public abstract class Piece
     @Ensures("result > 0")
     public int getAttackLevel()
     {
+
         return this.ATTACK_LEVEL;
     }
 
@@ -57,6 +77,7 @@ public abstract class Piece
     @Requires("deduction > 0")
     public void applyAttack(int deduction)
     {
+
         this.mark = this.mark - deduction;
     }
 
@@ -78,6 +99,7 @@ public abstract class Piece
     @Ensures({"result.getPosX() <= 7", "result.getPosX() >= 0", "result.getPosY() <= 7", "result.getPosY() >= 0"})
     public Coordinate getCoordinate()
     {
+
         return this.coordinate;
     }
 
@@ -90,6 +112,7 @@ public abstract class Piece
             "coordinate.getPosY() <= 7", "coordinate.getPosY() >= 0"})
     public void setCoordinate(Coordinate coordinate)
     {
+
         this.coordinate = coordinate;
     }
 
@@ -110,6 +133,13 @@ public abstract class Piece
         return Objects.hash(this.coordinate, this.ATTACK_LEVEL, this.mark);
     }
 
+    public int getID() {
+        return ID;
+    }
+
+    public int getTypeID() {
+        return typeID;
+    }
 
     @Override
     public boolean equals(Object o)

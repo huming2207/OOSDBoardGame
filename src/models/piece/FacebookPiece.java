@@ -7,7 +7,7 @@ public class FacebookPiece extends Piece
 {
     public FacebookPiece(Coordinate coordinate)
     {
-        super(coordinate, 120, 30, RoleType.CAPITALISM_PIECE);
+        super(coordinate,6102,11, 120, 30, RoleType.CAPITALISM_PIECE);
     }
 
     @Override

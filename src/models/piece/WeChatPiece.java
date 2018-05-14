@@ -6,9 +6,7 @@ import models.piece.type.RoleType;
 public class WeChatPiece extends Piece
 {
     public WeChatPiece(Coordinate coordinate)
-    {
-        super(coordinate, 120, 50, RoleType.COMMUNISM_PIECE);
-    }
+    { super(coordinate, 6102,11,120, 50, RoleType.COMMUNISM_PIECE); }
 
     @Override
     public final String getStyle()

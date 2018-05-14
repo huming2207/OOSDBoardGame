@@ -7,7 +7,7 @@ public class WeiboPiece extends Piece
 {
     public WeiboPiece(Coordinate coordinate)
     {
-        super(coordinate, 100, 20, RoleType.COMMUNISM_PIECE);
+        super(coordinate,8603,111, 100, 20, RoleType.COMMUNISM_PIECE);
     }
 
     @Override
