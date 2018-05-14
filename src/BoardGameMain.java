@@ -10,6 +10,7 @@ public class BoardGameMain extends Application
 {
     public static void main(String[] args)
     {
+
         Application.launch(BoardGameMain.class, args);
     }
 
@@ -33,7 +34,7 @@ public class BoardGameMain extends Application
             // We can also use loader.setController() but we can't set "fx:controller" parameter in FXML any more,
             // and it will result to some issues with FXML editor in Intellij IDEA.
             HomeController controller = loader.getController();
-            controller.gameInit(10);
+            controller.gameInit(15);
 
             primaryStage.show();
         } catch (IOException exception) {
