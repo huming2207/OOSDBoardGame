@@ -83,6 +83,7 @@ public class BoardCellCoordinate implements ICoordinate
     @Requires({"posY > 0"})
     public void setPosY(int posY)
     {
+
         this.posY = posY;
     }
 
