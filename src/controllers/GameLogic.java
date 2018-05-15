@@ -139,8 +139,17 @@ public class GameLogic
         // Stop timer
         board.stopCountdown();
 
+        //get origin coordinate and piece id
+        System.out.println("current piece ID is :" + " " + board.getCurrentPlayer().getSelectedPiece().getID());
+        System.out.println(String.format("User placed piece at origin x %d, origin y %d",
+                board.getCurrentPlayer().getSelectedPiece().getCoordinate().getPosX(),
+                board.getCurrentPlayer().getSelectedPiece().getCoordinate().getPosY()));
+
         // Set the new coordinate for the piece
         board.getCurrentPlayer().getSelectedPiece().setCoordinate(coordinate);
+
+
+
 
         System.out.println(String.format("User placed piece at x %d, y %d",
                 coordinate.getPosX(), coordinate.getPosY()));
