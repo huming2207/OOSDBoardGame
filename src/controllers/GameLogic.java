@@ -145,8 +145,48 @@ public class GameLogic
                 board.getCurrentPlayer().getSelectedPiece().getCoordinate().getPosX(),
                 board.getCurrentPlayer().getSelectedPiece().getCoordinate().getPosY()));
 
+        //hard code for rule : moveRange
+
+        int x0 = board.getCurrentPlayer().getSelectedPiece().getCoordinate().getPosX();
+        int y0 = board.getCurrentPlayer().getSelectedPiece().getCoordinate().getPosY();
+
+        int newX = coordinate.getPosX();
+        int newY = coordinate.getPosY();
+
+        int typeID = board.getCurrentPlayer().getSelectedPiece().getID();
+
+        if (typeID == 1 || (Math.abs(newX - x0) + Math.abs(newY - y0) <= 1)) {
+            board.getCurrentPlayer().getSelectedPiece().setCoordinate(coordinate);
+        }
+        else if (typeID == 11 || Math.abs(newX - x0) + Math.abs(newY - y0) <= 1){
+            board.getCurrentPlayer().getSelectedPiece().setCoordinate(coordinate);
+
+        }
+
+        else if (typeID == 111 || Math.abs(newX - x0) + Math.abs(newY - y0) <= 2) {
+            board.getCurrentPlayer().getSelectedPiece().setCoordinate(coordinate);
+
+        }
+
+        else {
+            return;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         // Set the new coordinate for the piece
-        board.getCurrentPlayer().getSelectedPiece().setCoordinate(coordinate);
+        //board.getCurrentPlayer().getSelectedPiece().setCoordinate(coordinate);
 
 
 
