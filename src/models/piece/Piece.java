@@ -1,6 +1,7 @@
 package models.piece;
 
 import models.coordinate.Coordinate;
+import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 
 /**
@@ -78,6 +79,8 @@ public interface Piece
      * @return Role TYPE for player's selection
      */
     RoleType getRoleType();
+
+    CharacterType getCharacterType();
 
     int[][] getMoveRangeAllowance();
 

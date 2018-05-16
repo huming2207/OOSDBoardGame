@@ -2,6 +2,7 @@ package models.piece.decorators.style.roles;
 
 import models.coordinate.Coordinate;
 import models.piece.Piece;
+import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 
 public class CapitalismRule extends AbstractRule
@@ -44,6 +45,11 @@ public class CapitalismRule extends AbstractRule
     public RoleType getRoleType()
     {
         return RoleType.CAPITALISM_PIECE;
+    }
+
+    public CharacterType getCharacterType()
+    {
+        return super.decoratePiece.getCharacterType();
     }
 
     public int[][] getMoveRangeAllowance()

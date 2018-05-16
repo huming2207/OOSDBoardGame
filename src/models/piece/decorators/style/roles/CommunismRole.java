@@ -2,6 +2,7 @@ package models.piece.decorators.style.roles;
 
 import models.coordinate.Coordinate;
 import models.piece.Piece;
+import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 
 public class CommunismRole extends AbstractRule
@@ -44,6 +45,11 @@ public class CommunismRole extends AbstractRule
     public RoleType getRoleType()
     {
         return RoleType.COMMUNISM_PIECE;
+    }
+
+    public CharacterType getCharacterType()
+    {
+        return super.decoratePiece.getCharacterType();
     }
 
     public int[][] getMoveRangeAllowance()

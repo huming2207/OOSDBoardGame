@@ -1,6 +1,7 @@
 package models.piece;
 
 import models.coordinate.Coordinate;
+import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 
 public class SimplePiece implements Piece
@@ -65,6 +66,12 @@ public class SimplePiece implements Piece
     public int[][] getAttackRangeAllowance()
     {
         return new int[0][];
+    }
+
+    @Override
+    public CharacterType getCharacterType()
+    {
+        return null;
     }
 
 

@@ -2,6 +2,7 @@ package models.piece.decorators.style.characters;
 
 import models.coordinate.Coordinate;
 import models.piece.Piece;
+import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 
 public class BaiduCharacter extends AbstractCharacter
@@ -65,6 +66,11 @@ public class BaiduCharacter extends AbstractCharacter
     public RoleType getRoleType()
     {
         return super.decoratePiece.getRoleType();
+    }
+
+    public CharacterType getCharacterType()
+    {
+        return CharacterType.BAIDU;
     }
 
     public int[][] getMoveRangeAllowance()

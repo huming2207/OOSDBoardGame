@@ -2,6 +2,7 @@ package models.piece.decorators.style.characters;
 
 import models.coordinate.Coordinate;
 import models.piece.Piece;
+import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 
 public class GoogleCharacter extends AbstractCharacter
@@ -66,6 +67,11 @@ public class GoogleCharacter extends AbstractCharacter
     public RoleType getRoleType()
     {
         return super.decoratePiece.getRoleType();
+    }
+
+    public CharacterType getCharacterType()
+    {
+        return CharacterType.GOOGLE;
     }
 
     public int[][] getMoveRangeAllowance()
