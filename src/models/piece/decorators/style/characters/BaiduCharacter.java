@@ -1,21 +1,23 @@
-package models.piece;
+package models.piece.decorators.style.characters;
 
 import models.coordinate.Coordinate;
+import models.piece.Piece;
 import models.piece.type.RoleType;
 
-public class BaiduPiece extends Piece
+public class BaiduCharacter extends AbstractCharacter
 {
-
-    public BaiduPiece(Coordinate coordinate)
+    public BaiduCharacter(Piece piece)
     {
-        super(coordinate, 150, 50, RoleType.COMMUNISM_PIECE);
+        super(piece);
+        super.mark = 150;
     }
 
     @Override
-    public final String getStyle()
+    public String getStyle()
     {
-        return "-fx-background-color:#ff0000;" +
-                "-fx-shape: \"M610.752 697.504l-45.6 0c0 0-5.856-3.616-5.856-13.824l0-95.68-51.456 0.672 0 106.432c0 " +
+        return super.decoratePiece.getStyle() +
+                " -fx-shape: " +
+                "\"M610.752 697.504l-45.6 0c0 0-5.856-3.616-5.856-13.824l0-95.68-51.456 0.672 0 106.432c0 " +
                 "0 4.96 28.16 42.272 28.16l86.4 0 0-128.672-25.728 0 0 102.912zM456.352 594.56l-48.256 0c0 " +
                 "0-44.544-1.76-60.16 48.736-5.408 33.696 4.832 46.528 6.624 50.816 1.792 4.224 16.192 29.12 52.32 " +
                 "29.12l75.168 0 0-193.6-25.728-0.576 0 65.536zM456.352 697.504l-38.048 0c0 " +
@@ -32,6 +34,46 @@ public class BaiduPiece extends Piece
                 "70.464-133.664 6.08-7.712 48.96-36.896 76.48-82.944 27.648-46.08 110.272-82.976 168.416 7.616 " +
                 "42.912 61.472 116.384 118.368 116.384 118.368s55.072 43.008 19.904 125.952zM719.84 545.28c-70.464 " +
                 "1.6-73.472-47.616-73.472-82.88 0-36.928 7.584-89.184 64.32-89.184 56.64 0 71.872 55.36 71.872 73.728 " +
-                "0 18.528 7.712 96.8-62.752 98.336z\";";
+                "0 18.528 7.712 96.8-62.752 98.336z\"; ";
+    }
+
+    public int getAttackLevel()
+    {
+        return -50;
+    }
+
+    public void applyAttack(int deduction)
+    {
+        super.mark += deduction;
+    }
+
+    public int getMark()
+    {
+        return super.mark;
+    }
+
+    public Coordinate getCoordinate()
+    {
+        return super.decoratePiece.getCoordinate();
+    }
+
+    public void setCoordinate(Coordinate coordinate)
+    {
+        super.decoratePiece.setCoordinate(coordinate);
+    }
+
+    public RoleType getRoleType()
+    {
+        return super.decoratePiece.getRoleType();
+    }
+
+    public int[][] getMoveRangeAllowance()
+    {
+        return super.decoratePiece.getMoveRangeAllowance();
+    }
+
+    public int[][] getAttackRangeAllowance()
+    {
+        return super.decoratePiece.getMoveRangeAllowance();
     }
 }

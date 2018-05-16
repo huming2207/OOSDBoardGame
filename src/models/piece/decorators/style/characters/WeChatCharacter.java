@@ -1,20 +1,22 @@
-package models.piece;
+package models.piece.decorators.style.characters;
 
 import models.coordinate.Coordinate;
+import models.piece.Piece;
 import models.piece.type.RoleType;
 
-public class WeChatPiece extends Piece
+public class WeChatCharacter extends AbstractCharacter
 {
-    public WeChatPiece(Coordinate coordinate)
+    public WeChatCharacter(Piece piece)
     {
-        super(coordinate, 120, 50, RoleType.COMMUNISM_PIECE);
+        super(piece);
+        super.mark = 120;
     }
 
-    @Override
-    public final String getStyle()
+    public String getStyle()
     {
-        return "-fx-background-color:#ff0000;" +
-                "-fx-shape: \"M320.417684 308.224c-19.442526 0-39.073684 13.056-39.073684 32.848842 0 19.712 " +
+        return super.decoratePiece.getStyle() +
+                " -fx-shape: " +
+                "\"M320.417684 308.224c-19.442526 0-39.073684 13.056-39.073684 32.848842 0 19.712 " +
                 "19.631158 32.929684 39.073684 32.929684 19.469474 0 32.525474-13.217684 32.525474-32.929684C352.943158 " +
                 "321.28 339.900632 308.224 320.417684 308.224zM502.177684 374.016c19.631158 0 32.606316-13.231158 " +
                 "32.606316-32.929684 0-19.806316-12.975158-32.848842-32.606316-32.848842-19.442526 0-39.006316 " +
@@ -35,6 +37,46 @@ public class WeChatPiece extends Piece
                 "32.592842-13.069474 32.592842-26.273684C762.112 512.336842 749.069474 499.105684 729.532632 " +
                 "499.105684zM586.657684 499.105684c-12.867368 0-25.923368 13.231158-25.923368 26.381474 0 13.204211 " +
                 "13.056 26.273684 25.923368 26.273684 19.712 0 32.525474-13.069474 32.525474-26.273684C619.183158 " +
-                "512.336842 606.369684 499.105684 586.657684 499.105684z\";";
+                "512.336842 606.369684 499.105684 586.657684 499.105684z\"; ";
+    }
+
+    public int getAttackLevel()
+    {
+        return -30;
+    }
+    
+    public void applyAttack(int deduction)
+    {
+        super.mark += deduction;
+    }
+
+    public int getMark()
+    {
+        return super.mark;
+    }
+
+    public Coordinate getCoordinate()
+    {
+        return super.decoratePiece.getCoordinate();
+    }
+
+    public void setCoordinate(Coordinate coordinate)
+    {
+        super.decoratePiece.setCoordinate(coordinate);
+    }
+
+    public RoleType getRoleType()
+    {
+        return super.decoratePiece.getRoleType();
+    }
+
+    public int[][] getMoveRangeAllowance()
+    {
+        return super.decoratePiece.getMoveRangeAllowance();
+    }
+
+    public int[][] getAttackRangeAllowance()
+    {
+        return super.decoratePiece.getMoveRangeAllowance();
     }
 }

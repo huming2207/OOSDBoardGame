@@ -1,20 +1,21 @@
-package models.piece;
+package models.piece.decorators.style.characters;
 
 import models.coordinate.Coordinate;
+import models.piece.Piece;
 import models.piece.type.RoleType;
 
-public class TwitterPiece extends Piece
+public class TwitterCharacter extends AbstractCharacter
 {
-    public TwitterPiece(Coordinate coordinate)
+    public TwitterCharacter(Piece piece)
     {
-        super(coordinate, 100, 20, RoleType.CAPITALISM_PIECE);
+        super(piece);
+        super.mark = 100;
     }
 
-    @Override
-    public final String getStyle()
+    public String getStyle()
     {
-        return "-fx-background-color:#0000ff;" +
-                "-fx-shape: \"M512 0c-282.76736 0-512 229.23264-512 512s229.23264 512 512 512 512-229.23264 " +
+        return super.decoratePiece.getStyle() + " -fx-shape: " +
+                "\"M512 0c-282.76736 0-512 229.23264-512 512s229.23264 512 512 512 512-229.23264 " +
                 "512-512-229.23264-512-512-512zM766.48448 381.48096c0.24576 5.632 0.38912 11.30496 0.38912 16.97792 " +
                 "0 173.50656-132.07552 373.59616-373.57568 373.59616-74.15808 0-143.17568-21.72928-201.27744-59.00288 " +
                 "10.28096 1.20832 20.72576 1.8432 31.31392 1.8432 61.52192 0 118.12864-20.992 163.08224-56.2176-" +
@@ -26,6 +27,46 @@ public class TwitterPiece extends Piece
                 "0-72.51968 58.79808-131.29728 131.29728-131.29728 37.76512 0 71.8848 15.95392 95.8464 41.472 " +
                 "29.9008-5.87776 57.99936-16.81408 83.37408-31.86688-9.80992 30.65856-30.6176 56.40192-57.73312 " +
                 "72.64256 26.56256-3.1744 51.87584-10.24 75.40736-20.66432-17.59232 26.33728-39.85408 " +
-                "49.4592-65.51552 67.97312z\";";
+                "49.4592-65.51552 67.97312z\"; ";
+    }
+
+    public int getAttackLevel()
+    {
+        return -20;
+    }
+    
+    public void applyAttack(int deduction)
+    {
+        super.mark += deduction;
+    }
+
+    public int getMark()
+    {
+        return super.mark;
+    }
+    
+    public Coordinate getCoordinate()
+    {
+        return super.decoratePiece.getCoordinate();
+    }
+
+    public void setCoordinate(Coordinate coordinate)
+    {
+        super.decoratePiece.setCoordinate(coordinate);
+    }
+
+    public RoleType getRoleType()
+    {
+        return super.decoratePiece.getRoleType();
+    }
+
+    public int[][] getMoveRangeAllowance()
+    {
+        return super.decoratePiece.getMoveRangeAllowance();
+    }
+
+    public int[][] getAttackRangeAllowance()
+    {
+        return super.decoratePiece.getMoveRangeAllowance();
     }
 }

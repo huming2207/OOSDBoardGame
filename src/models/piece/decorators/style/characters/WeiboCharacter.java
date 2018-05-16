@@ -1,20 +1,23 @@
-package models.piece;
+package models.piece.decorators.style.characters;
 
 import models.coordinate.Coordinate;
+import models.piece.Piece;
 import models.piece.type.RoleType;
 
-public class WeiboPiece extends Piece
+public class WeiboCharacter extends AbstractCharacter
 {
-    public WeiboPiece(Coordinate coordinate)
+    public WeiboCharacter(Piece piece)
     {
-        super(coordinate, 100, 20, RoleType.COMMUNISM_PIECE);
+        super(piece);
+        super.mark = 100;
     }
 
     @Override
     public String getStyle()
     {
-        return "-fx-background-color:#ff0000;" +
-                "-fx-shape:\"M357.741904 600.362884c-25.69135 2.681895-44.090113 25.079456-44.090113 46.493689 0 " +
+        return super.decoratePiece.getStyle() +
+                " -fx-shape:" +
+                "\"M357.741904 600.362884c-25.69135 2.681895-44.090113 25.079456-44.090113 46.493689 0 " +
                 "21.467441 20.683644 36.29512 46.389319 33.291929 25.598235-2.921332 46.374994-22.71681 46.374994-" +
                 "44.104439C406.416104 614.548995 387.233544 597.545922 357.741904 600.362884zM422.943374 582.668105c-" +
                 "8.807995 6.375769-10.615026 18.598294-5.81913 26.195804 4.596365 7.759181 15.304505 8.660649 " +
@@ -45,6 +48,46 @@ public class WeiboPiece extends Piece
                 "558.921912 432.765403 422.038835 439.088987zM515.215512 668.934885c-41.886068 54.094268-124.78027 " +
                 "80.476301-205.269873 36.904967-38.286332-20.805409-36.903944-61.586385-36.903944-61.586385s-" +
                 "15.888772-128.912087 121.684988-144.986064C532.512253 483.246634 557.114882 614.840617 " +
-                "515.215512 668.934885z\";";
+                "515.215512 668.934885z\"; ";
+    }
+
+    public int getAttackLevel()
+    {
+        return -20;
+    }
+
+    public void applyAttack(int deduction)
+    {
+        super.mark += deduction;
+    }
+
+    public int getMark()
+    {
+        return super.mark;
+    }
+    
+    public Coordinate getCoordinate()
+    {
+        return super.decoratePiece.getCoordinate();
+    }
+
+    public void setCoordinate(Coordinate coordinate)
+    {
+        super.decoratePiece.setCoordinate(coordinate);
+    }
+
+    public RoleType getRoleType()
+    {
+        return super.decoratePiece.getRoleType();
+    }
+
+    public int[][] getMoveRangeAllowance()
+    {
+        return super.decoratePiece.getMoveRangeAllowance();
+    }
+
+    public int[][] getAttackRangeAllowance()
+    {
+        return super.decoratePiece.getMoveRangeAllowance();
     }
 }

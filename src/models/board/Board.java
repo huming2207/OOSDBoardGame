@@ -3,22 +3,15 @@ package models.board;
 import com.google.java.contract.Ensures;
 import com.google.java.contract.Requires;
 import controllers.GameLogic;
-import controllers.HomeController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
-import models.coordinate.Coordinate;
 import models.piece.Piece;
 import models.piece.type.RoleType;
 import models.player.Player;
-
-import java.util.Timer;
 
 public class Board implements ListChangeListener<Piece>
 {

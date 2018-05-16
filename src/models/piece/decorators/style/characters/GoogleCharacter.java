@@ -1,21 +1,22 @@
-package models.piece;
+package models.piece.decorators.style.characters;
 
 import models.coordinate.Coordinate;
+import models.piece.Piece;
 import models.piece.type.RoleType;
 
-public class GooglePiece extends Piece
+public class GoogleCharacter extends AbstractCharacter
 {
-
-    public GooglePiece(Coordinate coordinate)
+    public GoogleCharacter(Piece piece)
     {
-        super(coordinate, 150, 50, RoleType.CAPITALISM_PIECE);
+        super(piece);
+        super.mark = 150;
     }
 
-    @Override
-    public final String getStyle()
+    public String getStyle()
     {
-        return "-fx-background-color:#0000ff;" +
-                "-fx-shape: \"M410.148864 279.972864c-40.522752-1.19808-67.724288 39.596032-60.695552 92.85632 6.962176 " +
+        return super.decoratePiece.getStyle() +
+                " -fx-shape: " +
+                "\"M410.148864 279.972864c-40.522752-1.19808-67.724288 39.596032-60.695552 92.85632 6.962176 " +
                 "53.327872 45.504512 90.55232 86.028288 91.810816 40.464384 1.175552 63.740928-33.110016 " +
                 "56.771584-86.445056C485.289984 324.934656 450.605056 281.208832 410.148864 279.972864zM427.14112 " +
                 "573.678592c-60.367872-0.687104-111.486976 38.178816-111.486976 83.257344 0 45.973504 43.568128 " +
@@ -34,6 +35,46 @@ public class GooglePiece extends Piece
                 "0-61.983744 63.561728-118.367232 139.828224-118.367232 39.33184 0 150.327296 0 150.327296 0l-33.619968 " +
                 "35.369984-39.465984 0C537.884672 306.7904 552.64256 339.64032 552.64256 375.949312zM768.468992 " +
                 "366.660608l-69.35552 0 0 69.419008-34.670592 0 0-69.419008-69.280768 0L595.162112 331.922432l69.280768 " +
-                "0 0-69.489664 34.670592 0 0 69.489664 69.35552 0L768.468992 366.660608z\";";
+                "0 0-69.489664 34.670592 0 0 69.489664 69.35552 0L768.468992 366.660608z\"; ";
+    }
+    
+    public int getAttackLevel()
+    {
+        return -50;
+    }
+    
+    public void applyAttack(int deduction)
+    {
+        super.mark += deduction;
+    }
+
+    public int getMark()
+    {
+        return super.mark;
+    }
+
+    public Coordinate getCoordinate()
+    {
+        return super.decoratePiece.getCoordinate();
+    }
+
+    public void setCoordinate(Coordinate coordinate)
+    {
+        super.decoratePiece.setCoordinate(coordinate);
+    }
+
+    public RoleType getRoleType()
+    {
+        return super.decoratePiece.getRoleType();
+    }
+
+    public int[][] getMoveRangeAllowance()
+    {
+        return super.decoratePiece.getMoveRangeAllowance();
+    }
+
+    public int[][] getAttackRangeAllowance()
+    {
+        return super.decoratePiece.getMoveRangeAllowance();
     }
 }

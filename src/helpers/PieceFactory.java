@@ -3,6 +3,12 @@ package helpers;
 import com.google.java.contract.Ensures;
 import models.coordinate.Coordinate;
 import models.piece.*;
+import models.piece.decorators.ranges.RangeA;
+import models.piece.decorators.ranges.RangeB;
+import models.piece.decorators.ranges.RangeC;
+import models.piece.decorators.style.characters.*;
+import models.piece.decorators.style.roles.CapitalismRule;
+import models.piece.decorators.style.roles.CommunismRole;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,12 +29,12 @@ public class PieceFactory
         Collection<Piece> pieceList = new ArrayList<>();
         LinkedList<Coordinate> coordinates = createRandomCoordinateQueue(boardX, boardY);
 
-        pieceList.add(new BaiduPiece(coordinates.pop()));
-        pieceList.add(new FacebookPiece(coordinates.pop()));
-        pieceList.add(new GooglePiece(coordinates.pop()));
-        pieceList.add(new TwitterPiece(coordinates.pop()));
-        pieceList.add(new WeChatPiece(coordinates.pop()));
-        pieceList.add(new WeiboPiece(coordinates.pop()));
+        pieceList.add(new CommunismRole(new RangeA(new BaiduCharacter(new SimplePiece(coordinates.pop())))));
+        pieceList.add(new CapitalismRule(new RangeB(new FacebookCharacter(new SimplePiece(coordinates.pop())))));
+        pieceList.add(new CapitalismRule(new RangeA(new GoogleCharacter(new SimplePiece(coordinates.pop())))));
+        pieceList.add(new CapitalismRule(new RangeC(new TwitterCharacter(new SimplePiece(coordinates.pop())))));
+        pieceList.add(new CommunismRole(new RangeB(new WeChatCharacter(new SimplePiece(coordinates.pop())))));
+        pieceList.add(new CommunismRole(new RangeC(new WeiboCharacter(new SimplePiece(coordinates.pop())))));
 
         return pieceList;
     }
