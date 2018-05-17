@@ -1,11 +1,8 @@
-package models.board.factory;
+package models.factory;
 
 import models.coordinate.Coordinate;
 import models.piece.Piece;
 import models.piece.type.CharacterType;
-import models.piece.type.RoleType;
-
-import java.util.HashMap;
 
 public abstract class AbstractBoardFactory
 {

@@ -1,4 +1,4 @@
-package models.board.factory;
+package models.factory;
 
 import models.coordinate.Coordinate;
 import models.piece.Piece;
@@ -7,7 +7,6 @@ import models.piece.decorators.style.characters.*;
 import models.piece.decorators.style.roles.CapitalismRule;
 import models.piece.decorators.style.roles.CommunismRole;
 import models.piece.type.CharacterType;
-import models.piece.type.RoleType;
 
 public class PieceFactory extends AbstractBoardFactory
 {

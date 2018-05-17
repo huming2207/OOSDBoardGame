@@ -1,8 +1,8 @@
 package models.piece;
 
-import models.board.factory.AbstractBoardFactory;
-import models.board.factory.CoordinateFactory;
-import models.board.factory.PieceFactory;
+import models.factory.AbstractBoardFactory;
+import models.factory.CoordinateFactory;
+import models.factory.PieceFactory;
 import models.coordinate.Coordinate;
 import models.piece.type.CharacterType;
 
