@@ -1,8 +1,7 @@
 package models.piece.decorators.ranges;
 
-import models.coordinate.Coordinate;
 import models.piece.Piece;
-import models.piece.PieceGenerator;
+import models.piece.PiecePrototype;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -21,7 +20,7 @@ public abstract class AbstractRange implements Piece, Cloneable, Serializable
     public Piece clone()
     {
         try {
-            return PieceGenerator.deepClone(this);
+            return PiecePrototype.deepClone(this);
 
         } catch (IOException | ClassNotFoundException e) {
 

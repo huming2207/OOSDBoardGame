@@ -8,7 +8,7 @@ import models.coordinate.Coordinate;
 import models.board.Board;
 import models.coordinate.BoardCellCoordinate;
 import models.piece.Piece;
-import models.piece.PieceGenerator;
+import models.piece.PiecePrototype;
 
 
 public class GameLogic
@@ -25,11 +25,11 @@ public class GameLogic
         this.board = new Board(this,"Communism", "Capitalism");
 
         // Initialise piece generator
-        PieceGenerator pieceGenerator = new PieceGenerator(this.homeController.getBoardSize());
-        pieceGenerator.generateNewPieces();
+        PiecePrototype piecePrototype = new PiecePrototype(this.homeController.getBoardSize());
+        piecePrototype.generateNewPieces();
 
         // Add all from random piece factory
-        board.getPieceList().addAll(pieceGenerator.getPieceList());
+        board.getPieceList().addAll(piecePrototype.getPieceList());
 
         // First turn: communism player (player A)
         board.setCurrentPlayer(board.getCommunismPlayer());

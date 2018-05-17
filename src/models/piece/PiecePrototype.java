@@ -20,12 +20,12 @@ import java.util.*;
  *
  * @author Ming Hu (s3554025)
  */
-public class PieceGenerator
+public class PiecePrototype
 {
     private HashMap<CharacterType, Piece> pieceMap;
     private int boardSize;
 
-    public PieceGenerator(int boardSize)
+    public PiecePrototype(int boardSize)
     {
         this.pieceMap = new HashMap<>();
         this.boardSize = boardSize;

@@ -1,18 +1,29 @@
 package models.factory;
 
 import models.coordinate.Coordinate;
+import models.factory.command.PieceCreator;
 import models.piece.Piece;
 import models.piece.SimplePiece;
 import models.piece.decorators.style.characters.*;
 import models.piece.decorators.style.roles.CapitalismRule;
 import models.piece.decorators.style.roles.CommunismRole;
 import models.piece.type.CharacterType;
+import models.piece.type.RoleType;
 
+import java.util.HashMap;
+
+/**
+ * Piece factory, the factory class to create pieces
+ */
 public class PieceFactory extends AbstractBoardFactory
 {
+    private final HashMap<CharacterType, PieceCreator> creatorCommands;
+
     public PieceFactory(int boardSize)
     {
         super(boardSize);
+        this.creatorCommands = new HashMap<>();
+        this.initPieceCreationCommands();
     }
 
     @Override
@@ -30,47 +41,30 @@ public class PieceFactory extends AbstractBoardFactory
     @Override
     public Piece createPiece(CharacterType characterType, Coordinate coordinate)
     {
-        Piece piece = new SimplePiece(coordinate);
+        Piece newPiece = this.creatorCommands.get(characterType).createPiece();
+        newPiece.setCoordinate(coordinate);
 
-        switch (characterType)
-        {
-            case BAIDU:
-            {
-                piece = new CommunismRole(new BaiduCharacter(piece));
-                break;
-            }
+        return newPiece;
+    }
 
-            case WEIBO:
-            {
-                piece = new CommunismRole(new WeiboCharacter(piece));
-                break;
-            }
+    private void initPieceCreationCommands()
+    {
+        this.creatorCommands.put(CharacterType.BAIDU, () ->
+                new CommunismRole(new BaiduCharacter(new SimplePiece())));
 
-            case GOOGLE:
-            {
-                piece = new CapitalismRule(new GoogleCharacter(piece));
-                break;
-            }
+        this.creatorCommands.put(CharacterType.FACEBOOK, () ->
+                new CapitalismRule(new FacebookCharacter(new SimplePiece())));
 
-            case WECHAT:
-            {
-                piece = new CommunismRole(new WeChatCharacter(piece));
-                break;
-            }
+        this.creatorCommands.put(CharacterType.GOOGLE, () ->
+                new CapitalismRule(new GoogleCharacter(new SimplePiece())));
 
-            case TWITTER:
-            {
-                piece = new CapitalismRule(new TwitterCharacter(piece));
-                break;
-            }
+        this.creatorCommands.put(CharacterType.TWITTER, () ->
+                new CapitalismRule(new TwitterCharacter(new SimplePiece())));
 
-            case FACEBOOK:
-            {
-                piece = new CapitalismRule(new FacebookCharacter(piece));
-                break;
-            }
-        }
+        this.creatorCommands.put(CharacterType.WECHAT, () ->
+                new CommunismRole(new WeChatCharacter(new SimplePiece())));
 
-        return piece;
+        this.creatorCommands.put(CharacterType.WEIBO, () ->
+                new CommunismRole(new WeiboCharacter(new SimplePiece())));
     }
 }

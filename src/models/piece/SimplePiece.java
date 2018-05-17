@@ -11,11 +11,6 @@ public class SimplePiece implements Piece, Cloneable, Serializable
     private Coordinate coordinate;
     private int mark;
 
-    public SimplePiece(Coordinate coordinate)
-    {
-        this.coordinate = coordinate;
-    }
-
     @Override
     public String getStyle()
     {
@@ -81,7 +76,7 @@ public class SimplePiece implements Piece, Cloneable, Serializable
     public Piece clone()
     {
         try {
-            return PieceGenerator.deepClone(this);
+            return PiecePrototype.deepClone(this);
 
         } catch (IOException | ClassNotFoundException e) {
 
