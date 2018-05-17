@@ -5,7 +5,6 @@ import helpers.exceptions.DuplicatedPieceException;
 import helpers.exceptions.InvalidPieceSelectionException;
 import javafx.scene.control.Alert;
 import models.coordinate.Coordinate;
-import helpers.PieceFactory;
 import models.board.Board;
 import models.coordinate.BoardCellCoordinate;
 import models.piece.Piece;
