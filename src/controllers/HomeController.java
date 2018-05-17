@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuBar;
 import javafx.scene.layout.TilePane;
 import models.player.Player;
 import models.coordinate.BoardCellCoordinate;
@@ -18,6 +19,12 @@ import models.coordinate.Coordinate;
 
 import java.util.Map;
 
+/**
+ * Home GUI controller
+ *
+ * @author Ming Hu
+ * @since Assignment 1
+ */
 public class HomeController
 {
     private GameLogic gameLogic;
@@ -32,6 +39,20 @@ public class HomeController
 
     @FXML
     private TilePane mainBoard;
+
+    @FXML
+    private MenuBar menuBar;
+
+    @FXML
+    public void initialize()
+    {
+        // Workaround for macOS users
+        // Push the menu bar to the system native menu bar area (top of the screen)
+        // Ref: https://stackoverflow.com/questions/22569046/how-to-make-an-os-x-menubar-in-javafx
+        final String osName = System.getProperty("os.name");
+        if (osName != null && osName.toUpperCase().contains("MAC"))
+            menuBar.useSystemMenuBarProperty().set(true);
+    }
 
     /**
      * Set the FXML Control map from the main class (i.e. from loader.getNamespace()) and initialise game logic.

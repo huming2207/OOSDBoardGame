@@ -5,12 +5,17 @@ import helpers.exceptions.DuplicatedPieceException;
 import helpers.exceptions.InvalidPieceSelectionException;
 import javafx.scene.control.Alert;
 import models.coordinate.Coordinate;
-import helpers.PieceFactory;
 import models.board.Board;
 import models.coordinate.BoardCellCoordinate;
 import models.piece.Piece;
+import models.piece.PiecePrototype;
 
-
+/**
+ * Game logic controller
+ *
+ * @author Ming Hu
+ * @since Assignment 1
+ */
 public class GameLogic
 {
     private HomeController homeController;
@@ -24,10 +29,11 @@ public class GameLogic
         // Initialise board model
         this.board = new Board(this,"Communism", "Capitalism");
 
+        // Initialise piece generator
+        PiecePrototype piecePrototype = new PiecePrototype(this.homeController.getBoardSize());
+
         // Add all from random piece factory
-        board.getPieceList().addAll(PieceFactory.createRandomPieceList(
-                this.homeController.getBoardSize(),
-                this.homeController.getBoardSize()));
+        board.getPieceList().addAll(piecePrototype.getPieceList());
 
         // First turn: communism player (player A)
         board.setCurrentPlayer(board.getCommunismPlayer());

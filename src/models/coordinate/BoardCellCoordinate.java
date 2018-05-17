@@ -4,7 +4,9 @@ import com.google.java.contract.Ensures;
 import com.google.java.contract.Requires;
 import javafx.scene.control.Button;
 
-public class BoardCellCoordinate implements ICoordinate
+import java.io.Serializable;
+
+public class BoardCellCoordinate implements ICoordinate, Serializable
 {
     private Button button;
     private int posX;
