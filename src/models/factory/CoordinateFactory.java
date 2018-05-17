@@ -6,6 +6,12 @@ import models.piece.type.CharacterType;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Coordinate factory
+ *
+ * @author Ming Hu
+ * @since Assignment 2
+ */
 public class CoordinateFactory extends AbstractBoardFactory
 {
     public CoordinateFactory(int boardSize)

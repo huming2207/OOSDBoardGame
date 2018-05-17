@@ -10,7 +10,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * Piece generator class
+ * Piece prototype generator class
  *
  * It generates new pieces in the beginning. When controllers need the piece, it clones and return a new one.
  *
@@ -19,18 +19,28 @@ import java.util.*;
  *  https://en.wikipedia.org/wiki/Prototype_pattern
  *
  * @author Ming Hu (s3554025)
+ * @since Assignment 2
  */
 public class PiecePrototype
 {
     private HashMap<CharacterType, Piece> pieceMap;
     private int boardSize;
 
+    /**
+     * Constructor of Piece Prototype Generator
+     * @param boardSize Board size of a certain board
+     */
     public PiecePrototype(int boardSize)
     {
         this.pieceMap = new HashMap<>();
         this.boardSize = boardSize;
+        this.generateNewPieces();
     }
 
+    /**
+     *(Re)generate new pieces for the prototype map.
+     * If a new random coordinate is necessary, then this method should be used.
+     */
     public void generateNewPieces()
     {
         AbstractBoardFactory pieceFactory = new PieceFactory(this.boardSize);
@@ -49,22 +59,42 @@ public class PiecePrototype
         });
     }
 
-    public Piece getPieceByCharacterType(CharacterType type)
+    /**
+     * Get one piece with specified character type
+     * Returned piece will be deep cloned, i.e. not the same piece as the one in the prototype map.
+     *
+     * @param  type Character type
+     * @return cloned piece
+     */
+    public Piece getPiece(CharacterType type)
     {
         return this.pieceMap.get(type).clone();
     }
 
+    /**
+     * Get a full 6 piece list
+     * Returned pieces will be deep cloned, i.e. not the same pieces as those in the prototype map.
+     *
+     * @return list with cloned pieces
+     */
     public List<Piece> getPieceList()
     {
         List<Piece> pieceList = new ArrayList<>();
 
         for(Piece piece : this.pieceMap.values()) {
-            pieceList.add(piece.clone());
+            pieceList.add(piece.clone()); // Neeed to be cloned
         }
 
         return pieceList;
     }
 
+    /**
+     * Perform a deep clone for a certain piece object
+     * @param originalPiece Original piece to be cloned
+     * @return a new cloned piece with different reference (but hash code might be the same)
+     * @throws IOException Throws when serialisation/deserialization fails
+     * @throws ClassNotFoundException Throws when deserialization fails
+     */
     public static Piece deepClone(Piece originalPiece) throws IOException, ClassNotFoundException
     {
         // A reasonable way to do deep cloning for Piece object

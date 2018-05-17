@@ -14,6 +14,13 @@ import java.util.HashMap;
 
 /**
  * Piece factory, the factory class to create pieces
+ *
+ * Ref: https://en.wikipedia.org/wiki/Command_pattern#Java_8
+ *
+ * (for team members: please have a look for Java 8 Lambda expression first if you don't know it)
+ *
+ * @author Ming Hu
+ * @since assignment 2
  */
 public class PieceFactory extends AbstractBoardFactory
 {

@@ -10,7 +10,12 @@ import models.coordinate.BoardCellCoordinate;
 import models.piece.Piece;
 import models.piece.PiecePrototype;
 
-
+/**
+ * Game logic controller
+ *
+ * @author Ming Hu
+ * @since Assignment 1
+ */
 public class GameLogic
 {
     private HomeController homeController;
@@ -26,7 +31,6 @@ public class GameLogic
 
         // Initialise piece generator
         PiecePrototype piecePrototype = new PiecePrototype(this.homeController.getBoardSize());
-        piecePrototype.generateNewPieces();
 
         // Add all from random piece factory
         board.getPieceList().addAll(piecePrototype.getPieceList());

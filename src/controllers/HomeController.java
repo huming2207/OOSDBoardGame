@@ -18,6 +18,12 @@ import models.coordinate.Coordinate;
 
 import java.util.Map;
 
+/**
+ * Home GUI controller
+ *
+ * @author Ming Hu
+ * @since Assignment 1
+ */
 public class HomeController
 {
     private GameLogic gameLogic;
