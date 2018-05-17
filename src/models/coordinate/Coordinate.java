@@ -3,9 +3,10 @@ package models.coordinate;
 import com.google.java.contract.Ensures;
 import com.google.java.contract.Requires;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Coordinate implements ICoordinate
+public class Coordinate implements ICoordinate, Serializable
 {
     private int posX;
     private int posY;
@@ -27,7 +28,7 @@ public class Coordinate implements ICoordinate
      * @param oldCoordinate original coordinate to be cloned...
      */
     @Requires({"oldCoordinate.getPosX() > 0", "oldCoordinate.getPosY() > 0"})
-    protected Coordinate(Coordinate oldCoordinate)
+    public Coordinate(Coordinate oldCoordinate)
     {
         this.posX = oldCoordinate.getPosX();
         this.posY = oldCoordinate.getPosY();

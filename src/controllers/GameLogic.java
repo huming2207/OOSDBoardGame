@@ -9,6 +9,7 @@ import helpers.PieceFactory;
 import models.board.Board;
 import models.coordinate.BoardCellCoordinate;
 import models.piece.Piece;
+import models.piece.PieceGenerator;
 
 
 public class GameLogic
@@ -24,10 +25,12 @@ public class GameLogic
         // Initialise board model
         this.board = new Board(this,"Communism", "Capitalism");
 
+        // Initialise piece generator
+        PieceGenerator pieceGenerator = new PieceGenerator(this.homeController.getBoardSize());
+        pieceGenerator.generateNewPieces();
+
         // Add all from random piece factory
-        board.getPieceList().addAll(PieceFactory.createRandomPieceList(
-                this.homeController.getBoardSize(),
-                this.homeController.getBoardSize()));
+        board.getPieceList().addAll(pieceGenerator.getPieceList());
 
         // First turn: communism player (player A)
         board.setCurrentPlayer(board.getCommunismPlayer());

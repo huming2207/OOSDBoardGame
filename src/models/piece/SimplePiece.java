@@ -4,7 +4,9 @@ import models.coordinate.Coordinate;
 import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 
-public class SimplePiece implements Piece
+import java.io.*;
+
+public class SimplePiece implements Piece, Cloneable, Serializable
 {
     private Coordinate coordinate;
     private int mark;
@@ -74,5 +76,25 @@ public class SimplePiece implements Piece
         return null;
     }
 
+    @Override
+    @SuppressWarnings("Duplicates")
+    public Piece clone()
+    {
+        try {
+            return PieceGenerator.deepClone(this);
 
+        } catch (IOException | ClassNotFoundException e) {
+
+            // If something happens, do a shallow clone instead...
+            e.printStackTrace();
+
+            try {
+                return (Piece)super.clone();
+
+            } catch (CloneNotSupportedException cloneEx) {
+                cloneEx.printStackTrace();
+                return null;
+            }
+        }
+    }
 }

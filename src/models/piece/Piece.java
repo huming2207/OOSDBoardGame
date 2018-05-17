@@ -91,4 +91,6 @@ public interface Piece
 
     @Override
     boolean equals(Object o);
+
+    Piece clone();
 }
