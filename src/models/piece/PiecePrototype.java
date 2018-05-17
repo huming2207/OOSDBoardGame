@@ -1,13 +1,15 @@
 package models.piece;
 
+import models.coordinate.Coordinate;
 import models.factory.AbstractBoardFactory;
 import models.factory.CoordinateFactory;
 import models.factory.PieceFactory;
-import models.coordinate.Coordinate;
 import models.piece.type.CharacterType;
 
-import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Piece prototype generator class
@@ -86,33 +88,6 @@ public class PiecePrototype
         }
 
         return pieceList;
-    }
-
-    /**
-     * Perform a deep clone for a certain piece object
-     * @param originalPiece Original piece to be cloned
-     * @return a new cloned piece with different reference (but hash code might be the same)
-     * @throws IOException Throws when serialisation/deserialization fails
-     * @throws ClassNotFoundException Throws when deserialization fails
-     */
-    public static Piece deepClone(Piece originalPiece) throws IOException, ClassNotFoundException
-    {
-        // A reasonable way to do deep cloning for Piece object
-        // Simply serialize the Piece to byte array and convert it back to Piece object
-        // Ref: https://stackoverflow.com/questions/64036/how-do-you-make-a-deep-copy-of-an-object-in-java
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-
-        // Covert the Piece object to byte[]
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
-        objectOutputStream.writeObject(originalPiece);
-        objectOutputStream.flush();
-        objectOutputStream.close();
-        byte[] byteBuffer = byteArrayOutputStream.toByteArray();
-        byteArrayOutputStream.close();
-
-        // ...then covert it back to a brand new Piece
-        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteBuffer);
-        return (Piece) new ObjectInputStream(byteArrayInputStream).readObject();
     }
 
     private boolean checkExistingCoordinate(Coordinate coordinate)
