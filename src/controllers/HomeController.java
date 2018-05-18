@@ -120,13 +120,14 @@ public class HomeController
     @FXML
     private void handleRedoAction(ActionEvent event)
     {
-
+        this.gameLogic.getStatusManager().performRedo();
     }
 
     @FXML
     private void handleUndoAction(ActionEvent event)
     {
 
+        this.gameLogic.getStatusManager().performUndo();
     }
 
     @FXML

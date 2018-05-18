@@ -1,9 +1,11 @@
 package controllers;
 
 import helpers.CloneHelper;
+import javafx.scene.control.Alert;
 import models.board.Board;
 
 import java.io.*;
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 /**
@@ -35,24 +37,54 @@ public class StatusManager
         }
     }
 
-    public Board performUndo()
+    public void performUndo()
     {
-        Board board = this.statusStack.pop();
+        // Pop out the previous board
+        Board board;
+
+        try {
+            board = this.statusStack.pop();
+        } catch (EmptyStackException emptyEx) {
+            Alert alert = new Alert(Alert.AlertType.ERROR,
+                    "Undo buffer is empty, no more status can be restored.");
+            alert.show();
+            return;
+        }
+
+        // Clear up the board before continue
+        this.gameLogic.getBoad().getPieceList().clear();
+
+        // Push into re-do stack for future re-do
         this.redoStack.push(board);
+
+        // Bind game logic
         board.setGameLogic(this.gameLogic);
         board.refreshPieceList();
 
-        return board;
+        this.gameLogic.setBoard(board);
     }
 
-    public Board performRedo()
+    public void performRedo()
     {
-        Board board = this.redoStack.pop();
-        this.statusStack.push(board);
+        Board board;
+        try {
+            board = this.redoStack.pop();
+        } catch (EmptyStackException emptyEx) {
+            Alert alert = new Alert(Alert.AlertType.ERROR,
+                    "Re-do buffer is empty, no more status can be restored.");
+            alert.show();
+            return;
+        }
+
+        // Clear up the board before continue
+        this.gameLogic.getBoad().getPieceList().clear();
+
+        // Bind game logic and refresh the list to make sure everything is correct
         board.setGameLogic(this.gameLogic);
         board.refreshPieceList();
 
-        return board;
+        this.statusStack.push(board);
+        this.gameLogic.setBoard(board);
     }
 
     public void serializeStatusToFile(String filePath) throws IOException
