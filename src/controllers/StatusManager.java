@@ -10,6 +10,7 @@ import java.util.Stack;
 
 /**
  * Status manager for board model, provides un-do/re-do/save/reload functionality
+ * The code below does work, but smells like durian.
  *
  * @author Ming Hu (s3554025)
  * @since Assignment 2
@@ -19,19 +20,27 @@ public class StatusManager
     private Stack<Board> statusStack;
     private Stack<Board> redoStack;
     private GameLogic gameLogic;
+    private int turnCounter;
 
     public StatusManager(GameLogic gameLogic)
     {
         this.statusStack = new Stack<>();
         this.redoStack = new Stack<>();
         this.gameLogic = gameLogic;
+        this.turnCounter = 0;
     }
 
     public void recordStatus(Board board)
     {
         try {
             Board clonedBoard = (Board)CloneHelper.deepClone(board);
-            this.statusStack.add(clonedBoard);
+            this.statusStack.push(clonedBoard);
+
+            // Only records the initial status of each turn
+            if(this.isTurnFinishes()) {
+                this.statusStack.pop();
+            }
+
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -116,5 +125,22 @@ public class StatusManager
 
         // Set previous board
         this.gameLogic.setBoard(restoredBoard);
+    }
+
+    /**
+     * Detects if the status recorder should keep the status to status stack.
+     * Every turn should have 2 times of piece selection, 1 for each side of player.
+     *
+     * @return True if it needs recording
+     */
+    private boolean isTurnFinishes()
+    {
+        if(this.turnCounter < 1) {
+            this.turnCounter += 1;
+            return false;
+        } else {
+            this.turnCounter = 0;
+            return true;
+        }
     }
 }

@@ -55,7 +55,7 @@ public class GameLogic implements ListChangeListener<Piece>
     {
         if(buttonEvent == null) return;
 
-        this.statusManager.recordStatus(this.board);
+
 
         Coordinate coordinate = new Coordinate(
                 buttonEvent.getPosX(),
@@ -82,9 +82,9 @@ public class GameLogic implements ListChangeListener<Piece>
         // If selected piece is null, then the user still haven't select a piece yet, go select one instead
         // If not, then go place a piece.
         if(selectedPiece == null) {
-            selectPiece(pieceInList);
+            this.selectPiece(pieceInList);
         } else {
-            placePiece(coordinate);
+            this.placePiece(coordinate);
         }
 
 
@@ -131,6 +131,7 @@ public class GameLogic implements ListChangeListener<Piece>
         if(piece.getRoleType() != this.board.getCurrentPlayer().getRoleType()) {
             throw new InvalidPieceSelectionException("Wrong piece selected, check your role please.");
         } else {
+            this.statusManager.recordStatus(this.board);
             this.board.beginCountdown(piece);
             this.board.getCurrentPlayer().setSelectedPiece(piece);
         }
