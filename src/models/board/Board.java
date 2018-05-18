@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
  * @author Ming Hu (s3554025)
  * @since Assignment 1
  */
-public class Board implements ListChangeListener<Piece>, Serializable
+public class Board implements Serializable
 {
     private Player communismPlayer;
     private Player capitalismPlayer;
@@ -50,7 +50,7 @@ public class Board implements ListChangeListener<Piece>, Serializable
         this.communismPlayer = new Player(communismPlayerName, RoleType.COMMUNISM_PIECE);
         this.capitalismPlayer = new Player(capitalismPlayerName, RoleType.CAPITALISM_PIECE);
         this.pieceList = FXCollections.observableArrayList();
-        this.pieceList.addListener(this);
+        this.pieceList.addListener(this.gameLogic);
     }
 
     private void writeObject(ObjectOutputStream outputStream) throws IOException
@@ -71,12 +71,30 @@ public class Board implements ListChangeListener<Piece>, Serializable
 
         // Deserialize and load the piece list
         ArrayList<Piece> pieces = (ArrayList<Piece>)inputStream.readObject();
-        this.pieceList = FXCollections.observableArrayList(pieces);
+        this.pieceList = FXCollections.observableArrayList();
+        this.pieceList.addAll(pieces);
     }
 
     public void setGameLogic(GameLogic gameLogic)
     {
         this.gameLogic = gameLogic;
+    }
+
+    public void refreshPieceList()
+    {
+        // Load the piece list into an array list buffer
+        ArrayList<Piece> pieces = new ArrayList<>(this.pieceList);
+
+        // Refresh listener
+        this.pieceList.addListener(this.gameLogic);
+
+        // Refresh piece list
+        this.pieceList.clear();
+        this.pieceList.addAll(pieces);
+        pieces.clear();
+
+        // Add player into the candidate zone
+        this.gameLogic.getGuiController().commitPlayerSelection(this.getCurrentPlayer());
     }
 
     /**
@@ -200,26 +218,4 @@ public class Board implements ListChangeListener<Piece>, Serializable
         this.turnTimeline.stop();
     }
 
-    /**
-     * This method triggers when any changes is made in the piece list. It will update UI via home controller.
-     * @param change Piece changes in the list
-     */
-    @Override
-    public void onChanged(Change<? extends Piece> change)
-    {
-        while(change.next()) {
-            if(change.wasAdded()) {
-                for(Piece piece : change.getAddedSubList()) {
-                    this.gameLogic.getGuiController().commitUIChanges(piece.getCoordinate(), piece.getStyle());
-                }
-            }
-
-            if(change.wasRemoved()) {
-                for(Piece piece : change.getRemoved()) {
-                    // Put an empty string to the style (may need to set a default button style later on)
-                    this.gameLogic.getGuiController().commitUIChanges(piece.getCoordinate(), "");
-                }
-            }
-        }
-    }
 }

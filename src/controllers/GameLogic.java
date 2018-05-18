@@ -3,6 +3,7 @@ package controllers;
 import com.google.java.contract.Requires;
 import helpers.exceptions.DuplicatedPieceException;
 import helpers.exceptions.InvalidPieceSelectionException;
+import javafx.collections.ListChangeListener;
 import javafx.scene.control.Alert;
 import models.coordinate.Coordinate;
 import models.board.Board;
@@ -16,7 +17,7 @@ import models.piece.PiecePrototype;
  * @author Ming Hu
  * @since Assignment 1
  */
-public class GameLogic
+public class GameLogic implements ListChangeListener<Piece>
 {
     private HomeController homeController;
     private StatusManager statusManager;
@@ -173,5 +174,48 @@ public class GameLogic
         this.homeController.commitPlayerSelection(board.getCurrentPlayer());
 
 
+    }
+
+    public StatusManager getStatusManager()
+    {
+        return statusManager;
+    }
+
+    public void setStatusManager(StatusManager statusManager)
+    {
+        this.statusManager = statusManager;
+    }
+
+    public void setBoard(Board board)
+    {
+        this.board = board;
+    }
+
+    public Board getBoad()
+    {
+        return this.board;
+    }
+
+    /**
+     * This method triggers when any changes is made in the piece list. It will update UI via home controller.
+     * @param change Piece changes in the list
+     */
+    @Override
+    public void onChanged(Change<? extends Piece> change)
+    {
+        while(change.next()) {
+            if(change.wasAdded()) {
+                for(Piece piece : change.getAddedSubList()) {
+                    this.getGuiController().commitUIChanges(piece.getCoordinate(), piece.getStyle());
+                }
+            }
+
+            if(change.wasRemoved()) {
+                for(Piece piece : change.getRemoved()) {
+                    // Put an empty string to the style (may need to set a default button style later on)
+                    this.getGuiController().commitUIChanges(piece.getCoordinate(), null);
+                }
+            }
+        }
     }
 }

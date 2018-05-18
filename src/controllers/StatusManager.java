@@ -7,7 +7,7 @@ import java.io.*;
 import java.util.Stack;
 
 /**
- * Status manager for board model, provides undo/re-do/save/reload functionality
+ * Status manager for board model, provides un-do/re-do/save/reload functionality
  *
  * @author Ming Hu (s3554025)
  * @since Assignment 2
@@ -21,13 +21,6 @@ public class StatusManager
     public StatusManager(GameLogic gameLogic)
     {
         this.statusStack = new Stack<>();
-        this.redoStack = new Stack<>();
-        this.gameLogic = gameLogic;
-    }
-
-    public StatusManager(Stack<Board> statusStack, GameLogic gameLogic)
-    {
-        this.statusStack = statusStack;
         this.redoStack = new Stack<>();
         this.gameLogic = gameLogic;
     }
@@ -47,6 +40,7 @@ public class StatusManager
         Board board = this.statusStack.pop();
         this.redoStack.push(board);
         board.setGameLogic(this.gameLogic);
+        board.refreshPieceList();
 
         return board;
     }
@@ -56,6 +50,7 @@ public class StatusManager
         Board board = this.redoStack.pop();
         this.statusStack.push(board);
         board.setGameLogic(this.gameLogic);
+        board.refreshPieceList();
 
         return board;
     }
@@ -72,7 +67,7 @@ public class StatusManager
     }
 
     @SuppressWarnings("unchecked") // ...have no idea, just suppress it...
-    private void loadStatusFromFile(String filePath) throws IOException, ClassNotFoundException
+    public void loadStatusFromFile(String filePath) throws IOException, ClassNotFoundException
     {
         FileInputStream fileInputStream = new FileInputStream(filePath);
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
@@ -81,5 +76,13 @@ public class StatusManager
 
         objectInputStream.close();
         fileInputStream.close();
+
+        // Restore to previous status
+        Board restoredBoard = this.statusStack.pop();
+        restoredBoard.setGameLogic(this.gameLogic);
+        restoredBoard.refreshPieceList();
+
+        // Set previous board
+        this.gameLogic.setBoard(restoredBoard);
     }
 }
