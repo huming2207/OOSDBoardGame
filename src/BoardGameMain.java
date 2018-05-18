@@ -26,14 +26,14 @@ public class BoardGameMain extends Application
             Scene scene = new Scene(loader.load());
 
             // Load main CSS for home view
-            scene.getStylesheets().add(getClass().getResource("views/css/BoardButton.css").toExternalForm());
+            // scene.getStylesheets().add(getClass().getResource("views/css/BoardButton.css").toExternalForm());
             primaryStage.setScene(scene);
 
             // Get the controller from loader, then set the object map to it.
             // We can also use loader.setController() but we can't set "fx:controller" parameter in FXML any more,
             // and it will result to some issues with FXML editor in Intellij IDEA.
             HomeController controller = loader.getController();
-            controller.gameInit(10);
+            controller.gameInit(10, primaryStage);
 
             primaryStage.show();
         } catch (IOException exception) {

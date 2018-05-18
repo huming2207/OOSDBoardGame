@@ -13,10 +13,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.TilePane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import models.player.Player;
 import models.coordinate.BoardCellCoordinate;
 import models.coordinate.Coordinate;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -30,6 +34,7 @@ public class HomeController
     private GameLogic gameLogic;
     private ObservableMap<String, Button> buttonMap;
     private int boardSize;
+    private Stage currentStage;
 
     @FXML
     private Button selectedPiece;
@@ -54,13 +59,90 @@ public class HomeController
             menuBar.useSystemMenuBarProperty().set(true);
     }
 
+    @FXML
+    private void handleSaveAction(ActionEvent event)
+    {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save your status to file");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("BoardGame status (*.status)", "*.status"));
+
+        File statusFile = fileChooser.showSaveDialog(this.currentStage);
+
+        if(statusFile == null) {
+            return; // does nothing if user didn't correctly pick a file
+        }
+
+        String statusFilePath = statusFile.getAbsolutePath();
+
+        // Prevents user set a wrong extension name
+        if(!statusFilePath.endsWith(".status")) {
+            statusFilePath += ".status";
+        }
+
+        try {
+            this.gameLogic.getStatusManager().serializeStatusToFile(statusFilePath);
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "File save action failed!");
+            alert.show();
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleLoadAction(ActionEvent event)
+    {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Load your status from file");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("BoardGame status (*.status)", "*.status"));
+
+        File statusFile = fileChooser.showOpenDialog(this.currentStage);
+
+        if(statusFile == null) {
+            return; // does nothing if user didn't correctly pick a file
+        } else {
+            // Clear the board before loading the status
+            this.gameLogic.getBoad().getPieceList().clear();
+        }
+
+        String statusFilePath = statusFile.getAbsolutePath();
+
+        try {
+            this.gameLogic.getStatusManager().loadStatusFromFile(statusFilePath);
+        } catch (IOException |ClassNotFoundException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "File load action failed!");
+            alert.show();
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleRedoAction(ActionEvent event)
+    {
+        this.gameLogic.getStatusManager().performRedo();
+    }
+
+    @FXML
+    private void handleUndoAction(ActionEvent event)
+    {
+
+        this.gameLogic.getStatusManager().performUndo();
+    }
+
+    @FXML
+    private void handleExitAction(ActionEvent event)
+    {
+        System.exit(0);
+    }
+
     /**
      * Set the FXML Control map from the main class (i.e. from loader.getNamespace()) and initialise game logic.
      *
      * We shouldn't use constructor here because the FXML loader may not recognise and handle it correctly.
      *
      */
-    public void gameInit(int boardSize)
+    public void gameInit(int boardSize, Stage stage)
     {
         this.buttonMap = FXCollections.observableHashMap();
 
@@ -70,6 +152,9 @@ public class HomeController
 
         // Initialise game logic
         this.gameLogic = new GameLogic(this);
+
+        // Set current stage
+        this.currentStage = stage;
     }
 
     /**
@@ -82,7 +167,7 @@ public class HomeController
         BoardCellCoordinate buttonResult = BoardButtonHelper.parseClickResult(clickEvent);
 
         try {
-            gameLogic.commitMapChanges(buttonResult);
+            this.gameLogic.commitMapChanges(buttonResult);
         } catch (DuplicatedPieceException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "You're putting the piece on a non-empty place!");
             alert.show();

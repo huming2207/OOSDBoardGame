@@ -5,7 +5,9 @@ import com.google.java.contract.Requires;
 import models.piece.Piece;
 import models.piece.type.RoleType;
 
-public class Player
+import java.io.Serializable;
+
+public class Player implements Serializable
 {
     private String playerName;
     private RoleType allowedType;

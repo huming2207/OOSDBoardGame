@@ -1,7 +1,7 @@
 package models.piece.decorators.style.characters;
 
+import helpers.CloneHelper;
 import models.piece.Piece;
-import models.piece.PiecePrototype;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -21,7 +21,7 @@ public abstract class AbstractCharacter implements Piece, Cloneable, Serializabl
     public Piece clone()
     {
         try {
-            return PiecePrototype.deepClone(this);
+            return (Piece)CloneHelper.deepClone(this);
 
         } catch (IOException | ClassNotFoundException e) {
 

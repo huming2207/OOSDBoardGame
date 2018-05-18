@@ -12,15 +12,14 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
     <MenuBar fx:id="menuBar" prefWidth="800.0">
         <Menu text="File">
-            <MenuItem text="New Game" />
-            <MenuItem text="Load archived status" />
-            <MenuItem text="Save current status" />
+            <MenuItem text="Load archived status" onAction="#handleLoadAction"/>
+            <MenuItem text="Save current status" onAction="#handleSaveAction"/>
             <SeparatorMenuItem />
-            <MenuItem text="Exit" />
+            <MenuItem text="Exit" onAction="#handleExitAction"/>
         </Menu>
         <Menu text="Edit">
-            <MenuItem text="Un-do" />
-            <MenuItem text="Re-do" />
+            <MenuItem text="Un-do" onAction="#handleUndoAction"/>
+            <MenuItem text="Re-do" onAction="#handleRedoAction"/>
             <MenuItem text="Settings" />
         </Menu>
         <Menu text="Help">

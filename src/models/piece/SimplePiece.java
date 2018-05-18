@@ -1,10 +1,12 @@
 package models.piece;
 
+import helpers.CloneHelper;
 import models.coordinate.Coordinate;
 import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.Serializable;
 
 public class SimplePiece implements Piece, Cloneable, Serializable
 {
@@ -76,7 +78,7 @@ public class SimplePiece implements Piece, Cloneable, Serializable
     public Piece clone()
     {
         try {
-            return PiecePrototype.deepClone(this);
+            return (Piece)CloneHelper.deepClone(this);
 
         } catch (IOException | ClassNotFoundException e) {
 
