@@ -30,6 +30,12 @@ public class StatusManager
         this.turnCounter = 0;
     }
 
+    /**
+     * Record status
+     * Recording will only happens when a turn is finished.
+     *
+     * @param board current board
+     */
     public void recordStatus(Board board)
     {
         try {
@@ -46,6 +52,10 @@ public class StatusManager
         }
     }
 
+    /**
+     * Perform an un-do operation when user requested.
+     * Un-do will not happens when status stack is empty
+     */
     public void performUndo()
     {
         // Pop out the previous board
@@ -73,6 +83,10 @@ public class StatusManager
         this.gameLogic.setBoard(board);
     }
 
+    /**
+     * Perform an re-do operation when user requested.
+     * Re-do will not happens when re-do status stack is empty
+     */
     public void performRedo()
     {
         Board board;
@@ -96,8 +110,21 @@ public class StatusManager
         this.gameLogic.setBoard(board);
     }
 
+    /**
+     * Serialize status stack to file for future re-load
+     * @param filePath file path
+     * @throws IOException throws when IO issue occurs
+     */
     public void serializeStatusToFile(String filePath) throws IOException
     {
+        // Disallow users to save when status stack is empty
+        if(this.statusStack.empty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR,
+                    "Status buffer is empty, content cannot be saved.");
+            alert.show();
+            return;
+        }
+
         FileOutputStream fileOutputStream = new FileOutputStream(filePath);
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
 
@@ -107,6 +134,12 @@ public class StatusManager
         fileOutputStream.close();
     }
 
+    /**
+     * Deserialize status stack from a previous status file
+     * @param filePath file path to the file
+     * @throws IOException throws when IO issue occurs
+     * @throws ClassNotFoundException throws when serialization issue occurs
+     */
     @SuppressWarnings("unchecked") // ...have no idea, just suppress it...
     public void loadStatusFromFile(String filePath) throws IOException, ClassNotFoundException
     {
