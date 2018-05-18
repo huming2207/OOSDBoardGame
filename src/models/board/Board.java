@@ -13,14 +13,29 @@ import models.piece.Piece;
 import models.piece.type.RoleType;
 import models.player.Player;
 
-public class Board implements ListChangeListener<Piece>
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
+/**
+ * Board model class, containing current board status
+ *
+ * @author Ming Hu (s3554025)
+ * @since Assignment 1
+ */
+public class Board implements ListChangeListener<Piece>, Serializable
 {
     private Player communismPlayer;
     private Player capitalismPlayer;
     private Player currentPlayer;
-    private ObservableList<Piece> pieceList;
-    private GameLogic gameLogic;
-    private Timeline turnTimeline;
+
+    // These three objects below cannot be serialize, so I use a convert
+    private transient ObservableList<Piece> pieceList;
+    private transient GameLogic gameLogic;
+    private transient Timeline turnTimeline;
 
     /**
      * Create a new board
@@ -36,6 +51,32 @@ public class Board implements ListChangeListener<Piece>
         this.capitalismPlayer = new Player(capitalismPlayerName, RoleType.CAPITALISM_PIECE);
         this.pieceList = FXCollections.observableArrayList();
         this.pieceList.addListener(this);
+    }
+
+    private void writeObject(ObjectOutputStream outputStream) throws IOException
+    {
+        // Serialize non-transient members above
+        outputStream.defaultWriteObject();
+
+        // Serialize piece list
+        ArrayList<Piece> pieces = new ArrayList<>(this.pieceList);
+        outputStream.writeObject(pieces);
+    }
+
+    @SuppressWarnings("unchecked")
+    private void readObject(ObjectInputStream inputStream) throws IOException, ClassNotFoundException
+    {
+        // Deserialize non-transient member above...
+        inputStream.defaultReadObject();
+
+        // Deserialize and load the piece list
+        ArrayList<Piece> pieces = (ArrayList<Piece>)inputStream.readObject();
+        this.pieceList = FXCollections.observableArrayList(pieces);
+    }
+
+    public void setGameLogic(GameLogic gameLogic)
+    {
+        this.gameLogic = gameLogic;
     }
 
     /**
@@ -124,9 +165,7 @@ public class Board implements ListChangeListener<Piece>
     public Piece getPieceFromList(int posX, int posY)
     {
         for(Piece piece : this.pieceList) {
-            if(piece.getCoordinate().getPosX() == posX && piece.getCoordinate().getPosY() == posY) {
-                return piece;
-            }
+            if(piece.getCoordinate().getPosX() == posX && piece.getCoordinate().getPosY() == posY) return piece;
         }
 
         return null;
@@ -141,13 +180,13 @@ public class Board implements ListChangeListener<Piece>
         System.out.println("Timeout countdown begins");
 
         // Fixed 5 seconds countdown for now, will add a parser later for user config in assignment 2
-        turnTimeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
+        this.turnTimeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
             System.out.println("5 seconds reached, timeout!");
-            gameLogic.timeout(piece);
+            this.gameLogic.timeout(piece);
             this.currentPlayer.setSelectedPiece(null);
         }));
 
-        turnTimeline.play();
+        this.turnTimeline.play();
     }
 
     /**
@@ -157,9 +196,8 @@ public class Board implements ListChangeListener<Piece>
     {
         System.out.println("Timeout countdown stops");
 
-        if(turnTimeline == null)
-            return;
-        turnTimeline.stop();
+        if(this.turnTimeline == null) return;
+        this.turnTimeline.stop();
     }
 
     /**

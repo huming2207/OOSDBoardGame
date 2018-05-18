@@ -82,7 +82,7 @@ public class HomeController
         BoardCellCoordinate buttonResult = BoardButtonHelper.parseClickResult(clickEvent);
 
         try {
-            gameLogic.commitMapChanges(buttonResult);
+            this.gameLogic.commitMapChanges(buttonResult);
         } catch (DuplicatedPieceException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "You're putting the piece on a non-empty place!");
             alert.show();

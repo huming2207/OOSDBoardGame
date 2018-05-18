@@ -19,6 +19,7 @@ import models.piece.PiecePrototype;
 public class GameLogic
 {
     private HomeController homeController;
+    private StatusManager statusManager;
     private Board board;
 
     public GameLogic(HomeController homeController)
@@ -32,12 +33,15 @@ public class GameLogic
         // Initialise piece generator
         PiecePrototype piecePrototype = new PiecePrototype(this.homeController.getBoardSize());
 
+        // Initialize status manager
+        this.statusManager = new StatusManager(this);
+
         // Add all from random piece factory
-        board.getPieceList().addAll(piecePrototype.getPieceList());
+        this.board.getPieceList().addAll(piecePrototype.getPieceList());
 
         // First turn: communism player (player A)
-        board.setCurrentPlayer(board.getCommunismPlayer());
-        homeController.commitPlayerSelection(board.getCurrentPlayer());
+        this.board.setCurrentPlayer(this.board.getCommunismPlayer());
+        homeController.commitPlayerSelection(this.board.getCurrentPlayer());
     }
 
     /**
@@ -50,13 +54,15 @@ public class GameLogic
     {
         if(buttonEvent == null) return;
 
+        this.statusManager.recordStatus(this.board);
+
         Coordinate coordinate = new Coordinate(
                 buttonEvent.getPosX(),
                 buttonEvent.getPosY());
 
         // Firstly, try find the piece
-        Piece pieceInList = board.getPieceFromList(coordinate.getPosX(), coordinate.getPosY());
-        Piece selectedPiece = board.getCurrentPlayer().getSelectedPiece();
+        Piece pieceInList = this.board.getPieceFromList(coordinate.getPosX(), coordinate.getPosY());
+        Piece selectedPiece = this.board.getCurrentPlayer().getSelectedPiece();
 
         // Possible error 1: if selected piece and the piece found in list are both null, then
         //                   just forget about it lol...
@@ -98,7 +104,7 @@ public class GameLogic
                 "5 seconds holding timeout! Try again in the next turn!");
         alert.show();
 
-        board.stopCountdown();
+        this.board.stopCountdown();
     }
 
     /**
@@ -121,15 +127,15 @@ public class GameLogic
     private void selectPiece(Piece piece) throws InvalidPieceSelectionException
     {
         // Check their role type first...
-        if(piece.getRoleType() != board.getCurrentPlayer().getRoleType()) {
+        if(piece.getRoleType() != this.board.getCurrentPlayer().getRoleType()) {
             throw new InvalidPieceSelectionException("Wrong piece selected, check your role please.");
         } else {
-            board.beginCountdown(piece);
-            board.getCurrentPlayer().setSelectedPiece(piece);
+            this.board.beginCountdown(piece);
+            this.board.getCurrentPlayer().setSelectedPiece(piece);
         }
 
-        homeController.commitPlayerSelection(board.getCurrentPlayer());
-        board.getPieceList().remove(piece);
+        this.homeController.commitPlayerSelection(this.board.getCurrentPlayer());
+        this.board.getPieceList().remove(piece);
 
         System.out.println(String.format("User selected piece at x %d, y %d",
                 piece.getCoordinate().getPosX(), piece.getCoordinate().getPosY()));
@@ -143,28 +149,28 @@ public class GameLogic
     private void placePiece(Coordinate coordinate)
     {
         // Stop timer
-        board.stopCountdown();
+        this.board.stopCountdown();
 
         // Set the new coordinate for the piece
-        board.getCurrentPlayer().getSelectedPiece().setCoordinate(coordinate);
+        this.board.getCurrentPlayer().getSelectedPiece().setCoordinate(coordinate);
 
         System.out.println(String.format("User placed piece at x %d, y %d",
                 coordinate.getPosX(), coordinate.getPosY()));
 
         // Re-add modified piece
-        board.getPieceList().add(board.getCurrentPlayer().getSelectedPiece());
+        this.board.getPieceList().add(this.board.getCurrentPlayer().getSelectedPiece());
 
         // Set current player to another player (another's turn)
-        board.setCurrentPlayer(board.getCurrentPlayer().getPlayerName().equals(
-                board.getCommunismPlayer().getPlayerName()) ?
-                board.getCapitalismPlayer() : board.getCommunismPlayer()
+        this.board.setCurrentPlayer(this.board.getCurrentPlayer().getPlayerName().equals(
+                this.board.getCommunismPlayer().getPlayerName()) ?
+                this.board.getCapitalismPlayer() : board.getCommunismPlayer()
         );
 
         // Clean up the candidate piece position
-        board.getCurrentPlayer().setSelectedPiece(null);
+        this.board.getCurrentPlayer().setSelectedPiece(null);
 
         // Commit to GUI
-        homeController.commitPlayerSelection(board.getCurrentPlayer());
+        this.homeController.commitPlayerSelection(board.getCurrentPlayer());
 
 
     }

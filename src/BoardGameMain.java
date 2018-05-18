@@ -26,7 +26,7 @@ public class BoardGameMain extends Application
             Scene scene = new Scene(loader.load());
 
             // Load main CSS for home view
-            scene.getStylesheets().add(getClass().getResource("views/css/BoardButton.css").toExternalForm());
+            // scene.getStylesheets().add(getClass().getResource("views/css/BoardButton.css").toExternalForm());
             primaryStage.setScene(scene);
 
             // Get the controller from loader, then set the object map to it.
