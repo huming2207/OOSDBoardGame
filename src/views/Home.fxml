@@ -9,18 +9,43 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.TilePane?>
 
+<?import javafx.scene.input.KeyCodeCombination?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
     <MenuBar fx:id="menuBar" prefWidth="800.0">
         <Menu text="File">
-            <MenuItem text="Load archived status" onAction="#handleLoadAction"/>
-            <MenuItem text="Save current status" onAction="#handleSaveAction"/>
+            <MenuItem text="Load archived status" onAction="#handleLoadAction">
+                <accelerator>
+                    <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                </accelerator>
+            </MenuItem>
+            <MenuItem text="Save current status" onAction="#handleSaveAction">
+                <accelerator>
+                    <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                </accelerator>
+            </MenuItem>
             <SeparatorMenuItem />
-            <MenuItem text="Exit" onAction="#handleExitAction"/>
+            <MenuItem text="Exit" onAction="#handleExitAction">
+                <accelerator>
+                    <KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                </accelerator>
+            </MenuItem>
         </Menu>
         <Menu text="Edit">
-            <MenuItem text="Un-do" onAction="#handleUndoAction"/>
-            <MenuItem text="Re-do" onAction="#handleRedoAction"/>
-            <MenuItem text="Settings" />
+            <MenuItem text="Un-do" onAction="#handleUndoAction">
+                <accelerator>
+                    <KeyCodeCombination alt="UP" code="Z" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                </accelerator>
+            </MenuItem>
+            <MenuItem text="Re-do" onAction="#handleRedoAction">
+                <accelerator>
+                    <KeyCodeCombination alt="UP" code="Z" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                </accelerator>
+            </MenuItem>
+            <MenuItem text="Settings">
+                <accelerator>
+                    <KeyCodeCombination alt="UP" code="E" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                </accelerator>
+            </MenuItem>
         </Menu>
         <Menu text="Help">
             <MenuItem text="About" />
