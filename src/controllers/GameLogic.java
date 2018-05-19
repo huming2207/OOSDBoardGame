@@ -157,39 +157,35 @@ public class GameLogic
 
         if (typeID == 1 || (Math.abs(newX - x0) + Math.abs(newY - y0) <= 1)) {
             board.getCurrentPlayer().getSelectedPiece().setCoordinate(coordinate);
-        }
-        else if (typeID == 11 || Math.abs(newX - x0) + Math.abs(newY - y0) <= 1){
+
+        } else if (typeID == 11 || Math.abs(newX - x0) + Math.abs(newY - y0) <= 1){
             board.getCurrentPlayer().getSelectedPiece().setCoordinate(coordinate);
-
-        }
-
-        else if (typeID == 111 || Math.abs(newX - x0) + Math.abs(newY - y0) <= 2) {
+        } else if (typeID == 111 || Math.abs(newX - x0) + Math.abs(newY - y0) <= 2) {
             board.getCurrentPlayer().getSelectedPiece().setCoordinate(coordinate);
+        } else { return; }
 
-        }
+        /**
+         * //moveRange new code for if use factory 
+         int x0 = getBoad().getCurrentPlayer().getSelectedPiece().getCoordinate().getPosX();
+         int y0 = getBoad().getCurrentPlayer().getSelectedPiece().getCoordinate().getPosY();
+         int newX = coordinate.getPosX();
+         int newY = coordinate.getPosY();
+         System.out.println(getBoad().getCurrentPlayer().getSelectedPiece().getCharacterType());
 
-        else {
-            return;
-        }
-
-
-
-
-
-
-
-
-
-
-
-
+         if (getBoad().getCurrentPlayer().getSelectedPiece().getCharacterType().equals(BAIDU) || getBoad().getCurrentPlayer().getSelectedPiece().getCharacterType().equals(GOOGLE)  && (Math.abs(newX - x0) + Math.abs(newY - y0) <= 1) ){
+         this.board.getCurrentPlayer().getSelectedPiece().setCoordinate(coordinate);
+         }else if (getBoad().getCurrentPlayer().getSelectedPiece().getCharacterType().equals(WECHAT)  || getBoad().getCurrentPlayer().getSelectedPiece().getCharacterType().equals(FACEBOOK)&& (Math.abs(newX - x0) + Math.abs(newY - y0) <= 1) ) {
+         this.board.getCurrentPlayer().getSelectedPiece().setCoordinate(coordinate);
+         }else  if (getBoad().getCurrentPlayer().getSelectedPiece().getCharacterType().equals(WEIBO) || getBoad().getCurrentPlayer().getSelectedPiece().getCharacterType().equals(TWITTER) && (Math.abs(newX - x0) + Math.abs(newY - y0) <= 2)) {
+         this.board.getCurrentPlayer().getSelectedPiece().setCoordinate(coordinate);
+         }else {
+         return;
+         }
+         */
 
 
         // Set the new coordinate for the piece
         //board.getCurrentPlayer().getSelectedPiece().setCoordinate(coordinate);
-
-
-
 
         System.out.println(String.format("User placed piece at x %d, y %d",
                 coordinate.getPosX(), coordinate.getPosY()));
