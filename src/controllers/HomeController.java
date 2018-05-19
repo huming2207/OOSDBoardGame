@@ -4,6 +4,9 @@ import com.google.java.contract.Requires;
 import helpers.BoardButtonHelper;
 import helpers.exceptions.DuplicatedPieceException;
 import helpers.exceptions.InvalidPieceSelectionException;
+import helpers.logger.AbstractReaction;
+import helpers.logger.ReactionLevel;
+import helpers.logger.ReactionManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
@@ -35,6 +38,7 @@ public class HomeController
     private ObservableMap<String, Button> buttonMap;
     private int boardSize;
     private Stage currentStage;
+    private AbstractReaction reaction;
 
     @FXML
     private Button selectedPiece;
@@ -57,6 +61,8 @@ public class HomeController
         final String osName = System.getProperty("os.name");
         if (osName != null && osName.toUpperCase().contains("MAC"))
             menuBar.useSystemMenuBarProperty().set(true);
+
+        this.reaction = ReactionManager.getReaction();
     }
 
     @FXML
@@ -83,9 +89,8 @@ public class HomeController
         try {
             this.gameLogic.getStatusManager().serializeStatusToFile(statusFilePath);
         } catch (IOException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "File save action failed!");
-            alert.show();
             e.printStackTrace();
+            this.reaction.handleReaction(ReactionLevel.CRASH, "Cannot save the file!");
         }
     }
 
@@ -111,9 +116,8 @@ public class HomeController
         try {
             this.gameLogic.getStatusManager().loadStatusFromFile(statusFilePath);
         } catch (IOException |ClassNotFoundException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "File load action failed!");
-            alert.show();
             e.printStackTrace();
+            this.reaction.handleReaction(ReactionLevel.CRASH, "Cannot load the file!");
         }
     }
 
@@ -169,11 +173,9 @@ public class HomeController
         try {
             this.gameLogic.commitMapChanges(buttonResult);
         } catch (DuplicatedPieceException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "You're putting the piece on a non-empty place!");
-            alert.show();
+            this.reaction.handleReaction(ReactionLevel.WARN, "You're putting the piece on a non-empty place!");
         } catch (InvalidPieceSelectionException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "You're selecting a piece in the wrong role!");
-            alert.show();
+            this.reaction.handleReaction(ReactionLevel.WARN, "You're selecting a piece in the wrong role!");
         }
     }
 
