@@ -40,18 +40,21 @@
     -fx-base: rgb(149, 89, 23);
     -fx-background: rgb(225, 228, 203);
 }
+.root.button:hover {
+    fx-base: rgb(100,100,100);
+}
 
 .button{
     -fx-text-fill: rgb(132, 145, 47);
-    -fx-border-color: rgb(149, 89, 23);
+    -fx-border-color: rgb(0, 0, 0);
     -fx-border-radius: 5;
     -fx-padding: 3 6 6 6;
 }
 
-#selectedPiece{
-    -fx-text-fill: rgb(222, 222, 222);
-    -fx-border-color: rgb(1, 1, 1);
-    -fx-border-radius: 5;
+.button:hover {
+    -fx-border-color: rgb(0,240,0);
+    -fx-background-color: rgb(0,0,0);
+
 }
 
 .borders{
