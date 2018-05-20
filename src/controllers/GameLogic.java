@@ -3,8 +3,10 @@ package controllers;
 import com.google.java.contract.Requires;
 import helpers.exceptions.DuplicatedPieceException;
 import helpers.exceptions.InvalidPieceSelectionException;
+import helpers.reactions.AbstractReaction;
+import helpers.reactions.ReactionLevel;
+import helpers.reactions.ReactionManager;
 import javafx.collections.ListChangeListener;
-import javafx.scene.control.Alert;
 import models.coordinate.Coordinate;
 import models.board.Board;
 import models.coordinate.BoardCellCoordinate;
@@ -22,6 +24,7 @@ public class GameLogic implements ListChangeListener<Piece>
     private HomeController homeController;
     private StatusManager statusManager;
     private Board board;
+    private AbstractReaction reaction;
 
     public GameLogic(HomeController homeController)
     {
@@ -43,6 +46,8 @@ public class GameLogic implements ListChangeListener<Piece>
         // First turn: communism player (player A)
         this.board.setCurrentPlayer(this.board.getCommunismPlayer());
         homeController.commitPlayerSelection(this.board.getCurrentPlayer());
+
+        this.reaction = ReactionManager.getReaction();
     }
 
     /**
@@ -101,9 +106,7 @@ public class GameLogic implements ListChangeListener<Piece>
         placePiece(piece.getCoordinate());
 
         // Show timeout alert
-        Alert alert = new Alert(Alert.AlertType.ERROR,
-                "5 seconds holding timeout! Try again in the next turn!");
-        alert.show();
+        this.reaction.handleReaction(ReactionLevel.WARN, "5-second Timeout! Switching to next turn!");
 
         this.board.stopCountdown();
     }
@@ -139,7 +142,7 @@ public class GameLogic implements ListChangeListener<Piece>
         this.homeController.commitPlayerSelection(this.board.getCurrentPlayer());
         this.board.getPieceList().remove(piece);
 
-        System.out.println(String.format("User selected piece at x %d, y %d",
+        this.reaction.handleReaction(ReactionLevel.DEBUG, String.format("User selected piece at x %d, y %d",
                 piece.getCoordinate().getPosX(), piece.getCoordinate().getPosY()));
     }
 
@@ -156,7 +159,7 @@ public class GameLogic implements ListChangeListener<Piece>
         // Set the new coordinate for the piece
         this.board.getCurrentPlayer().getSelectedPiece().setCoordinate(coordinate);
 
-        System.out.println(String.format("User placed piece at x %d, y %d",
+        this.reaction.handleReaction(ReactionLevel.DEBUG, String.format("User placed piece at x %d, y %d",
                 coordinate.getPosX(), coordinate.getPosY()));
 
         // Re-add modified piece

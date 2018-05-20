@@ -3,10 +3,12 @@ package models.board;
 import com.google.java.contract.Ensures;
 import com.google.java.contract.Requires;
 import controllers.GameLogic;
+import helpers.reactions.AbstractReaction;
+import helpers.reactions.ReactionLevel;
+import helpers.reactions.ReactionManager;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.util.Duration;
 import models.piece.Piece;
@@ -18,7 +20,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 /**
  * Board model class, containing current board status
@@ -36,6 +37,7 @@ public class Board implements Serializable
     private transient ObservableList<Piece> pieceList;
     private transient GameLogic gameLogic;
     private transient Timeline turnTimeline;
+    private transient AbstractReaction reaction;
 
     /**
      * Create a new board
@@ -51,6 +53,7 @@ public class Board implements Serializable
         this.capitalismPlayer = new Player(capitalismPlayerName, RoleType.CAPITALISM_PIECE);
         this.pieceList = FXCollections.observableArrayList();
         this.pieceList.addListener(this.gameLogic);
+        this.reaction = ReactionManager.getReaction();
     }
 
     private void writeObject(ObjectOutputStream outputStream) throws IOException
@@ -71,6 +74,7 @@ public class Board implements Serializable
 
         // Deserialize and load the piece list
         ArrayList<Piece> pieces = (ArrayList<Piece>)inputStream.readObject();
+        this.reaction = ReactionManager.getReaction();
         this.pieceList = FXCollections.observableArrayList();
         this.pieceList.addAll(pieces);
     }
@@ -195,11 +199,10 @@ public class Board implements Serializable
      */
     public void beginCountdown(Piece piece)
     {
-        System.out.println("Timeout countdown begins");
+        this.reaction.handleReaction(ReactionLevel.DEBUG, "Timeout counter starts...");
 
         // Fixed 5 seconds countdown for now, will add a parser later for user config in assignment 2
         this.turnTimeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
-            System.out.println("5 seconds reached, timeout!");
             this.gameLogic.timeout(piece);
             this.currentPlayer.setSelectedPiece(null);
         }));
@@ -212,7 +215,7 @@ public class Board implements Serializable
      */
     public void stopCountdown()
     {
-        System.out.println("Timeout countdown stops");
+        this.reaction.handleReaction(ReactionLevel.DEBUG, "Timeout counter stops...");
 
         if(this.turnTimeline == null) return;
         this.turnTimeline.stop();
