@@ -16,6 +16,8 @@ import models.piece.PiecePrototype;
 /**
  * Game logic controller
  *
+ * Provides some low-level piece moves rules
+ *
  * @author Ming Hu
  * @since Assignment 1
  */
@@ -23,6 +25,7 @@ public class GameLogic implements ListChangeListener<Piece>
 {
     private HomeController homeController;
     private StatusManager statusManager;
+    private CompeteManager competeManager;
     private Board board;
     private AbstractReaction reaction;
 
@@ -48,6 +51,7 @@ public class GameLogic implements ListChangeListener<Piece>
         homeController.commitPlayerSelection(this.board.getCurrentPlayer());
 
         this.reaction = ReactionManager.getReaction();
+        this.competeManager = new CompeteManager(this);
     }
 
     /**
@@ -87,7 +91,7 @@ public class GameLogic implements ListChangeListener<Piece>
         if(selectedPiece == null) {
             this.selectPiece(pieceInList);
         } else {
-            this.placePiece(coordinate);
+            this.placePiece(coordinate, true);
         }
 
 
@@ -101,7 +105,7 @@ public class GameLogic implements ListChangeListener<Piece>
     public void timeout(Piece piece)
     {
         // Put back to original place when timeout
-        placePiece(piece.getCoordinate());
+        placePiece(piece.getCoordinate(), false);
 
         // Show timeout alert
         this.reaction.handleReaction(ReactionLevel.WARN, "5-second Timeout! Switching to next turn!");
@@ -149,16 +153,23 @@ public class GameLogic implements ListChangeListener<Piece>
      * @param coordinate New coordinate for the candidate piece
      */
     @Requires({"coordinate.getPosX() > 0", "coordinate.getPosY() > 0"})
-    private void placePiece(Coordinate coordinate)
+    private void placePiece(Coordinate coordinate, boolean applyRules)
     {
+        this.reaction.handleReaction(ReactionLevel.DEBUG, String.format("User placed piece at x %d, y %d",
+                coordinate.getPosX(), coordinate.getPosY()));
+
+        // Validate if the piece should move to this position
+        if(applyRules && !this.competeManager.validateMoveRange(this.board.getCurrentPlayer(), coordinate)) {
+            this.reaction.handleReaction(ReactionLevel.WARN,
+                    "You are placing the piece out of its single move range");
+            return; // ...stop the placement
+        }
+
         // Stop timer
         this.board.stopCountdown();
 
         // Set the new coordinate for the piece
         this.board.getCurrentPlayer().getSelectedPiece().setCoordinate(coordinate);
-
-        this.reaction.handleReaction(ReactionLevel.DEBUG, String.format("User placed piece at x %d, y %d",
-                coordinate.getPosX(), coordinate.getPosY()));
 
         // Re-add modified piece
         this.board.getPieceList().add(this.board.getCurrentPlayer().getSelectedPiece());
@@ -181,11 +192,6 @@ public class GameLogic implements ListChangeListener<Piece>
     public StatusManager getStatusManager()
     {
         return statusManager;
-    }
-
-    public void setStatusManager(StatusManager statusManager)
-    {
-        this.statusManager = statusManager;
     }
 
     public void setBoard(Board board)

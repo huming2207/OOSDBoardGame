@@ -18,6 +18,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.layout.TilePane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import models.piece.Piece;
 import models.player.Player;
 import models.coordinate.BoardCellCoordinate;
 import models.coordinate.Coordinate;
@@ -56,6 +57,27 @@ public class HomeController
 
     @FXML
     private Label capitalismPlayerScore;
+
+    /**
+     * Set the FXML Control map from the main class (i.e. from loader.getNamespace()) and initialise game logic.
+     *
+     * We shouldn't use constructor here because the FXML loader may not recognise and handle it correctly.
+     *
+     */
+    public void gameInit(int boardSize, Stage stage)
+    {
+        this.buttonMap = FXCollections.observableHashMap();
+
+        // Board pane initialisation
+        this.initBoardGui(this.mainBoard, boardSize);
+        this.boardSize = boardSize;
+
+        // Initialise game logic
+        this.gameLogic = new GameLogic(this);
+
+        // Set current stage
+        this.currentStage = stage;
+    }
 
     @FXML
     public void initialize()
@@ -146,27 +168,6 @@ public class HomeController
     }
 
     /**
-     * Set the FXML Control map from the main class (i.e. from loader.getNamespace()) and initialise game logic.
-     *
-     * We shouldn't use constructor here because the FXML loader may not recognise and handle it correctly.
-     *
-     */
-    public void gameInit(int boardSize, Stage stage)
-    {
-        this.buttonMap = FXCollections.observableHashMap();
-
-        // Board pane initialisation
-        this.initBoardGui(this.mainBoard, boardSize);
-        this.boardSize = boardSize;
-
-        // Initialise game logic
-        this.gameLogic = new GameLogic(this);
-
-        // Set current stage
-        this.currentStage = stage;
-    }
-
-    /**
      * Handle all board button click event
      *
      * @param clickEvent event input
@@ -225,10 +226,10 @@ public class HomeController
         if(player.getSelectedPiece() != null) {
             this.selectedPiece.setStyle(player.getSelectedPiece().getStyle());
         } else {
-            this.selectedPiece.setStyle("");
+            this.selectedPiece.setStyle(null);
         }
 
-        // Set the player name
+        // Set the next player name
         this.playerNameLabel.setText(player.getPlayerName());
     }
 

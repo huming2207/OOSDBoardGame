@@ -44,7 +44,7 @@ public class RangeC extends AbstractRange
 
     public RoleType getRoleType()
     {
-        return RoleType.COMMUNISM_PIECE;
+        return super.decoratePiece.getRoleType();
     }
 
     public CharacterType getCharacterType()
@@ -52,7 +52,7 @@ public class RangeC extends AbstractRange
         return super.decoratePiece.getCharacterType();
     }
 
-    public int[][] getMoveRangeAllowance()
+    public int[][] getMoveRangeOffset()
     {
         return new int[][] {
                 {-1, 0}, {1, 0}, {0, -1}, {0, 1},
@@ -60,7 +60,7 @@ public class RangeC extends AbstractRange
         };
     }
 
-    public int[][] getAttackRangeAllowance()
+    public int[][] getAttackZoneOffset()
     {
         return new int[][] {{-1, 1}, {1, 1}, {-1, -1}, {1, -1}};
     }

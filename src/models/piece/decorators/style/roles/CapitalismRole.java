@@ -5,9 +5,9 @@ import models.piece.Piece;
 import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 
-public class CapitalismRule extends AbstractRule
+public class CapitalismRole extends AbstractRule
 {
-    public CapitalismRule(Piece piece)
+    public CapitalismRole(Piece piece)
     {
         super(piece);
     }
@@ -52,13 +52,13 @@ public class CapitalismRule extends AbstractRule
         return super.decoratePiece.getCharacterType();
     }
 
-    public int[][] getMoveRangeAllowance()
+    public int[][] getMoveRangeOffset()
     {
-        return super.decoratePiece.getMoveRangeAllowance();
+        return super.decoratePiece.getMoveRangeOffset();
     }
 
-    public int[][] getAttackRangeAllowance()
+    public int[][] getAttackZoneOffset()
     {
-        return super.decoratePiece.getMoveRangeAllowance();
+        return super.decoratePiece.getMoveRangeOffset();
     }
 }

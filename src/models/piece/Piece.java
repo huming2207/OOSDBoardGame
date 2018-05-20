@@ -83,9 +83,9 @@ public interface Piece
 
     CharacterType getCharacterType();
 
-    int[][] getMoveRangeAllowance();
+    int[][] getMoveRangeOffset();
 
-    int[][] getAttackRangeAllowance();
+    int[][] getAttackZoneOffset();
 
     @Override
     int hashCode();
