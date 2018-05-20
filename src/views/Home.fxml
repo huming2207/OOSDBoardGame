@@ -6,37 +6,40 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.text.Font?>
 
-<?import javafx.scene.input.KeyCodeCombination?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="554.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
     <MenuBar fx:id="menuBar" prefWidth="800.0">
         <Menu text="File">
-            <MenuItem text="Load archived status" onAction="#handleLoadAction">
+            <MenuItem onAction="#handleLoadAction" text="Load archived status">
                 <accelerator>
                     <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                 </accelerator>
             </MenuItem>
-            <MenuItem text="Save current status" onAction="#handleSaveAction">
+            <MenuItem onAction="#handleSaveAction" text="Save current status">
                 <accelerator>
                     <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                 </accelerator>
             </MenuItem>
             <SeparatorMenuItem />
-            <MenuItem text="Exit" onAction="#handleExitAction">
+            <MenuItem onAction="#handleExitAction" text="Exit">
                 <accelerator>
                     <KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                 </accelerator>
             </MenuItem>
         </Menu>
         <Menu text="Edit">
-            <MenuItem text="Un-do" onAction="#handleUndoAction">
+            <MenuItem onAction="#handleUndoAction" text="Un-do">
                 <accelerator>
                     <KeyCodeCombination alt="UP" code="Z" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                 </accelerator>
             </MenuItem>
-            <MenuItem text="Re-do" onAction="#handleRedoAction">
+            <MenuItem onAction="#handleRedoAction" text="Re-do">
                 <accelerator>
                     <KeyCodeCombination alt="UP" code="Z" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
                 </accelerator>
@@ -52,11 +55,44 @@
         </Menu>
     </MenuBar>
 
-    <TilePane fx:id="mainBoard" layoutX="150.0" layoutY="86.0" prefHeight="500.0" prefWidth="500.0">
+    <TilePane fx:id="mainBoard" layoutX="26.0" layoutY="50.0" prefHeight="500.0" prefWidth="500.0">
 
     </TilePane>
-   <Label layoutX="346.0" layoutY="51.0" text="Selected piece:" AnchorPane.leftAnchor="346.0" AnchorPane.topAnchor="51.0" />
-   <Button fx:id="selectedPiece" layoutX="447.0" layoutY="37.0" maxHeight="43.0" maxWidth="43.0" minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0" AnchorPane.leftAnchor="447.0" AnchorPane.topAnchor="37.0" />
-   <Label layoutX="150.0" layoutY="50.0" prefHeight="17.0" prefWidth="85.0" text="Current turn:" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="50.0" />
-   <Label fx:id="playerNameLabel" layoutX="235.0" layoutY="50.0" text="Unknown" AnchorPane.leftAnchor="235.0" AnchorPane.topAnchor="50.0" />
+    <TitledPane animated="false" collapsible="false" layoutX="537.0" layoutY="50.0" prefHeight="186.0" prefWidth="249.0"
+                text="Status">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="178.0">
+            <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="25.0" prefHeight="17.0" prefWidth="118.0"
+                   text="Selected piece:"/>
+            <Button fx:id="selectedPiece" layoutX="147.0" layoutY="12.0" maxHeight="43.0" maxWidth="43.0"
+                    minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"/>
+            <Label alignment="CENTER_RIGHT" layoutX="33.0" layoutY="73.0" prefHeight="17.0" prefWidth="99.0"
+                   text="Current turn:"/>
+            <Label fx:id="playerNameLabel" layoutX="146.0" layoutY="73.0" prefHeight="17.0" prefWidth="97.0"
+                   text="Unknown"/>
+            <ToggleButton layoutX="56.0" layoutY="110.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="135.0"
+                          text="Defensive mode"/>
+        </AnchorPane>
+    </TitledPane>
+    <TitledPane animated="false" collapsible="false" layoutX="537.0" layoutY="243.0" prefHeight="136.0"
+                prefWidth="249.0" text="Grade - Communism Player">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="251.0" prefWidth="247.0">
+            <Label fx:id="communismPlayerScore" alignment="CENTER" layoutY="-1.0" prefHeight="112.0"
+                   prefWidth="249.0" text="Unknown">
+                <font>
+                    <Font size="36.0"/>
+                </font>
+            </Label>
+        </AnchorPane>
+    </TitledPane>
+    <TitledPane animated="false" collapsible="false" layoutX="537.0" layoutY="389.0" prefHeight="136.0"
+                prefWidth="249.0" text="Grade - Capitalism Player">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="251.0" prefWidth="247.0">
+            <Label fx:id="capitalismPlayerScore" alignment="CENTER" layoutY="-1.0" prefHeight="112.0"
+                   prefWidth="249.0" text="Unknown">
+                <font>
+                    <Font size="36.0"/>
+                </font>
+            </Label>
+        </AnchorPane>
+    </TitledPane>
 </AnchorPane>

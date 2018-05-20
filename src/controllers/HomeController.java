@@ -52,6 +52,12 @@ public class HomeController
     private MenuBar menuBar;
 
     @FXML
+    private Label communismPlayerScore;
+
+    @FXML
+    private Label capitalismPlayerScore;
+
+    @FXML
     public void initialize()
     {
         // Workaround for macOS users
