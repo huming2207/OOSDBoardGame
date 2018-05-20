@@ -46,11 +46,12 @@ public interface Piece
     int getAttackLevel();
 
     /**
-     * Apply attack from other pieces
+     * Suffer attack from other pieces
+     * Deduction should be a negative number
      *
      * @param deduction HP value (mark) deduction
      */
-    void applyAttack(int deduction);
+    void sufferAttack(int deduction);
 
     /**
      * Get current mark (max. 100?)

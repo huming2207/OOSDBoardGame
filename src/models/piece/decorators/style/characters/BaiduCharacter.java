@@ -43,7 +43,7 @@ public class BaiduCharacter extends AbstractCharacter
         return -50;
     }
 
-    public void applyAttack(int deduction)
+    public void sufferAttack(int deduction)
     {
         super.mark += deduction;
     }

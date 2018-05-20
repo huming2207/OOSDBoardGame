@@ -29,7 +29,7 @@ public class FacebookCharacter extends AbstractCharacter
         return -30;
     }
 
-    public void applyAttack(int deduction)
+    public void sufferAttack(int deduction)
     {
         super.mark += deduction;
     }

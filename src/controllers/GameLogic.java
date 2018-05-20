@@ -60,8 +60,6 @@ public class GameLogic implements ListChangeListener<Piece>
     {
         if(buttonEvent == null) return;
 
-
-
         Coordinate coordinate = new Coordinate(
                 buttonEvent.getPosX(),
                 buttonEvent.getPosY());

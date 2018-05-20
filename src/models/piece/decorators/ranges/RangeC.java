@@ -22,9 +22,9 @@ public class RangeC extends AbstractRange
         return super.decoratePiece.getAttackLevel();
     }
 
-    public void applyAttack(int deduction)
+    public void sufferAttack(int deduction)
     {
-        super.decoratePiece.applyAttack(deduction);
+        super.decoratePiece.sufferAttack(deduction);
     }
 
     public int getMark()

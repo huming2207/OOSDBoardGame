@@ -26,7 +26,7 @@ public class SimplePiece implements Piece, Cloneable, Serializable
     }
 
     @Override
-    public void applyAttack(int deduction)
+    public void sufferAttack(int deduction)
     {
         this.mark += deduction;
     }
