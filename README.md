@@ -5,15 +5,11 @@ OOSD Board Game, for Object Oriented Software Design (ISYS1083), Group G3.
 ## IMPORTANT NOTICE FOR TEACHERS 
 
  * Please refer to PDF version of this document if you can't render markdown in your environment. Thanks.
- * **The following Design Principle sections in this README document are just a for another reference, as it was written for a draft by Ming Hu for other group members without extra checking. If there is any conflicts against with the Design Principle section in the report, please refer to the report instead, not this README.**
+ * **This README file is just a reference for team member to understand the code and help them for designing diagram, presentation slide and reports. If there is any conflicted content, please refer to those documents first.**
 
-## Author (Assignment 1 branch)
+## Author (Assignment 2 branch)
 
-Code written and debugged by Ming Hu (s3554025), partially reviewed by other group members, which are:
-
-- Xuan Gia Khanh Nguyen (s3636905)
-- Yixiong Shen (s3700889)
-- Nguyen Tuan Manh (s3574923)
+Code written, tested and debugged by Ming Hu (s3554025).
 
 ## Build environment
 
@@ -33,15 +29,43 @@ You may also need to set Cofoja separately before compile. Please refer to [this
     - [x] Round based game demo
     - [x] Countdown timeout for each turn
     - [ ] Capture phrases (Assignment 2)
-    - [ ] Revert support (Assignment 2)
+    - [ ] Defensive mode (Assignment 2)
 - [x] Board
     - [x] 8x8 board, 64 cells
+    - [x] Un-do/Re-do support (Assignment 2)
+    - [x] Status save/reload (Assignment 2)
+    - [x] Board resizing (Assignment 2)
 - [x] Piece
     - [x] CSS styled
     - [x] Movable
+- [x] Settings (Assignment 2)
+    - [ ] Board size
+    - [ ] Custom player name
 - [x] Player
     - [x] Initial mark deduction info
     - [x] Turn based
+
+## Design patterns
+
+Assignment 2 has implemented/refactored with 5 design patterns, which are:
+
+- Prototype 
+    - located in `PiecePrototype` class
+    - for creating pieces correctly
+- Command
+    - located in `PieceFactory`, `PieceCreator` class
+    - for shortening the code using lambda (no more if-else or switch-case needed)
+    - simplify the process for adding new pieces/characters 
+- Decorator
+    - located in package `models.pieces`
+    - simplify the process for adding new pieces/characters
+    - decouple piece model
+- Chain of Responsibility
+    - located in `helpers.reactions` package
+    - simplify & decouple the reaction when for notification/logging
+- Abstract Factory
+    - located in `models.factory` package (together with command pattern)
+    - shorten the code
 
 ## Methods/Constructors with Cofoja (DbC as required)
 
