@@ -4,9 +4,9 @@ import com.google.java.contract.Requires;
 import helpers.BoardButtonHelper;
 import helpers.exceptions.DuplicatedPieceException;
 import helpers.exceptions.InvalidPieceSelectionException;
-import helpers.logger.AbstractReaction;
-import helpers.logger.ReactionLevel;
-import helpers.logger.ReactionManager;
+import helpers.reactions.AbstractReaction;
+import helpers.reactions.ReactionLevel;
+import helpers.reactions.ReactionManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
@@ -24,7 +24,6 @@ import models.coordinate.Coordinate;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
 
 /**
  * Home GUI controller

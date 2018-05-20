@@ -1,4 +1,4 @@
-package helpers.logger;
+package helpers.reactions;
 
 /**
  * Logger helper for Board Game

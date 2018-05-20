@@ -1,10 +1,10 @@
-package helpers.logger;
+package helpers.reactions;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Debug logger: does nothing but just log to console
+ * Debug reactions: does nothing but just log to console
  *
  * @author Ming Hu (s3554025)
  * @since Assignment 2

@@ -1,10 +1,10 @@
-package helpers.logger;
+package helpers.reactions;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Crash logger: Crashes app with non-zero exit code
+ * Crash reactions: Crashes app with non-zero exit code
  *
  * @author Ming Hu (s3554025)
  * @since Assignment 2

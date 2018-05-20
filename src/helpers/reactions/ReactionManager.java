@@ -1,4 +1,4 @@
-package helpers.logger;
+package helpers.reactions;
 
 public class ReactionManager
 {

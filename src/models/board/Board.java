@@ -3,13 +3,12 @@ package models.board;
 import com.google.java.contract.Ensures;
 import com.google.java.contract.Requires;
 import controllers.GameLogic;
-import helpers.logger.AbstractReaction;
-import helpers.logger.ReactionLevel;
-import helpers.logger.ReactionManager;
+import helpers.reactions.AbstractReaction;
+import helpers.reactions.ReactionLevel;
+import helpers.reactions.ReactionManager;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.util.Duration;
 import models.piece.Piece;
@@ -21,7 +20,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 /**
  * Board model class, containing current board status

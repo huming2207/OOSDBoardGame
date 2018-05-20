@@ -1,8 +1,8 @@
-package helpers.logger;
+package helpers.reactions;
 
 /**
  * Reaction level enumeration class
- * Separate the level of reaction
+ * Separate the level of reactions
  *
  * @author Ming Hu (s3554025)
  * @since Assignment 2

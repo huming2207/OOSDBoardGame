@@ -1,9 +1,9 @@
-package helpers.logger;
+package helpers.reactions;
 
 import javafx.scene.control.Alert;
 
 /**
- * Warning logger: shows a warning dialog box with logged info
+ * Warning reactions: shows a warning dialog box with logged info
  *
  * @author Ming Hu (s3554025)
  * @since Assignment 2
