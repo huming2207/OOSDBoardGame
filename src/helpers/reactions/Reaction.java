@@ -8,12 +8,12 @@ package helpers.reactions;
  * @author Ming Hu
  * @since Assignment 2
  */
-public abstract class AbstractReaction
+public abstract class Reaction
 {
     protected ReactionLevel reactionLevel;
-    protected AbstractReaction nextLevelLogger;
+    protected Reaction nextLevelLogger;
 
-    public void setNextLevelLogger(AbstractReaction nextLevelLogger)
+    public void setNextLevelLogger(Reaction nextLevelLogger)
     {
         this.nextLevelLogger = nextLevelLogger;
     }

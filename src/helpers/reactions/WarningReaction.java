@@ -11,7 +11,7 @@ import java.util.Date;
  * @author Ming Hu (s3554025)
  * @since Assignment 2
  */
-public class WarningReaction extends AbstractReaction
+public class WarningReaction extends Reaction
 {
     public WarningReaction()
     {

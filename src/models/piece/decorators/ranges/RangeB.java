@@ -5,7 +5,7 @@ import models.piece.Piece;
 import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 
-public class RangeB extends AbstractRange
+public class RangeB extends Range
 {
     public RangeB(Piece piece)
     {

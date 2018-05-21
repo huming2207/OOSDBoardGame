@@ -6,12 +6,12 @@ import models.piece.Piece;
 import java.io.IOException;
 import java.io.Serializable;
 
-public abstract class AbstractCharacter implements Piece, Cloneable, Serializable
+public abstract class Character implements Piece, Cloneable, Serializable
 {
     protected Piece decoratePiece;
     protected int mark;
 
-    public AbstractCharacter(Piece piece)
+    public Character(Piece piece)
     {
         this.decoratePiece = piece;
     }

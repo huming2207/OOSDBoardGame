@@ -1,6 +1,6 @@
 package controllers;
 
-import helpers.reactions.AbstractReaction;
+import helpers.reactions.Reaction;
 import helpers.reactions.ReactionLevel;
 import helpers.reactions.ReactionManager;
 import models.coordinate.Coordinate;
@@ -13,7 +13,7 @@ import java.util.List;
 public class CompeteManager
 {
     private GameLogic gameLogic;
-    private AbstractReaction reaction;
+    private Reaction reaction;
 
     public CompeteManager(GameLogic gameLogic)
     {

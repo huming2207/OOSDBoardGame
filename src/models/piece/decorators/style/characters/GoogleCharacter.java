@@ -5,7 +5,7 @@ import models.piece.Piece;
 import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 
-public class GoogleCharacter extends AbstractCharacter
+public class GoogleCharacter extends Character
 {
     public GoogleCharacter(Piece piece)
     {

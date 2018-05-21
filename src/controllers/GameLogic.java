@@ -3,7 +3,7 @@ package controllers;
 import com.google.java.contract.Requires;
 import helpers.exceptions.DuplicatedPieceException;
 import helpers.exceptions.InvalidPieceSelectionException;
-import helpers.reactions.AbstractReaction;
+import helpers.reactions.Reaction;
 import helpers.reactions.ReactionLevel;
 import helpers.reactions.ReactionManager;
 import javafx.collections.ListChangeListener;
@@ -27,7 +27,7 @@ public class GameLogic implements ListChangeListener<Piece>
     private StatusManager statusManager;
     private CompeteManager competeManager;
     private Board board;
-    private AbstractReaction reaction;
+    private Reaction reaction;
 
     public GameLogic(HomeController homeController)
     {

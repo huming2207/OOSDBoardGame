@@ -5,7 +5,7 @@ import models.piece.Piece;
 import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 
-public class FacebookCharacter extends AbstractCharacter
+public class FacebookCharacter extends Character
 {
     public FacebookCharacter(Piece piece)
     {

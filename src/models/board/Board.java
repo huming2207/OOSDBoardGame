@@ -3,7 +3,7 @@ package models.board;
 import com.google.java.contract.Ensures;
 import com.google.java.contract.Requires;
 import controllers.GameLogic;
-import helpers.reactions.AbstractReaction;
+import helpers.reactions.Reaction;
 import helpers.reactions.ReactionLevel;
 import helpers.reactions.ReactionManager;
 import javafx.animation.KeyFrame;
@@ -37,7 +37,7 @@ public class Board implements Serializable
     private transient ObservableList<Piece> pieceList;
     private transient GameLogic gameLogic;
     private transient Timeline turnTimeline;
-    private transient AbstractReaction reaction;
+    private transient Reaction reaction;
 
     /**
      * Create a new board

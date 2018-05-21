@@ -4,7 +4,7 @@ import com.google.java.contract.Requires;
 import helpers.BoardButtonHelper;
 import helpers.exceptions.DuplicatedPieceException;
 import helpers.exceptions.InvalidPieceSelectionException;
-import helpers.reactions.AbstractReaction;
+import helpers.reactions.Reaction;
 import helpers.reactions.ReactionLevel;
 import helpers.reactions.ReactionManager;
 import javafx.collections.FXCollections;
@@ -18,7 +18,6 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.layout.TilePane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import models.piece.Piece;
 import models.player.Player;
 import models.coordinate.BoardCellCoordinate;
 import models.coordinate.Coordinate;
@@ -38,7 +37,7 @@ public class HomeController
     private ObservableMap<String, Button> buttonMap;
     private int boardSize;
     private Stage currentStage;
-    private AbstractReaction reaction;
+    private Reaction reaction;
 
     @FXML
     private Button selectedPiece;

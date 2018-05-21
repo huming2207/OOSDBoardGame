@@ -5,7 +5,7 @@ import models.piece.Piece;
 import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 
-public class CapitalismRole extends AbstractRule
+public class CapitalismRole extends Role
 {
     public CapitalismRole(Piece piece)
     {

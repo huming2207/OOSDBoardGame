@@ -5,7 +5,7 @@ import models.piece.Piece;
 import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 
-public class TwitterCharacter extends AbstractCharacter
+public class TwitterCharacter extends Character
 {
     public TwitterCharacter(Piece piece)
     {

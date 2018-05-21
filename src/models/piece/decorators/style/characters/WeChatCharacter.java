@@ -5,7 +5,7 @@ import models.piece.Piece;
 import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 
-public class WeChatCharacter extends AbstractCharacter
+public class WeChatCharacter extends Character
 {
     public WeChatCharacter(Piece piece)
     {

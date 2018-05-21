@@ -5,7 +5,7 @@ import models.piece.Piece;
 import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 
-public class WeiboCharacter extends AbstractCharacter
+public class WeiboCharacter extends Character
 {
     public WeiboCharacter(Piece piece)
     {

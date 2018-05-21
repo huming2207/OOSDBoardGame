@@ -5,7 +5,7 @@ import models.piece.Piece;
 import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 
-public class BaiduCharacter extends AbstractCharacter
+public class BaiduCharacter extends Character
 {
     public BaiduCharacter(Piece piece)
     {
