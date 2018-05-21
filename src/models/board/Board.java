@@ -34,7 +34,7 @@ public class Board implements Serializable
     private Player currentPlayer;
     private boolean defensiveMode;
 
-    // These three objects below cannot be serialize, so I use a convert
+    // These three objects below cannot be serialize, use "transient" keyword to avoid serialization
     private transient ObservableList<Piece> pieceList;
     private transient GameLogic gameLogic;
     private transient Timeline turnTimeline;
@@ -196,7 +196,7 @@ public class Board implements Serializable
     }
 
     /**
-     * Initialise and start the timeout countdown timer
+     * Initialize and start the timeout countdown timer
      * @param piece - Piece selected in the candidate area
      */
     public void beginCountdown(Piece piece)

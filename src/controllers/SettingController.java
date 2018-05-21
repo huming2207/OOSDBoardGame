@@ -28,9 +28,6 @@ public class SettingController
     private TextField communismPlayerName;
 
     @FXML
-    private Button saveButton;
-
-    @FXML
     private Label boardSizeIndicator;
 
     private Reaction reaction;
@@ -48,7 +45,7 @@ public class SettingController
     }
 
     @FXML
-    private void handleSaveRequest(ActionEvent event)
+    private void handleSaveRequest()
     {
         GenericSettings settings = new GenericSettings(
                 this.boardSize,

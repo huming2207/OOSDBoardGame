@@ -13,13 +13,13 @@ public enum ReactionLevel
 
     private int level;
 
-    private ReactionLevel(int level)
+    ReactionLevel(int level)
     {
         this.level = level;
     }
 
     public int getLevel()
     {
-        return level;
+        return this.level;
     }
 }

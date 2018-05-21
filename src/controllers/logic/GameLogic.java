@@ -36,12 +36,12 @@ public class GameLogic implements ListChangeListener<Piece>
         // Assign home controller
         this.homeController = homeController;
         
-        // Initialise board model
+        // Initialize board model
         this.board = new Board(this,
                 homeController.getSettings().getCommunismPlayerName(),
                 homeController.getSettings().getCapitalismPlayerName());
 
-        // Initialise piece generator
+        // Initialize piece generator
         PiecePrototype piecePrototype = new PiecePrototype(this.homeController.getBoardSize());
 
         // Initialize status manager

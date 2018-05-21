@@ -63,7 +63,7 @@ public class HomeController
     private ToggleButton defensiveToggle;
 
     /**
-     * Set the FXML Control map from the main class (i.e. from loader.getNamespace()) and initialise game logic.
+     * Set the FXML Control map from the main class (i.e. from loader.getNamespace()) and initialize game logic.
      *
      * We shouldn't use constructor here because the FXML loader may not recognise and handle it correctly.
      *
@@ -80,7 +80,7 @@ public class HomeController
         this.initBoardGui(this.mainBoard, this.settings.getBoardSize());
         this.boardSize = this.settings.getBoardSize();
 
-        // Initialise game logic
+        // Initialize game logic
         this.gameLogic = new GameLogic(this);
 
         // Set current stage
@@ -101,7 +101,7 @@ public class HomeController
     }
 
     @FXML
-    private void handleSaveAction(ActionEvent event)
+    private void handleSaveAction()
     {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save your status to file");
@@ -130,7 +130,7 @@ public class HomeController
     }
 
     @FXML
-    private void handleLoadAction(ActionEvent event)
+    private void handleLoadAction()
     {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Load your status from file");
@@ -157,19 +157,19 @@ public class HomeController
     }
 
     @FXML
-    private void handleRedoAction(ActionEvent event)
+    private void handleRedoAction()
     {
         this.gameLogic.getStatusManager().performRedo();
     }
 
     @FXML
-    private void handleUndoAction(ActionEvent event)
+    private void handleUndoAction()
     {
         this.gameLogic.getStatusManager().performUndo();
     }
 
     @FXML
-    private void handleExitAction(ActionEvent event)
+    private void handleExitAction()
     {
         System.exit(0);
     }
@@ -182,7 +182,7 @@ public class HomeController
     }
 
     @FXML
-    private void handleAboutAction(ActionEvent event)
+    private void handleAboutAction()
     {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -200,7 +200,7 @@ public class HomeController
     }
 
     @FXML
-    private void handleSettingAction(ActionEvent event)
+    private void handleSettingAction()
     {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -265,7 +265,7 @@ public class HomeController
      * Set the selected piece to selectPiece button to tell user they've selected a piece in GUI
      *
      * PS: here using cofoja for null checking is useful,
-     *      just in case if someone use this method when currentPlayer is not initialised.
+     *      just in case if someone use this method when currentPlayer is not initialized.
      * @param player Committed player
      *
      */
@@ -284,12 +284,12 @@ public class HomeController
     }
 
     /**
-     *  Initialise the board with specific size and button
+     *  Initialize the board with specific size and button
      * @param pane Tile pane, i.e. GUI of the board
      * @param boardSize size of the board
      */
     @Requires({"pane != null", "boardSize > 0"})
-    public void initBoardGui(TilePane pane, int boardSize)
+    private void initBoardGui(TilePane pane, int boardSize)
     {
         // Disable gaps
         pane.setHgap(0);
@@ -302,7 +302,7 @@ public class HomeController
         for(int buttonXCounter = 0; buttonXCounter < boardSize; buttonXCounter += 1) {
             for(int buttonYCounter = 0; buttonYCounter < boardSize; buttonYCounter += 1) {
 
-                // Initialise a button
+                // Initialize a button
                 Button button = new Button();
 
                 // Set the size of it, we have to -1 to make sure it can display correctly
@@ -324,11 +324,6 @@ public class HomeController
                 this.mainBoard.getChildren().add(button);
             }
         }
-    }
-
-    public ObservableMap<String, Button> getButtonMap()
-    {
-        return this.buttonMap;
     }
 
     public int getBoardSize()
