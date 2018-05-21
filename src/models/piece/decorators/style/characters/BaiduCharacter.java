@@ -5,7 +5,7 @@ import models.piece.Piece;
 import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 
-public class BaiduCharacter extends AbstractCharacter
+public class BaiduCharacter extends Character
 {
     public BaiduCharacter(Piece piece)
     {
@@ -43,7 +43,7 @@ public class BaiduCharacter extends AbstractCharacter
         return -50;
     }
 
-    public void applyAttack(int deduction)
+    public void sufferAttack(int deduction)
     {
         super.mark += deduction;
     }
@@ -73,13 +73,13 @@ public class BaiduCharacter extends AbstractCharacter
         return CharacterType.BAIDU;
     }
 
-    public int[][] getMoveRangeAllowance()
+    public int[][] getMoveRangeOffset()
     {
-        return super.decoratePiece.getMoveRangeAllowance();
+        return super.decoratePiece.getMoveRangeOffset();
     }
 
-    public int[][] getAttackRangeAllowance()
+    public int[][] getAttackZoneOffset()
     {
-        return super.decoratePiece.getMoveRangeAllowance();
+        return super.decoratePiece.getMoveRangeOffset();
     }
 }

@@ -26,7 +26,7 @@ public class SimplePiece implements Piece, Cloneable, Serializable
     }
 
     @Override
-    public void applyAttack(int deduction)
+    public void sufferAttack(int deduction)
     {
         this.mark += deduction;
     }
@@ -56,13 +56,13 @@ public class SimplePiece implements Piece, Cloneable, Serializable
     }
 
     @Override
-    public int[][] getMoveRangeAllowance()
+    public int[][] getMoveRangeOffset()
     {
         return new int[0][];
     }
 
     @Override
-    public int[][] getAttackRangeAllowance()
+    public int[][] getAttackZoneOffset()
     {
         return new int[0][];
     }

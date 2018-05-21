@@ -5,7 +5,7 @@ import models.piece.Piece;
 import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 
-public class WeiboCharacter extends AbstractCharacter
+public class WeiboCharacter extends Character
 {
     public WeiboCharacter(Piece piece)
     {
@@ -57,7 +57,7 @@ public class WeiboCharacter extends AbstractCharacter
         return -20;
     }
 
-    public void applyAttack(int deduction)
+    public void sufferAttack(int deduction)
     {
         super.mark += deduction;
     }
@@ -87,13 +87,13 @@ public class WeiboCharacter extends AbstractCharacter
         return CharacterType.WEIBO;
     }
 
-    public int[][] getMoveRangeAllowance()
+    public int[][] getMoveRangeOffset()
     {
-        return super.decoratePiece.getMoveRangeAllowance();
+        return super.decoratePiece.getMoveRangeOffset();
     }
 
-    public int[][] getAttackRangeAllowance()
+    public int[][] getAttackZoneOffset()
     {
-        return super.decoratePiece.getMoveRangeAllowance();
+        return super.decoratePiece.getMoveRangeOffset();
     }
 }

@@ -4,17 +4,14 @@ import com.google.java.contract.Requires;
 import helpers.BoardButtonHelper;
 import helpers.exceptions.DuplicatedPieceException;
 import helpers.exceptions.InvalidPieceSelectionException;
-import helpers.reactions.AbstractReaction;
+import helpers.reactions.Reaction;
 import helpers.reactions.ReactionLevel;
 import helpers.reactions.ReactionManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuBar;
+import javafx.scene.control.*;
 import javafx.scene.layout.TilePane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -37,7 +34,7 @@ public class HomeController
     private ObservableMap<String, Button> buttonMap;
     private int boardSize;
     private Stage currentStage;
-    private AbstractReaction reaction;
+    private Reaction reaction;
 
     @FXML
     private Button selectedPiece;
@@ -56,6 +53,30 @@ public class HomeController
 
     @FXML
     private Label capitalismPlayerScore;
+
+    @FXML
+    private ToggleButton defensiveToggle;
+
+    /**
+     * Set the FXML Control map from the main class (i.e. from loader.getNamespace()) and initialise game logic.
+     *
+     * We shouldn't use constructor here because the FXML loader may not recognise and handle it correctly.
+     *
+     */
+    public void gameInit(int boardSize, Stage stage)
+    {
+        this.buttonMap = FXCollections.observableHashMap();
+
+        // Board pane initialisation
+        this.initBoardGui(this.mainBoard, boardSize);
+        this.boardSize = boardSize;
+
+        // Initialise game logic
+        this.gameLogic = new GameLogic(this);
+
+        // Set current stage
+        this.currentStage = stage;
+    }
 
     @FXML
     public void initialize()
@@ -113,7 +134,7 @@ public class HomeController
             return; // does nothing if user didn't correctly pick a file
         } else {
             // Clear the board before loading the status
-            this.gameLogic.getBoad().getPieceList().clear();
+            this.gameLogic.getBoard().getPieceList().clear();
         }
 
         String statusFilePath = statusFile.getAbsolutePath();
@@ -135,7 +156,6 @@ public class HomeController
     @FXML
     private void handleUndoAction(ActionEvent event)
     {
-
         this.gameLogic.getStatusManager().performUndo();
     }
 
@@ -145,25 +165,11 @@ public class HomeController
         System.exit(0);
     }
 
-    /**
-     * Set the FXML Control map from the main class (i.e. from loader.getNamespace()) and initialise game logic.
-     *
-     * We shouldn't use constructor here because the FXML loader may not recognise and handle it correctly.
-     *
-     */
-    public void gameInit(int boardSize, Stage stage)
+    @FXML
+    private void handleDefensiveToggle(ActionEvent event)
     {
-        this.buttonMap = FXCollections.observableHashMap();
-
-        // Board pane initialisation
-        this.initBoardGui(this.mainBoard, boardSize);
-        this.boardSize = boardSize;
-
-        // Initialise game logic
-        this.gameLogic = new GameLogic(this);
-
-        // Set current stage
-        this.currentStage = stage;
+        ToggleButton defensiveToggle = (ToggleButton)event.getSource();
+        this.gameLogic.getBoard().setDefensiveMode(defensiveToggle.isSelected());
     }
 
     /**
@@ -225,10 +231,10 @@ public class HomeController
         if(player.getSelectedPiece() != null) {
             this.selectedPiece.setStyle(player.getSelectedPiece().getStyle());
         } else {
-            this.selectedPiece.setStyle("");
+            this.selectedPiece.setStyle(null);
         }
 
-        // Set the player name
+        // Set the next player name
         this.playerNameLabel.setText(player.getPlayerName());
     }
 

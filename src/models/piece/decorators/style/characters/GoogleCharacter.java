@@ -5,7 +5,7 @@ import models.piece.Piece;
 import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 
-public class GoogleCharacter extends AbstractCharacter
+public class GoogleCharacter extends Character
 {
     public GoogleCharacter(Piece piece)
     {
@@ -44,7 +44,7 @@ public class GoogleCharacter extends AbstractCharacter
         return -50;
     }
     
-    public void applyAttack(int deduction)
+    public void sufferAttack(int deduction)
     {
         super.mark += deduction;
     }
@@ -74,13 +74,13 @@ public class GoogleCharacter extends AbstractCharacter
         return CharacterType.GOOGLE;
     }
 
-    public int[][] getMoveRangeAllowance()
+    public int[][] getMoveRangeOffset()
     {
-        return super.decoratePiece.getMoveRangeAllowance();
+        return super.decoratePiece.getMoveRangeOffset();
     }
 
-    public int[][] getAttackRangeAllowance()
+    public int[][] getAttackZoneOffset()
     {
-        return super.decoratePiece.getMoveRangeAllowance();
+        return super.decoratePiece.getMoveRangeOffset();
     }
 }

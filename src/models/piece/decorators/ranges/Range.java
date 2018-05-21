@@ -1,4 +1,4 @@
-package models.piece.decorators.style.roles;
+package models.piece.decorators.ranges;
 
 import helpers.CloneHelper;
 import models.piece.Piece;
@@ -6,11 +6,11 @@ import models.piece.Piece;
 import java.io.IOException;
 import java.io.Serializable;
 
-public abstract class AbstractRule implements Piece, Cloneable, Serializable
+public abstract class Range implements Piece, Cloneable, Serializable
 {
     protected Piece decoratePiece;
 
-    public AbstractRule(Piece piece)
+    public Range(Piece piece)
     {
         this.decoratePiece = piece;
     }
@@ -36,5 +36,4 @@ public abstract class AbstractRule implements Piece, Cloneable, Serializable
             }
         }
     }
-
 }

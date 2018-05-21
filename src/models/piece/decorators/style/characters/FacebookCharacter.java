@@ -5,7 +5,7 @@ import models.piece.Piece;
 import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 
-public class FacebookCharacter extends AbstractCharacter
+public class FacebookCharacter extends Character
 {
     public FacebookCharacter(Piece piece)
     {
@@ -29,7 +29,7 @@ public class FacebookCharacter extends AbstractCharacter
         return -30;
     }
 
-    public void applyAttack(int deduction)
+    public void sufferAttack(int deduction)
     {
         super.mark += deduction;
     }
@@ -59,13 +59,13 @@ public class FacebookCharacter extends AbstractCharacter
         return CharacterType.FACEBOOK;
     }
 
-    public int[][] getMoveRangeAllowance()
+    public int[][] getMoveRangeOffset()
     {
-        return super.decoratePiece.getMoveRangeAllowance();
+        return super.decoratePiece.getMoveRangeOffset();
     }
 
-    public int[][] getAttackRangeAllowance()
+    public int[][] getAttackZoneOffset()
     {
-        return super.decoratePiece.getMoveRangeAllowance();
+        return super.decoratePiece.getMoveRangeOffset();
     }
 }

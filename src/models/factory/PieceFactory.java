@@ -4,11 +4,13 @@ import models.coordinate.Coordinate;
 import models.factory.command.PieceCreator;
 import models.piece.Piece;
 import models.piece.SimplePiece;
+import models.piece.decorators.ranges.RangeA;
+import models.piece.decorators.ranges.RangeB;
+import models.piece.decorators.ranges.RangeC;
 import models.piece.decorators.style.characters.*;
-import models.piece.decorators.style.roles.CapitalismRule;
+import models.piece.decorators.style.roles.CapitalismRole;
 import models.piece.decorators.style.roles.CommunismRole;
 import models.piece.type.CharacterType;
-import models.piece.type.RoleType;
 
 import java.util.HashMap;
 
@@ -57,21 +59,21 @@ public class PieceFactory extends AbstractBoardFactory
     private void initPieceCreationCommands()
     {
         this.creatorCommands.put(CharacterType.BAIDU, () ->
-                new CommunismRole(new BaiduCharacter(new SimplePiece())));
+                 new RangeA(new BaiduCharacter(new CommunismRole(new SimplePiece()))));
 
         this.creatorCommands.put(CharacterType.FACEBOOK, () ->
-                new CapitalismRule(new FacebookCharacter(new SimplePiece())));
+                new RangeB(new FacebookCharacter(new CapitalismRole(new SimplePiece()))));
 
         this.creatorCommands.put(CharacterType.GOOGLE, () ->
-                new CapitalismRule(new GoogleCharacter(new SimplePiece())));
+                new RangeA(new GoogleCharacter(new CapitalismRole(new SimplePiece()))));
 
         this.creatorCommands.put(CharacterType.TWITTER, () ->
-                new CapitalismRule(new TwitterCharacter(new SimplePiece())));
+                new RangeC(new TwitterCharacter(new CapitalismRole(new SimplePiece()))));
 
         this.creatorCommands.put(CharacterType.WECHAT, () ->
-                new CommunismRole(new WeChatCharacter(new SimplePiece())));
+                new RangeB(new WeChatCharacter(new CommunismRole(new SimplePiece()))));
 
         this.creatorCommands.put(CharacterType.WEIBO, () ->
-                new CommunismRole(new WeiboCharacter(new SimplePiece())));
+                new RangeC(new WeiboCharacter(new CommunismRole(new SimplePiece()))));
     }
 }

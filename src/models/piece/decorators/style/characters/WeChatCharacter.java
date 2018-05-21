@@ -5,7 +5,7 @@ import models.piece.Piece;
 import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 
-public class WeChatCharacter extends AbstractCharacter
+public class WeChatCharacter extends Character
 {
     public WeChatCharacter(Piece piece)
     {
@@ -46,7 +46,7 @@ public class WeChatCharacter extends AbstractCharacter
         return -30;
     }
     
-    public void applyAttack(int deduction)
+    public void sufferAttack(int deduction)
     {
         super.mark += deduction;
     }
@@ -76,13 +76,13 @@ public class WeChatCharacter extends AbstractCharacter
         return CharacterType.WECHAT;
     }
 
-    public int[][] getMoveRangeAllowance()
+    public int[][] getMoveRangeOffset()
     {
-        return super.decoratePiece.getMoveRangeAllowance();
+        return super.decoratePiece.getMoveRangeOffset();
     }
 
-    public int[][] getAttackRangeAllowance()
+    public int[][] getAttackZoneOffset()
     {
-        return super.decoratePiece.getMoveRangeAllowance();
+        return super.decoratePiece.getMoveRangeOffset();
     }
 }

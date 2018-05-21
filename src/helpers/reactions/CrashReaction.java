@@ -9,7 +9,7 @@ import java.util.Date;
  * @author Ming Hu (s3554025)
  * @since Assignment 2
  */
-public class CrashReaction extends AbstractReaction
+public class CrashReaction extends Reaction
 {
     public CrashReaction()
     {

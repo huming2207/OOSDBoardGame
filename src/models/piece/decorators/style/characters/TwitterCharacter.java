@@ -5,7 +5,7 @@ import models.piece.Piece;
 import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 
-public class TwitterCharacter extends AbstractCharacter
+public class TwitterCharacter extends Character
 {
     public TwitterCharacter(Piece piece)
     {
@@ -36,7 +36,7 @@ public class TwitterCharacter extends AbstractCharacter
         return -20;
     }
     
-    public void applyAttack(int deduction)
+    public void sufferAttack(int deduction)
     {
         super.mark += deduction;
     }
@@ -66,13 +66,13 @@ public class TwitterCharacter extends AbstractCharacter
         return CharacterType.TWITTER;
     }
 
-    public int[][] getMoveRangeAllowance()
+    public int[][] getMoveRangeOffset()
     {
-        return super.decoratePiece.getMoveRangeAllowance();
+        return super.decoratePiece.getMoveRangeOffset();
     }
 
-    public int[][] getAttackRangeAllowance()
+    public int[][] getAttackZoneOffset()
     {
-        return super.decoratePiece.getMoveRangeAllowance();
+        return super.decoratePiece.getMoveRangeOffset();
     }
 }

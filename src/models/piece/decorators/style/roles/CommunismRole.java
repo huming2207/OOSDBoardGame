@@ -5,7 +5,7 @@ import models.piece.Piece;
 import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 
-public class CommunismRole extends AbstractRule
+public class CommunismRole extends Role
 {
     public CommunismRole(Piece piece)
     {
@@ -22,9 +22,9 @@ public class CommunismRole extends AbstractRule
         return super.decoratePiece.getAttackLevel();
     }
 
-    public void applyAttack(int deduction)
+    public void sufferAttack(int deduction)
     {
-        super.decoratePiece.applyAttack(deduction);
+        super.decoratePiece.sufferAttack(deduction);
     }
 
     public int getMark()
@@ -52,13 +52,13 @@ public class CommunismRole extends AbstractRule
         return super.decoratePiece.getCharacterType();
     }
 
-    public int[][] getMoveRangeAllowance()
+    public int[][] getMoveRangeOffset()
     {
-        return super.decoratePiece.getMoveRangeAllowance();
+        return super.decoratePiece.getMoveRangeOffset();
     }
 
-    public int[][] getAttackRangeAllowance()
+    public int[][] getAttackZoneOffset()
     {
-        return super.decoratePiece.getMoveRangeAllowance();
+        return super.decoratePiece.getMoveRangeOffset();
     }
 }

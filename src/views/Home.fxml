@@ -69,8 +69,8 @@
                    text="Current turn:"/>
             <Label fx:id="playerNameLabel" layoutX="146.0" layoutY="73.0" prefHeight="17.0" prefWidth="97.0"
                    text="Unknown"/>
-            <ToggleButton layoutX="56.0" layoutY="110.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="135.0"
-                          text="Defensive mode"/>
+            <ToggleButton fx:id="defensiveToggle" layoutX="56.0" layoutY="110.0" mnemonicParsing="false" selected="true"
+                          prefHeight="43.0" prefWidth="135.0" text="Defensive mode" onAction="#handleDefensiveToggle"/>
         </AnchorPane>
     </TitledPane>
     <TitledPane animated="false" collapsible="false" layoutX="537.0" layoutY="243.0" prefHeight="136.0"

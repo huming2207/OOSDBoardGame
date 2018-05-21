@@ -2,11 +2,11 @@ package helpers.reactions;
 
 public class ReactionManager
 {
-    public static AbstractReaction getReaction()
+    public static Reaction getReaction()
     {
-        AbstractReaction crashReaction = new CrashReaction();
-        AbstractReaction warningReaction = new WarningReaction();
-        AbstractReaction debugReaction = new DebugReaction();
+        Reaction crashReaction = new CrashReaction();
+        Reaction warningReaction = new WarningReaction();
+        Reaction debugReaction = new DebugReaction();
 
         crashReaction.setNextLevelLogger(warningReaction);
         warningReaction.setNextLevelLogger(debugReaction);
