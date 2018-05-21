@@ -1,4 +1,4 @@
-package controllers;
+package controllers.logic;
 
 import helpers.CloneHelper;
 import javafx.scene.control.Alert;

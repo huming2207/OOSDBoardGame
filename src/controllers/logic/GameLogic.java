@@ -1,6 +1,7 @@
-package controllers;
+package controllers.logic;
 
 import com.google.java.contract.Requires;
+import controllers.HomeController;
 import helpers.exceptions.DuplicatedPieceException;
 import helpers.exceptions.InvalidPieceSelectionException;
 import helpers.reactions.Reaction;
@@ -59,7 +60,7 @@ public class GameLogic implements ListChangeListener<Piece>
      * @param buttonEvent Supplied click result information
      */
     @Requires({"buttonEvent.getPosX() > 0", "buttonEvent.getPosY() > 0"})
-    protected void commitMapChanges(BoardCellCoordinate buttonEvent)
+    public void commitMapChanges(BoardCellCoordinate buttonEvent)
             throws DuplicatedPieceException, InvalidPieceSelectionException
     {
         if(buttonEvent == null) return;

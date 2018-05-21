@@ -1,6 +1,7 @@
 package controllers;
 
 import com.google.java.contract.Requires;
+import controllers.logic.GameLogic;
 import helpers.BoardButtonHelper;
 import helpers.exceptions.DuplicatedPieceException;
 import helpers.exceptions.InvalidPieceSelectionException;
