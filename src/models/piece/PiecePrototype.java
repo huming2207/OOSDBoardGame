@@ -26,30 +26,28 @@ import java.util.List;
 public class PiecePrototype
 {
     private HashMap<CharacterType, Piece> pieceMap;
-    private int boardSize;
 
     /**
      * Constructor of Piece Prototype Generator
      * @param boardSize Board size of a certain board
      */
-    public PiecePrototype(int boardSize)
+    public PiecePrototype(int boardSize, int pieceCount)
     {
         this.pieceMap = new HashMap<>();
-        this.boardSize = boardSize;
-        this.generateNewPieces();
+        this.generateNewPieces(boardSize, pieceCount);
     }
 
     /**
      *(Re)generate new pieces for the prototype map.
      * If a new random coordinate is necessary, then this method should be used.
      */
-    public void generateNewPieces()
+    private void generateNewPieces(int boardSize, int pieceCount)
     {
-        AbstractBoardFactory pieceFactory = new PieceFactory(this.boardSize);
-        AbstractBoardFactory coordinateFactory = new CoordinateFactory(this.boardSize);
+        AbstractBoardFactory pieceFactory = new PieceFactory(boardSize);
+        AbstractBoardFactory coordinateFactory = new CoordinateFactory(boardSize);
 
         // Iterate through all types of characters and add them into the piece map
-        EnumSet.allOf(CharacterType.class).forEach(characterType ->{
+        EnumSet.allOf(CharacterType.class).stream().limit(pieceCount).forEach(characterType ->{
 
             Coordinate coordinate;
 

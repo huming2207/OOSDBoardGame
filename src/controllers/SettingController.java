@@ -3,20 +3,18 @@ package controllers;
 import helpers.reactions.Reaction;
 import helpers.reactions.ReactionLevel;
 import helpers.reactions.ReactionManager;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import models.misc.GenericSettings;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
 public class SettingController
 {
-    private int boardSize = 8;
+    private int boardSize = 10;
+    private int pieceCount = 6;
 
     @FXML
     private Slider boardSizeSlider;
@@ -30,16 +28,28 @@ public class SettingController
     @FXML
     private Label boardSizeIndicator;
 
+    @FXML
+    private Slider pieceCountSlider;
+
+    @FXML
+    private Label pieceCountIndicator;
+
     private Reaction reaction;
 
     @FXML
     private void initialize()
     {
-        // "Single-way binding" from the slider to board size
+        // "Single-way binding" from the board size slider to board size
         this.boardSizeSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             this.boardSizeIndicator.setText(Integer.toString(newValue.intValue()));
             this.boardSize = newValue.intValue();
         });
+
+        // "Single-way binding" from the piece count slider to piece count
+        this.pieceCountSlider.valueProperty().addListener(((observable, oldValue, newValue) -> {
+            this.pieceCountIndicator.setText(Integer.toString(newValue.intValue()));
+            this.pieceCount = newValue.intValue();
+        }));
 
         this.reaction = ReactionManager.getReaction();
     }
@@ -49,6 +59,7 @@ public class SettingController
     {
         GenericSettings settings = new GenericSettings(
                 this.boardSize,
+                this.pieceCount,
                 this.capitalismPlayerName.getText(),
                 this.communismPlayerName.getText());
 
