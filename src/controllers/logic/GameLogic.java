@@ -11,6 +11,7 @@ import javafx.collections.ListChangeListener;
 import models.coordinate.Coordinate;
 import models.board.Board;
 import models.coordinate.BoardCellCoordinate;
+import models.misc.GenericSettings;
 import models.piece.Piece;
 import models.piece.PiecePrototype;
 
@@ -36,7 +37,9 @@ public class GameLogic implements ListChangeListener<Piece>
         this.homeController = homeController;
         
         // Initialise board model
-        this.board = new Board(this,"Communism", "Capitalism");
+        this.board = new Board(this,
+                homeController.getSettings().getCommunismPlayerName(),
+                homeController.getSettings().getCapitalismPlayerName());
 
         // Initialise piece generator
         PiecePrototype piecePrototype = new PiecePrototype(this.homeController.getBoardSize());

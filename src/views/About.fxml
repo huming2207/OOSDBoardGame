@@ -7,7 +7,8 @@
 <?import javafx.scene.layout.RowConstraints?>
 
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="307.0"
-          prefWidth="497.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141">
+          prefWidth="497.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controllers.AboutController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.0" minWidth="10.0" prefWidth="47.0"/>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="460.0" minWidth="10.0" prefWidth="460.0"/>
@@ -19,10 +20,11 @@
         <RowConstraints maxHeight="129.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES"/>
     </rowConstraints>
     <children>
-        <Label text="By Ming Hu (s3554025) for Group G3, OOSD Assignment 1 &amp; 2, March to May, 2018&#10;&#10;This app is developed, debugged and tested in Java 1.8.161 with JavaFX8, in Ubuntu 18.04, macOS 10.13.4 and Windows 10 17384.48"
+        <Label text="By Ming Hu (s3554025) for Group G3, OOSD Assignment 1 &amp; 2, &#10;March to May, 2018.&#10;&#10;This app is developed, debugged and tested in Java 1.8_171 with JavaFX8, in Ubuntu 18.04, macOS 10.13.4 and Windows 10 17384.48"
                wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1"
                GridPane.valignment="CENTER"/>
         <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="162.0" text="Close" GridPane.columnIndex="1"
-                GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER"/>
+                GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER"
+                onAction="#handleCloseAction"/>
     </children>
 </GridPane>

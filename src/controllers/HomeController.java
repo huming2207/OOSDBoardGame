@@ -12,16 +12,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.TilePane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import models.misc.GenericSettings;
 import models.player.Player;
 import models.coordinate.BoardCellCoordinate;
 import models.coordinate.Coordinate;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Home GUI controller
@@ -36,6 +39,7 @@ public class HomeController
     private int boardSize;
     private Stage currentStage;
     private Reaction reaction;
+    private GenericSettings settings;
 
     @FXML
     private Button selectedPiece;
@@ -64,13 +68,17 @@ public class HomeController
      * We shouldn't use constructor here because the FXML loader may not recognise and handle it correctly.
      *
      */
-    public void gameInit(int boardSize, Stage stage)
+    public void gameInit(Stage stage)
     {
+        // Load the settings
+        // This function should run before game logic class is created
+        this.loadSettings();
+
         this.buttonMap = FXCollections.observableHashMap();
 
         // Board pane initialisation
-        this.initBoardGui(this.mainBoard, boardSize);
-        this.boardSize = boardSize;
+        this.initBoardGui(this.mainBoard, this.settings.getBoardSize());
+        this.boardSize = this.settings.getBoardSize();
 
         // Initialise game logic
         this.gameLogic = new GameLogic(this);
@@ -171,6 +179,42 @@ public class HomeController
     {
         ToggleButton defensiveToggle = (ToggleButton)event.getSource();
         this.gameLogic.getBoard().setDefensiveMode(defensiveToggle.isSelected());
+    }
+
+    @FXML
+    private void handleAboutAction(ActionEvent event)
+    {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getClassLoader().getResource("views/About.fxml"));
+
+            // Set the scene by getting the Parent scene from FXMLLoader
+            Scene scene = new Scene(loader.load());
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("About");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleSettingAction(ActionEvent event)
+    {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getClassLoader().getResource("views/Settings.fxml"));
+
+            // Set the scene by getting the Parent scene from FXMLLoader
+            Scene scene = new Scene(loader.load());
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Settings");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -290,6 +334,37 @@ public class HomeController
     public int getBoardSize()
     {
         return this.boardSize;
+    }
+
+    public GenericSettings getSettings()
+    {
+        return this.settings;
+    }
+
+    private void loadSettings()
+    {
+        File file = new File("settings.bin");
+
+        // If file does not exist, load the default settings and stop
+        if(!file.exists() || file.isDirectory()) {
+            this.reaction.handleReaction(ReactionLevel.DEBUG, "setting.bin is not found, loading default...");
+            this.settings = new GenericSettings();
+            return;
+        }
+
+        // ...or, load the settings
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+
+            this.settings = (GenericSettings) objectInputStream.readObject();
+
+        } catch (IOException | ClassNotFoundException e) {
+            // if failed, print stack trace for debugging and load default settings
+            e.printStackTrace();
+            this.reaction.handleReaction(ReactionLevel.DEBUG, "setting.bin is not found, loading default...");
+            this.settings = new GenericSettings();
+        }
     }
 
 }

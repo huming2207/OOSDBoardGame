@@ -297,3 +297,6 @@ $RECYCLE.BIN/
 
 # Avoid ignoring Cofoja
 !cofoja.jar
+
+# Ignore settings
+settings.bin
