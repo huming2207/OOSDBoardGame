@@ -1,4 +1,4 @@
-package controllers;
+package controllers.logic;
 
 import helpers.reactions.Reaction;
 import helpers.reactions.ReactionLevel;

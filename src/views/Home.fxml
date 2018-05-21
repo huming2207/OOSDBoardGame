@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="554.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="554.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
     <MenuBar fx:id="menuBar" prefWidth="800.0">
         <Menu text="File">
             <MenuItem onAction="#handleLoadAction" text="Load archived status">
@@ -44,13 +44,13 @@
                     <KeyCodeCombination alt="UP" code="Z" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
                 </accelerator>
             </MenuItem>
-            <MenuItem text="Settings">
+            <MenuItem onAction="#handleSettingAction" text="Settings">
                 <accelerator>
                     <KeyCodeCombination alt="UP" code="E" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                 </accelerator>
             </MenuItem>
         </Menu>
-        <Menu text="Help">
+        <Menu onAction="#handleAboutAction" text="Help">
             <MenuItem text="About" />
         </Menu>
     </MenuBar>
@@ -58,39 +58,29 @@
     <TilePane fx:id="mainBoard" layoutX="26.0" layoutY="50.0" prefHeight="500.0" prefWidth="500.0">
 
     </TilePane>
-    <TitledPane animated="false" collapsible="false" layoutX="537.0" layoutY="50.0" prefHeight="186.0" prefWidth="249.0"
-                text="Status">
+    <TitledPane animated="false" collapsible="false" layoutX="537.0" layoutY="50.0" prefHeight="186.0" prefWidth="249.0" text="Status">
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="178.0">
-            <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="25.0" prefHeight="17.0" prefWidth="118.0"
-                   text="Selected piece:"/>
-            <Button fx:id="selectedPiece" layoutX="147.0" layoutY="12.0" maxHeight="43.0" maxWidth="43.0"
-                    minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0"/>
-            <Label alignment="CENTER_RIGHT" layoutX="33.0" layoutY="73.0" prefHeight="17.0" prefWidth="99.0"
-                   text="Current turn:"/>
-            <Label fx:id="playerNameLabel" layoutX="146.0" layoutY="73.0" prefHeight="17.0" prefWidth="97.0"
-                   text="Unknown"/>
-            <ToggleButton fx:id="defensiveToggle" layoutX="56.0" layoutY="110.0" mnemonicParsing="false" selected="true"
-                          prefHeight="43.0" prefWidth="135.0" text="Defensive mode" onAction="#handleDefensiveToggle"/>
+            <Label alignment="CENTER_RIGHT" layoutX="6.0" layoutY="25.0" prefHeight="17.0" prefWidth="104.0" text="Selected piece:" />
+            <Button fx:id="selectedPiece" layoutX="120.0" layoutY="12.0" maxHeight="43.0" maxWidth="43.0" minHeight="43.0" minWidth="43.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0" />
+            <Label alignment="CENTER_RIGHT" layoutX="7.0" layoutY="73.0" prefHeight="17.0" prefWidth="99.0" text="Current turn:" />
+            <Label fx:id="playerNameLabel" layoutX="120.0" layoutY="73.0" prefHeight="17.0" prefWidth="125.0" text="Unknown" />
+            <ToggleButton fx:id="defensiveToggle" layoutX="56.0" layoutY="110.0" mnemonicParsing="false" onAction="#handleDefensiveToggle" prefHeight="43.0" prefWidth="135.0" selected="true" text="Defensive mode" />
         </AnchorPane>
     </TitledPane>
-    <TitledPane animated="false" collapsible="false" layoutX="537.0" layoutY="243.0" prefHeight="136.0"
-                prefWidth="249.0" text="Grade - Communism Player">
+    <TitledPane animated="false" collapsible="false" layoutX="537.0" layoutY="243.0" prefHeight="136.0" prefWidth="249.0" text="Grade - Communism Player">
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="251.0" prefWidth="247.0">
-            <Label fx:id="communismPlayerScore" alignment="CENTER" layoutY="-1.0" prefHeight="112.0"
-                   prefWidth="249.0" text="Unknown">
+            <Label fx:id="communismPlayerScore" alignment="CENTER" layoutY="-1.0" prefHeight="112.0" prefWidth="249.0" text="Unknown">
                 <font>
-                    <Font size="36.0"/>
+                    <Font size="36.0" />
                 </font>
             </Label>
         </AnchorPane>
     </TitledPane>
-    <TitledPane animated="false" collapsible="false" layoutX="537.0" layoutY="389.0" prefHeight="136.0"
-                prefWidth="249.0" text="Grade - Capitalism Player">
+    <TitledPane animated="false" collapsible="false" layoutX="537.0" layoutY="389.0" prefHeight="136.0" prefWidth="249.0" text="Grade - Capitalism Player">
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="251.0" prefWidth="247.0">
-            <Label fx:id="capitalismPlayerScore" alignment="CENTER" layoutY="-1.0" prefHeight="112.0"
-                   prefWidth="249.0" text="Unknown">
+            <Label fx:id="capitalismPlayerScore" alignment="CENTER" layoutY="-1.0" prefHeight="112.0" prefWidth="249.0" text="Unknown">
                 <font>
-                    <Font size="36.0"/>
+                    <Font size="36.0" />
                 </font>
             </Label>
         </AnchorPane>

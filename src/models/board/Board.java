@@ -2,7 +2,7 @@ package models.board;
 
 import com.google.java.contract.Ensures;
 import com.google.java.contract.Requires;
-import controllers.GameLogic;
+import controllers.logic.GameLogic;
 import helpers.reactions.Reaction;
 import helpers.reactions.ReactionLevel;
 import helpers.reactions.ReactionManager;
