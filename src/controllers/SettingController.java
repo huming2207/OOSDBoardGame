@@ -51,6 +51,10 @@ public class SettingController
             this.pieceCount = newValue.intValue();
         }));
 
+        // Set the initial value to indicator labels
+        this.pieceCountIndicator.setText(Integer.toString(this.pieceCount));
+        this.boardSizeIndicator.setText(Integer.toString(this.boardSize));
+
         this.reaction = ReactionManager.getReaction();
     }
 
