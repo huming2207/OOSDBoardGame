@@ -40,7 +40,7 @@ public class CompeteManager
                 this.generateTargetCoordinates(currentPlayer, currentPlayer.getSelectedPiece().getAttackZoneOffset());
 
         // Query other piece in the board piece list, with each dead-zone coordinate
-        for(Piece piece : this.gameLogic.getBoad().getPieceList()) {
+        for(Piece piece : this.gameLogic.getBoard().getPieceList()) {
             for(Coordinate deathCoordinate : deadzoneCoordinates) {
 
                 if(piece.getCoordinate().equals(deathCoordinate)
@@ -52,7 +52,7 @@ public class CompeteManager
                     // Log it down
                     this.reaction.handleReaction(
                             ReactionLevel.WARN, "Oops, you hurt " +
-                                    currentPlayer.getSelectedPiece().getRoleType().toString());
+                                    currentPlayer.getSelectedPiece().getCharacterType().toString());
                 }
             }
         }

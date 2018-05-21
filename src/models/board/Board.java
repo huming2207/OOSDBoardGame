@@ -32,6 +32,7 @@ public class Board implements Serializable
     private Player communismPlayer;
     private Player capitalismPlayer;
     private Player currentPlayer;
+    private boolean defensiveMode;
 
     // These three objects below cannot be serialize, so I use a convert
     private transient ObservableList<Piece> pieceList;
@@ -54,6 +55,7 @@ public class Board implements Serializable
         this.pieceList = FXCollections.observableArrayList();
         this.pieceList.addListener(this.gameLogic);
         this.reaction = ReactionManager.getReaction();
+        this.defensiveMode = true;
     }
 
     private void writeObject(ObjectOutputStream outputStream) throws IOException
@@ -221,4 +223,13 @@ public class Board implements Serializable
         this.turnTimeline.stop();
     }
 
+    public boolean isDefensiveMode()
+    {
+        return defensiveMode;
+    }
+
+    public void setDefensiveMode(boolean defensiveMode)
+    {
+        this.defensiveMode = defensiveMode;
+    }
 }

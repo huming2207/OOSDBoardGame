@@ -71,7 +71,7 @@ public class StatusManager
         }
 
         // Clear up the board before continue
-        this.gameLogic.getBoad().getPieceList().clear();
+        this.gameLogic.getBoard().getPieceList().clear();
 
         // Push into re-do stack for future re-do
         this.redoStack.push(board);
@@ -100,7 +100,7 @@ public class StatusManager
         }
 
         // Clear up the board before continue
-        this.gameLogic.getBoad().getPieceList().clear();
+        this.gameLogic.getBoard().getPieceList().clear();
 
         // Bind game logic and refresh the list to make sure everything is correct
         board.setGameLogic(this.gameLogic);

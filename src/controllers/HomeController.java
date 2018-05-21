@@ -11,10 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuBar;
+import javafx.scene.control.*;
 import javafx.scene.layout.TilePane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -56,6 +53,9 @@ public class HomeController
 
     @FXML
     private Label capitalismPlayerScore;
+
+    @FXML
+    private ToggleButton defensiveToggle;
 
     /**
      * Set the FXML Control map from the main class (i.e. from loader.getNamespace()) and initialise game logic.
@@ -134,7 +134,7 @@ public class HomeController
             return; // does nothing if user didn't correctly pick a file
         } else {
             // Clear the board before loading the status
-            this.gameLogic.getBoad().getPieceList().clear();
+            this.gameLogic.getBoard().getPieceList().clear();
         }
 
         String statusFilePath = statusFile.getAbsolutePath();
@@ -156,7 +156,6 @@ public class HomeController
     @FXML
     private void handleUndoAction(ActionEvent event)
     {
-
         this.gameLogic.getStatusManager().performUndo();
     }
 
@@ -164,6 +163,13 @@ public class HomeController
     private void handleExitAction(ActionEvent event)
     {
         System.exit(0);
+    }
+
+    @FXML
+    private void handleDefensiveToggle(ActionEvent event)
+    {
+        ToggleButton defensiveToggle = (ToggleButton)event.getSource();
+        this.gameLogic.getBoard().setDefensiveMode(defensiveToggle.isSelected());
     }
 
     /**

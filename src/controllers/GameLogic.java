@@ -180,6 +180,11 @@ public class GameLogic implements ListChangeListener<Piece>
                 this.board.getCapitalismPlayer() : board.getCommunismPlayer()
         );
 
+        // Defensive mode toggle, if enabled, no one gets hurt. Otherwise it will perform attack
+        if(!this.board.isDefensiveMode()) {
+            this.competeManager.performPossibleAttack(this.board.getCurrentPlayer());
+        }
+
         // Clean up the candidate piece position
         this.board.getCurrentPlayer().setSelectedPiece(null);
 
@@ -199,7 +204,7 @@ public class GameLogic implements ListChangeListener<Piece>
         this.board = board;
     }
 
-    public Board getBoad()
+    public Board getBoard()
     {
         return this.board;
     }
