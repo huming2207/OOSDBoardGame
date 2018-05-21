@@ -5,19 +5,22 @@ import java.io.Serializable;
 public class GenericSettings implements Serializable
 {
     private int boardSize;
+    private int pieceCount;
     private String communismPlayerName;
     private String capitalismPlayerName;
 
     public GenericSettings()
     {
         this.boardSize = 10;
+        this.pieceCount = 6;
         this.communismPlayerName = "Communism";
         this.capitalismPlayerName = "Capitalism";
     }
 
-    public GenericSettings(int boardSize, String capitalismPlayerName, String communismPlayerName)
+    public GenericSettings(int boardSize, int pieceCount, String capitalismPlayerName, String communismPlayerName)
     {
         this.boardSize = boardSize;
+        this.pieceCount = pieceCount;
         this.capitalismPlayerName = capitalismPlayerName;
         this.communismPlayerName = communismPlayerName;
     }
@@ -30,6 +33,16 @@ public class GenericSettings implements Serializable
     public void setBoardSize(int boardSize)
     {
         this.boardSize = boardSize;
+    }
+
+    public int getPieceCount()
+    {
+        return pieceCount;
+    }
+
+    public void setPieceCount(int pieceCount)
+    {
+        this.pieceCount = pieceCount;
     }
 
     public String getCommunismPlayerName()

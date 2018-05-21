@@ -18,28 +18,36 @@
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="107.0" minWidth="10.0" prefWidth="79.0"/>
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES"/>
-        <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES"/>
-        <RowConstraints maxHeight="148.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES"/>
-        <RowConstraints maxHeight="148.0" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="128.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="128.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="99.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="148.0" minHeight="10.0" prefHeight="49.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="148.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES"/>
     </rowConstraints>
     <Label text="Board size: " GridPane.halignment="CENTER"/>
     <Slider fx:id="boardSizeSlider" blockIncrement="1.0" max="18.0" min="6.0" showTickLabels="true" value="10.0"
             GridPane.columnIndex="1"/>
     <Label fx:id="boardSizeIndicator" text="Unknown" GridPane.columnIndex="2" GridPane.halignment="CENTER"
            GridPane.valignment="CENTER"/>
-    <Button fx:id="saveButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="160.0" text="Save &amp; exit" GridPane.columnIndex="1"
-            GridPane.halignment="CENTER" GridPane.rowIndex="3" onAction="#handleSaveRequest"/>
-    <Label text="Capitalism player name:" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1"/>
-    <TextField fx:id="capitalismPlayerName" text="Aussie Fire alarm" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
+    <Button mnemonicParsing="false" onAction="#handleSaveRequest" prefHeight="30.0" prefWidth="160.0"
+            text="Save &amp; exit" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4"/>
+    <Label text="Capitalism player name:" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="2"/>
+    <TextField fx:id="capitalismPlayerName" text="Aussie Fire alarm" GridPane.columnIndex="1"
+               GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
         <GridPane.margin>
             <Insets right="10.0"/>
         </GridPane.margin>
     </TextField>
-    <Label text="Communism player name:" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="2"/>
-    <TextField fx:id="communismPlayerName" text="Asian Durian" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
+    <Label text="Communism player name:" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="3"/>
+    <TextField fx:id="communismPlayerName" text="Asian Durian" GridPane.columnIndex="1" GridPane.columnSpan="2147483647"
+               GridPane.rowIndex="3">
         <GridPane.margin>
             <Insets right="10.0"/>
         </GridPane.margin>
     </TextField>
+    <Label text="Piece count:" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER"/>
+    <Slider fx:id="pieceCountSlider" blockIncrement="1.0" max="6.0" min="1.0" showTickLabels="true" value="6.0"
+            GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    <Label fx:id="pieceCountIndicator" text="Unknown" GridPane.columnIndex="2" GridPane.halignment="CENTER"
+           GridPane.rowIndex="1" GridPane.valignment="CENTER"/>
 </GridPane>

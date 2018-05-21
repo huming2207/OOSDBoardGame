@@ -11,7 +11,7 @@ package helpers.reactions;
 public abstract class Reaction
 {
     protected ReactionLevel reactionLevel;
-    protected Reaction nextLevelLogger;
+    private Reaction nextLevelLogger;
 
     public void setNextLevelLogger(Reaction nextLevelLogger)
     {

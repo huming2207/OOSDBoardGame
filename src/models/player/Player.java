@@ -14,7 +14,7 @@ public class Player implements Serializable
     private Piece selectedPiece;
 
     /**
-     * Initialise a player with player name and type
+     * Initialize a player with player name and type
      * @param playerName Player name, e.g. "capitalism player"
      * @param allowedType Role type, e.g. RoleType.COMMUNISM_PLAYER
      */
