@@ -29,18 +29,20 @@ You may also need to set Cofoja separately before compile. Please refer to [this
     - [x] Round based game demo
     - [x] Countdown timeout for each turn
     - [ ] Capture phrases (Assignment 2)
-    - [ ] Defensive mode (Assignment 2)
+    - [x] Defensive mode (Assignment 2)
+    - [ ] Grade/win state (Assignment 2)
 - [x] Board
     - [x] 8x8 board, 64 cells
     - [x] Un-do/Re-do support (Assignment 2)
     - [x] Status save/reload (Assignment 2)
     - [x] Board resizing (Assignment 2)
+    - [x] Customize piece count 
 - [x] Piece
     - [x] CSS styled
     - [x] Movable
 - [x] Settings (Assignment 2)
-    - [ ] Board size
-    - [ ] Custom player name
+    - [x] Board size
+    - [x] Custom player name
 - [x] Player
     - [x] Initial mark deduction info
     - [x] Turn based
