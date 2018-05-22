@@ -326,16 +326,29 @@ public class HomeController
         }
     }
 
+    /**
+     * Get board size, e.g. 8 for 8x8 board or 10 for 10x10 board
+     * @return board size
+     */
     public int getBoardSize()
     {
         return this.boardSize;
     }
 
+    /**
+     * Get setting instance
+     * @return generic settings instance
+     */
     public GenericSettings getSettings()
     {
         return this.settings;
     }
 
+    /**
+     * Update score indicators with specific String
+     * @param communismPlayer communism player's score in String
+     * @param capitalismPlayer capitalism player's score in String
+     */
     public void updateScoreIndicators(String communismPlayer, String capitalismPlayer)
     {
         this.communismPlayerScore.setText(communismPlayer);

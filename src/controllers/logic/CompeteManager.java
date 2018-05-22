@@ -21,6 +21,12 @@ public class CompeteManager
         this.reaction = ReactionManager.getReaction();
     }
 
+    /**
+     * Validate move range, if not valid then a false value will return
+     * @param currentPlayer current player instance
+     * @param newCoordinate new coordinate
+     * @return true if it can move
+     */
     protected boolean validateMoveRange(Player currentPlayer, Coordinate newCoordinate)
     {
         List<Coordinate> moveRangeCoordinates =

@@ -235,16 +235,28 @@ public class GameLogic implements ListChangeListener<Piece>
                 Integer.toString(this.board.getCapitalismPlayer().getScore()));
     }
 
+    /**
+     * Get status manager instance
+     * @return status manager instance
+     */
     public StatusManager getStatusManager()
     {
         return statusManager;
     }
 
+    /**
+     * Set board instance
+     * @param board board instance
+     */
     public void setBoard(Board board)
     {
         this.board = board;
     }
 
+    /**
+     * Get board instance
+     * @return board instance
+     */
     public Board getBoard()
     {
         return this.board;
