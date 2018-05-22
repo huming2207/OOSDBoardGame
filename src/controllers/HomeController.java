@@ -336,6 +336,12 @@ public class HomeController
         return this.settings;
     }
 
+    public void updateScoreIndicators(String communismPlayer, String capitalismPlayer)
+    {
+        this.communismPlayerScore.setText(communismPlayer);
+        this.capitalismPlayerScore.setText(capitalismPlayer);
+    }
+
     private void loadSettings()
     {
         File file = new File("settings.bin");

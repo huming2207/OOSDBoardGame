@@ -174,6 +174,11 @@ public class GameLogic implements ListChangeListener<Piece>
         // Stop timer
         this.board.stopCountdown();
 
+        // Defensive mode toggle, if enabled, no one gets hurt. Otherwise it will perform attack
+        if(!this.board.isDefensiveMode()) {
+            this.competeManager.performPossibleAttack(this.board.getCurrentPlayer());
+        }
+
         // Set the new coordinate for the piece
         this.board.getCurrentPlayer().getSelectedPiece().setCoordinate(coordinate);
 
@@ -185,11 +190,6 @@ public class GameLogic implements ListChangeListener<Piece>
                 this.board.getCommunismPlayer().getPlayerName()) ?
                 this.board.getCapitalismPlayer() : board.getCommunismPlayer()
         );
-
-        // Defensive mode toggle, if enabled, no one gets hurt. Otherwise it will perform attack
-        if(!this.board.isDefensiveMode()) {
-            this.competeManager.performPossibleAttack(this.board.getCurrentPlayer());
-        }
 
         // Clean up the candidate piece position
         this.board.getCurrentPlayer().setSelectedPiece(null);

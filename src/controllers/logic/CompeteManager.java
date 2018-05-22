@@ -21,7 +21,7 @@ public class CompeteManager
         this.reaction = ReactionManager.getReaction();
     }
 
-    public boolean validateMoveRange(Player currentPlayer, Coordinate newCoordinate)
+    protected boolean validateMoveRange(Player currentPlayer, Coordinate newCoordinate)
     {
         List<Coordinate> moveRangeCoordinates =
                 this.generateTargetCoordinates(currentPlayer, currentPlayer.getSelectedPiece().getMoveRangeOffset());
@@ -33,7 +33,12 @@ public class CompeteManager
         return false;
     }
 
-    public void performPossibleAttack(Player currentPlayer)
+    /**
+     * Perform attack if possible, and return the reference of the piece that HAS BEEN ATTACKED BY OTHER PIECE
+     * @param currentPlayer Current player who perform the attack
+     * @return the piece that HAS BEEN ATTACKED BY OTHER PIECE
+     */
+    protected Piece performPossibleAttack(Player currentPlayer)
     {
         // Generate dead zone
         List<Coordinate> deadzoneCoordinates =
@@ -47,15 +52,18 @@ public class CompeteManager
                         && piece.getRoleType() != currentPlayer.getSelectedPiece().getRoleType()) {
 
                     // Perform attack
-                    piece.sufferAttack(currentPlayer.getSelectedPiece().getAttackLevel()); // Oops, it hurts...
+                    // Oops, it hurts...
+                    piece.sufferAttack(currentPlayer.getSelectedPiece().getAttackLevel());
 
                     // Log it down
                     this.reaction.handleReaction(
                             ReactionLevel.WARN, "Oops, you hurt " +
-                                    currentPlayer.getSelectedPiece().getCharacterType().toString());
+                                    piece.getCharacterType().toString());
                 }
             }
         }
+
+        return null;
     }
 
     private List<Coordinate> generateTargetCoordinates(Player currentPlayer, int[][] offsets)
