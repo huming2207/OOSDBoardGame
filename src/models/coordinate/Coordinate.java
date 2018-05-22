@@ -45,16 +45,6 @@ public class Coordinate implements ICoordinate, Serializable
     }
 
     /**
-     * Set X axis
-     * @param posX X axis value
-     */
-    @Requires({"posX > 0"})
-    public void setPosX(int posX)
-    {
-        this.posX = posX;
-    }
-
-    /**
      * Get Y axis
      * @return Y axis value
      */
@@ -63,17 +53,6 @@ public class Coordinate implements ICoordinate, Serializable
     {
         return posY;
     }
-
-    /**
-     * Set Y axis
-     * @param posY Y axis value
-     */
-    @Requires({"posY > 0"})
-    public void setPosY(int posY)
-    {
-        this.posY = posY;
-    }
-
 
     @Override
     public boolean equals(Object o)

@@ -8,8 +8,8 @@ public class ReactionManager
         Reaction warningReaction = new WarningReaction();
         Reaction debugReaction = new DebugReaction();
 
-        crashReaction.setNextLevelLogger(warningReaction);
-        warningReaction.setNextLevelLogger(debugReaction);
+        crashReaction.setNextReaction(warningReaction);
+        warningReaction.setNextReaction(debugReaction);
 
         return crashReaction;
     }

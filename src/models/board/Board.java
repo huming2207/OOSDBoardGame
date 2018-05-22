@@ -223,11 +223,19 @@ public class Board implements Serializable
         this.turnTimeline.stop();
     }
 
+    /**
+     * Detect if it's in defensive mode
+     * @return true if in defensive mode
+     */
     public boolean isDefensiveMode()
     {
         return defensiveMode;
     }
 
+    /**
+     * Set defensive mode
+     * @param defensiveMode true if in defensive mode
+     */
     public void setDefensiveMode(boolean defensiveMode)
     {
         this.defensiveMode = defensiveMode;
