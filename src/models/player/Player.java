@@ -12,6 +12,7 @@ public class Player implements Serializable
     private String playerName;
     private RoleType allowedType;
     private Piece selectedPiece;
+    private int score;
 
     /**
      * Initialize a player with player name and type
@@ -79,5 +80,15 @@ public class Player implements Serializable
     public void setRoleType(RoleType allowedType)
     {
         this.allowedType = allowedType;
+    }
+
+    public int getScore()
+    {
+        return score;
+    }
+
+    public void setScore(int score)
+    {
+        this.score = score;
     }
 }

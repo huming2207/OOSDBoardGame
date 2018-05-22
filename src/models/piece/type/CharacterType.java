@@ -2,10 +2,10 @@ package models.piece.type;
 
 public enum CharacterType
 {
+    BAIDU,
+    GOOGLE,
     WECHAT,
     FACEBOOK,
-    GOOGLE,
     WEIBO,
-    TWITTER,
-    BAIDU
+    TWITTER
 }

@@ -64,9 +64,8 @@ public class HomeController
 
     /**
      * Set the FXML Control map from the main class (i.e. from loader.getNamespace()) and initialize game logic.
-     *
+     * <p>
      * We shouldn't use constructor here because the FXML loader may not recognise and handle it correctly.
-     *
      */
     public void gameInit(Stage stage)
     {
@@ -110,14 +109,14 @@ public class HomeController
 
         File statusFile = fileChooser.showSaveDialog(this.currentStage);
 
-        if(statusFile == null) {
+        if (statusFile == null) {
             return; // does nothing if user didn't correctly pick a file
         }
 
         String statusFilePath = statusFile.getAbsolutePath();
 
         // Prevents user set a wrong extension name
-        if(!statusFilePath.endsWith(".status")) {
+        if (!statusFilePath.endsWith(".status")) {
             statusFilePath += ".status";
         }
 
@@ -139,7 +138,7 @@ public class HomeController
 
         File statusFile = fileChooser.showOpenDialog(this.currentStage);
 
-        if(statusFile == null) {
+        if (statusFile == null) {
             return; // does nothing if user didn't correctly pick a file
         } else {
             // Clear the board before loading the status
@@ -150,7 +149,7 @@ public class HomeController
 
         try {
             this.gameLogic.getStatusManager().loadStatusFromFile(statusFilePath);
-        } catch (IOException |ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             this.reaction.handleReaction(ReactionLevel.CRASH, "Cannot load the file!");
         }
@@ -177,7 +176,7 @@ public class HomeController
     @FXML
     private void handleDefensiveToggle(ActionEvent event)
     {
-        ToggleButton defensiveToggle = (ToggleButton)event.getSource();
+        ToggleButton defensiveToggle = (ToggleButton) event.getSource();
         this.gameLogic.getBoard().setDefensiveMode(defensiveToggle.isSelected());
     }
 
@@ -237,11 +236,11 @@ public class HomeController
 
     /**
      * Update the UI from game logic
-     *  - Query the controlMap to get the button, if null, raise an Alert dialog
-     *  - Apply style when a valid button
+     * - Query the controlMap to get the button, if null, raise an Alert dialog
+     * - Apply style when a valid button
      *
      * @param coordinate Coordinate of a button
-     * @param style CSS style
+     * @param style      CSS style
      */
     @Requires({"coordinate.getPosX() > 0", "coordinate.getPosX() > 0"})
     public void commitUIChanges(Coordinate coordinate, String style)
@@ -252,7 +251,7 @@ public class HomeController
 
         // In case the game algorithm goes wrong...
         // Btw style string does not need to check since it is constant in the model.
-        if(button == null) {
+        if (button == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Operation out of range!");
             alert.showAndWait();
             return;
@@ -263,17 +262,17 @@ public class HomeController
 
     /**
      * Set the selected piece to selectPiece button to tell user they've selected a piece in GUI
-     *
+     * <p>
      * PS: here using cofoja for null checking is useful,
-     *      just in case if someone use this method when currentPlayer is not initialized.
-     * @param player Committed player
+     * just in case if someone use this method when currentPlayer is not initialized.
      *
+     * @param player Committed player
      */
     @Requires("player != null")
     public void commitPlayerSelection(Player player)
     {
         // Set the style of selectPiece button. If piece is null, then set a empty style.
-        if(player.getSelectedPiece() != null) {
+        if (player.getSelectedPiece() != null) {
             this.selectedPiece.setStyle(player.getSelectedPiece().getStyle());
         } else {
             this.selectedPiece.setStyle(null);
@@ -284,8 +283,9 @@ public class HomeController
     }
 
     /**
-     *  Initialize the board with specific size and button
-     * @param pane Tile pane, i.e. GUI of the board
+     * Initialize the board with specific size and button
+     *
+     * @param pane      Tile pane, i.e. GUI of the board
      * @param boardSize size of the board
      */
     @Requires({"pane != null", "boardSize > 0"})
@@ -299,8 +299,8 @@ public class HomeController
         pane.setPrefColumns(boardSize);
         pane.setPrefRows(boardSize);
 
-        for(int buttonXCounter = 0; buttonXCounter < boardSize; buttonXCounter += 1) {
-            for(int buttonYCounter = 0; buttonYCounter < boardSize; buttonYCounter += 1) {
+        for (int buttonXCounter = 0; buttonXCounter < boardSize; buttonXCounter += 1) {
+            for (int buttonYCounter = 0; buttonYCounter < boardSize; buttonYCounter += 1) {
 
                 // Initialize a button
                 Button button = new Button();
@@ -347,7 +347,7 @@ public class HomeController
         File file = new File("settings.bin");
 
         // If file does not exist, load the default settings and stop
-        if(!file.exists() || file.isDirectory()) {
+        if (!file.exists() || file.isDirectory()) {
             this.reaction.handleReaction(ReactionLevel.DEBUG, "setting.bin is not found, loading default...");
             this.settings = new GenericSettings();
             return;
@@ -363,7 +363,8 @@ public class HomeController
         } catch (IOException | ClassNotFoundException e) {
             // if failed, print stack trace for debugging and load default settings
             e.printStackTrace();
-            this.reaction.handleReaction(ReactionLevel.DEBUG, "setting.bin is not found, loading default...");
+            this.reaction.handleReaction(ReactionLevel.DEBUG,
+                    "setting.bin found but failed to load, loading default...");
             this.settings = new GenericSettings();
         }
     }

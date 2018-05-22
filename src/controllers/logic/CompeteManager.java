@@ -59,6 +59,8 @@ public class CompeteManager
                     this.reaction.handleReaction(
                             ReactionLevel.WARN, "Oops, you hurt " +
                                     piece.getCharacterType().toString());
+
+                    return piece;
                 }
             }
         }
