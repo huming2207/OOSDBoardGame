@@ -1,9 +1,7 @@
 package models.piece;
 
 import models.coordinate.Coordinate;
-import models.factory.AbstractBoardFactory;
-import models.factory.CoordinateFactory;
-import models.factory.PieceFactory;
+import models.factory.*;
 import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 
@@ -46,8 +44,8 @@ public class PiecePrototype
      */
     private void generateNewPieces(int boardSize, int pieceCount)
     {
-        AbstractBoardFactory pieceFactory = new PieceFactory(boardSize);
-        AbstractBoardFactory coordinateFactory = new CoordinateFactory(boardSize);
+        AbstractBoardFactory pieceFactory = FactoryGenerator.getFactory(FactoryType.PIECE, boardSize);
+        AbstractBoardFactory coordinateFactory = FactoryGenerator.getFactory(FactoryType.COORDINATE, boardSize);
 
         // Iterate through all types of characters and add them into the piece map
         EnumSet.allOf(CharacterType.class).stream().limit(pieceCount).forEach(characterType ->{
@@ -56,10 +54,12 @@ public class PiecePrototype
 
             // Make sure no conflicts on coordinates
             do {
+                assert coordinateFactory != null;
                 coordinate = coordinateFactory.createCoordinate();
             } while (checkExistingCoordinate(coordinate));
 
             // Add into piece map
+            assert pieceFactory != null;
             Piece piece = pieceFactory.createPiece(characterType, coordinate);
             this.pieceMap.put(characterType, piece);
 

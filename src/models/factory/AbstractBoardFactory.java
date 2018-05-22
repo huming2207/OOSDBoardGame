@@ -3,6 +3,7 @@ package models.factory;
 import models.coordinate.Coordinate;
 import models.piece.Piece;
 import models.piece.type.CharacterType;
+import models.player.Player;
 
 public abstract class AbstractBoardFactory
 {
