@@ -58,6 +58,15 @@ public class StatusManager
      */
     public void performUndo()
     {
+        // Record current board to re-do stack
+        // This must be cloned before pushing into re-do stack, otherwise some stinky bugs will happen
+        try {
+            this.redoStack.push((Board)(CloneHelper.deepClone(this.gameLogic.getBoard())));
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return;
+        }
+
         // Pop out the previous board
         Board board;
 
@@ -73,9 +82,6 @@ public class StatusManager
         // Clear up the board before continue
         this.gameLogic.getBoard().getPieceList().clear();
 
-        // Push into re-do stack for future re-do
-        this.redoStack.push(board);
-
         // Bind game logic
         board.setGameLogic(this.gameLogic);
         board.refreshPieceList();
@@ -89,6 +95,16 @@ public class StatusManager
      */
     public void performRedo()
     {
+        // Record current board to un-do stack
+        // This must be cloned before pushing into re-do stack, otherwise some stinky bugs will happen
+        try {
+            this.statusStack.push((Board)(CloneHelper.deepClone(this.gameLogic.getBoard())));
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        // Get the last re-do status
         Board board;
         try {
             board = this.redoStack.pop();
@@ -106,7 +122,6 @@ public class StatusManager
         board.setGameLogic(this.gameLogic);
         board.refreshPieceList();
 
-        this.statusStack.push(board);
         this.gameLogic.setBoard(board);
     }
 
