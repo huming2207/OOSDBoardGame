@@ -8,6 +8,7 @@ import helpers.reactions.Reaction;
 import helpers.reactions.ReactionLevel;
 import helpers.reactions.ReactionManager;
 import javafx.collections.ListChangeListener;
+import javafx.scene.control.Alert;
 import models.coordinate.Coordinate;
 import models.board.Board;
 import models.coordinate.BoardCellCoordinate;
@@ -184,19 +185,33 @@ public class GameLogic implements ListChangeListener<Piece>
         // Defensive mode toggle, if enabled, no one gets hurt. Otherwise it will perform attack
         if(!this.board.isDefensiveMode()) {
             Piece sufferedPiece = this.competeManager.performPossibleAttack(this.board.getCurrentPlayer());
+            Player sufferedPlayer;
 
+            // If there is a piece suffered attack, continue applying score deduction
             if(sufferedPiece != null && sufferedPiece.getRoleType() == RoleType.CAPITALISM_PIECE) {
-                Player sufferedPlayer = this.board.getCapitalismPlayer();
+                sufferedPlayer = this.board.getCapitalismPlayer();
                 sufferedPlayer.setScore(sufferedPlayer.getScore() +
                         this.board.getCurrentPlayer().getSelectedPiece().getAttackLevel());
             } else if(sufferedPiece != null && sufferedPiece.getRoleType() == RoleType.COMMUNISM_PIECE) {
-                Player sufferedPlayer = this.board.getCommunismPlayer();
+                sufferedPlayer = this.board.getCommunismPlayer();
                 sufferedPlayer.setScore(sufferedPlayer.getScore() +
                         this.board.getCurrentPlayer().getSelectedPiece().getAttackLevel());
             }
 
+            // Update GUI immediately if an attack happens
             this.homeController.updateScoreIndicators(Integer.toString(this.board.getCommunismPlayer().getScore()),
                     Integer.toString(this.board.getCapitalismPlayer().getScore()));
+
+            // If anyone's mark is below 50, then he/she lost the game.
+            if(this.board.getCapitalismPlayer().getScore() <= 50) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Capitalism player lost!");
+                alert.showAndWait();
+                System.exit(0);
+            } else if(this.board.getCommunismPlayer().getScore() <= 50)  {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Communism player lost!");
+                alert.showAndWait();
+                System.exit(0);
+            }
         }
 
         // Set the new coordinate for the piece
