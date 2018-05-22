@@ -11,9 +11,10 @@ import javafx.collections.ListChangeListener;
 import models.coordinate.Coordinate;
 import models.board.Board;
 import models.coordinate.BoardCellCoordinate;
-import models.misc.GenericSettings;
 import models.piece.Piece;
 import models.piece.PiecePrototype;
+import models.piece.type.RoleType;
+import models.player.Player;
 
 /**
  * Game logic controller
@@ -51,6 +52,8 @@ public class GameLogic implements ListChangeListener<Piece>
 
         // Add all from random piece factory
         this.board.getPieceList().addAll(piecePrototype.getPieceList());
+        this.board.getCommunismPlayer().setScore(piecePrototype.getCommunismScore());
+        this.board.getCapitalismPlayer().setScore(piecePrototype.getCapitalismScore());
 
         // First turn: communism player (player A)
         this.board.setCurrentPlayer(this.board.getCommunismPlayer());
@@ -58,6 +61,10 @@ public class GameLogic implements ListChangeListener<Piece>
 
         this.reaction = ReactionManager.getReaction();
         this.competeManager = new CompeteManager(this);
+
+        // Update initial score
+        this.homeController.updateScoreIndicators(Integer.toString(this.board.getCommunismPlayer().getScore()),
+                Integer.toString(this.board.getCapitalismPlayer().getScore()));
     }
 
     /**
@@ -174,6 +181,24 @@ public class GameLogic implements ListChangeListener<Piece>
         // Stop timer
         this.board.stopCountdown();
 
+        // Defensive mode toggle, if enabled, no one gets hurt. Otherwise it will perform attack
+        if(!this.board.isDefensiveMode()) {
+            Piece sufferedPiece = this.competeManager.performPossibleAttack(this.board.getCurrentPlayer());
+
+            if(sufferedPiece != null && sufferedPiece.getRoleType() == RoleType.CAPITALISM_PIECE) {
+                Player sufferedPlayer = this.board.getCapitalismPlayer();
+                sufferedPlayer.setScore(sufferedPlayer.getScore() +
+                        this.board.getCurrentPlayer().getSelectedPiece().getAttackLevel());
+            } else if(sufferedPiece != null && sufferedPiece.getRoleType() == RoleType.COMMUNISM_PIECE) {
+                Player sufferedPlayer = this.board.getCommunismPlayer();
+                sufferedPlayer.setScore(sufferedPlayer.getScore() +
+                        this.board.getCurrentPlayer().getSelectedPiece().getAttackLevel());
+            }
+
+            this.homeController.updateScoreIndicators(Integer.toString(this.board.getCommunismPlayer().getScore()),
+                    Integer.toString(this.board.getCapitalismPlayer().getScore()));
+        }
+
         // Set the new coordinate for the piece
         this.board.getCurrentPlayer().getSelectedPiece().setCoordinate(coordinate);
 
@@ -186,18 +211,13 @@ public class GameLogic implements ListChangeListener<Piece>
                 this.board.getCapitalismPlayer() : board.getCommunismPlayer()
         );
 
-        // Defensive mode toggle, if enabled, no one gets hurt. Otherwise it will perform attack
-        if(!this.board.isDefensiveMode()) {
-            this.competeManager.performPossibleAttack(this.board.getCurrentPlayer());
-        }
-
         // Clean up the candidate piece position
         this.board.getCurrentPlayer().setSelectedPiece(null);
 
         // Commit to GUI
         this.homeController.commitPlayerSelection(board.getCurrentPlayer());
-
-
+        this.homeController.updateScoreIndicators(Integer.toString(this.board.getCommunismPlayer().getScore()),
+                Integer.toString(this.board.getCapitalismPlayer().getScore()));
     }
 
     public StatusManager getStatusManager()

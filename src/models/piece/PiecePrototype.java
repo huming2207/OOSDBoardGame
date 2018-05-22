@@ -5,6 +5,7 @@ import models.factory.AbstractBoardFactory;
 import models.factory.CoordinateFactory;
 import models.factory.PieceFactory;
 import models.piece.type.CharacterType;
+import models.piece.type.RoleType;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -26,6 +27,8 @@ import java.util.List;
 public class PiecePrototype
 {
     private HashMap<CharacterType, Piece> pieceMap;
+    private int capitalismScore = 0;
+    private int communismScore = 0;
 
     /**
      * Constructor of Piece Prototype Generator
@@ -51,11 +54,21 @@ public class PiecePrototype
 
             Coordinate coordinate;
 
+            // Make sure no conflicts on coordinates
             do {
                 coordinate = coordinateFactory.createCoordinate();
             } while (checkExistingCoordinate(coordinate));
 
-            this.pieceMap.put(characterType, pieceFactory.createPiece(characterType, coordinate));
+            // Add into piece map
+            Piece piece = pieceFactory.createPiece(characterType, coordinate);
+            this.pieceMap.put(characterType, piece);
+
+            // Count the score
+            if(piece.getRoleType() == RoleType.COMMUNISM_PIECE) {
+                this.communismScore += piece.getMark();
+            } else {
+                this.capitalismScore += piece.getMark();
+            }
         });
     }
 
@@ -69,6 +82,17 @@ public class PiecePrototype
     public Piece getPiece(CharacterType type)
     {
         return this.pieceMap.get(type).clone();
+    }
+
+
+    public int getCapitalismScore()
+    {
+        return capitalismScore;
+    }
+
+    public int getCommunismScore()
+    {
+        return communismScore;
     }
 
     /**

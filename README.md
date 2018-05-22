@@ -11,6 +11,10 @@ OOSD Board Game, for Object Oriented Software Design (ISYS1083), Group G3.
 
 Code written, tested and debugged by Ming Hu (s3554025).
 
+## Icons
+
+Icons are from [Alibaba's IconFont](http://www.iconfont.cn/collections/detail?spm=a313x.7781069.0.da5a778a4&cid=268), free for non-commercial use.
+
 ## Build environment
 
 This program is written and tested in JDK 8 environments. Since lambda and some other newer JavaFX features have been used, JDK 7 will not work.
