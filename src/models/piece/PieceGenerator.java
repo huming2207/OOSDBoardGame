@@ -22,7 +22,7 @@ import java.util.List;
  * @author Ming Hu (s3554025)
  * @since Assignment 2
  */
-public class PiecePrototype
+public class PieceGenerator
 {
     private HashMap<CharacterType, Piece> pieceMap;
     private int capitalismScore = 0;
@@ -32,7 +32,7 @@ public class PiecePrototype
      * Constructor of Piece Prototype Generator
      * @param boardSize Board size of a certain board
      */
-    public PiecePrototype(int boardSize, int pieceCount)
+    public PieceGenerator(int boardSize, int pieceCount)
     {
         this.pieceMap = new HashMap<>();
         this.generateNewPieces(boardSize, pieceCount);

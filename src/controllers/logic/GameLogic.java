@@ -13,7 +13,7 @@ import models.coordinate.Coordinate;
 import models.board.Board;
 import models.coordinate.BoardCellCoordinate;
 import models.piece.Piece;
-import models.piece.PiecePrototype;
+import models.piece.PieceGenerator;
 import models.piece.type.RoleType;
 import models.player.Player;
 
@@ -44,7 +44,7 @@ public class GameLogic implements ListChangeListener<Piece>
                 homeController.getSettings().getCapitalismPlayerName());
 
         // Initialize piece generator
-        PiecePrototype piecePrototype = new PiecePrototype(
+        PieceGenerator pieceGenerator = new PieceGenerator(
                 homeController.getBoardSize(),
                 homeController.getSettings().getPieceCount());
 
@@ -52,9 +52,9 @@ public class GameLogic implements ListChangeListener<Piece>
         this.statusManager = new StatusManager(this);
 
         // Add all from random piece factory
-        this.board.getPieceList().addAll(piecePrototype.getPieceList());
-        this.board.getCommunismPlayer().setScore(piecePrototype.getCommunismScore());
-        this.board.getCapitalismPlayer().setScore(piecePrototype.getCapitalismScore());
+        this.board.getPieceList().addAll(pieceGenerator.getPieceList());
+        this.board.getCommunismPlayer().setScore(pieceGenerator.getCommunismScore());
+        this.board.getCapitalismPlayer().setScore(pieceGenerator.getCapitalismScore());
 
         // First turn: communism player (player A)
         this.board.setCurrentPlayer(this.board.getCommunismPlayer());
