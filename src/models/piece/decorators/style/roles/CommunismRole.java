@@ -5,6 +5,13 @@ import models.piece.Piece;
 import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 
+/**
+ * Communism character decorator
+ * It sets icons to red and set communism role type to a certain piece
+ *
+ * @author Ming Hu
+ * @since Assignment 2
+ */
 public class CommunismRole extends Role
 {
     public CommunismRole(Piece piece)

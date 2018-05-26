@@ -1,12 +1,20 @@
 package models.player;
 
 import com.google.java.contract.Ensures;
+import com.google.java.contract.Invariant;
 import com.google.java.contract.Requires;
 import models.piece.Piece;
 import models.piece.type.RoleType;
 
 import java.io.Serializable;
 
+/**
+ * Capitalism player (for Abstract Factory to generate)
+ *
+ * @author Ming Hu
+ * @since Assignment 2
+ */
+@Invariant("score >= 0")
 public class CapitalismPlayer implements Player, Serializable
 {
     private String playerName;

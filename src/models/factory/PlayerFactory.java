@@ -1,5 +1,6 @@
 package models.factory;
 
+import com.google.java.contract.Ensures;
 import models.coordinate.Coordinate;
 import models.piece.Piece;
 import models.piece.type.CharacterType;
@@ -30,6 +31,7 @@ public class PlayerFactory extends AbstractBoardFactory
     }
 
     @Override
+    @Ensures("result != null")
     public Player createPlayer(String playerName, RoleType roleType)
     {
         if(roleType == RoleType.COMMUNISM_PIECE) {

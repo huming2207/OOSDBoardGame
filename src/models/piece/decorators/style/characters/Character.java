@@ -6,6 +6,13 @@ import models.piece.Piece;
 import java.io.IOException;
 import java.io.Serializable;
 
+/**
+ * Abstract character decorator
+ * It adds icons and character type to a certain piece
+ *
+ * @author Ming Hu
+ * @since Assignment 2
+ */
 public abstract class Character implements Piece, Cloneable, Serializable
 {
     protected Piece decoratePiece;

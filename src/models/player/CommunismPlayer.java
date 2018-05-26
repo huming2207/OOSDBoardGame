@@ -1,17 +1,25 @@
 package models.player;
 
 import com.google.java.contract.Ensures;
+import com.google.java.contract.Invariant;
 import com.google.java.contract.Requires;
 import models.piece.Piece;
 import models.piece.type.RoleType;
 
 import java.io.Serializable;
 
+/**
+ * Communism player (for Abstract Factory to generate)
+ *
+ * @author Ming Hu
+ * @since Assignment 2
+ */
+@Invariant("score >= 0")
 public class CommunismPlayer implements Player,Serializable
 {
     private String playerName;
     private Piece selectedPiece;
-    private int score;
+    private int score = 0;
 
     /**
      * Initialize a player with player name and type

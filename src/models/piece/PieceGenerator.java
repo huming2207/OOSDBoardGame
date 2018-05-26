@@ -1,5 +1,6 @@
 package models.piece;
 
+import com.google.java.contract.Ensures;
 import models.coordinate.Coordinate;
 import models.factory.*;
 import models.factory.generator.FactoryGenerator;
@@ -44,6 +45,7 @@ public class PieceGenerator
      *(Re)generate new pieces for the prototype map.
      * If a new random coordinate is necessary, then this method should be used.
      */
+    @Ensures({"boardSize >= 6", "pieceCount > 1"})
     private void generateNewPieces(int boardSize, int pieceCount)
     {
         AbstractBoardFactory pieceFactory = FactoryGenerator.getFactory(FactoryType.PIECE);

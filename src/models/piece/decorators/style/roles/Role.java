@@ -6,6 +6,13 @@ import models.piece.Piece;
 import java.io.IOException;
 import java.io.Serializable;
 
+/**
+ * Communism character decorator
+ * It sets icon's color and set the role type to a certain piece
+ *
+ * @author Ming Hu
+ * @since Assignment 2
+ */
 public abstract class Role implements Piece, Cloneable, Serializable
 {
     protected Piece decoratePiece;

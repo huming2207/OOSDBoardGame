@@ -5,6 +5,13 @@ import models.piece.Piece;
 import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 
+/**
+ * Capitalism role decorator
+ * It sets icons to blue and set capitalism role type to a certain piece
+ *
+ * @author Ming Hu
+ * @since Assignment 2
+ */
 public class CapitalismRole extends Role
 {
     public CapitalismRole(Piece piece)

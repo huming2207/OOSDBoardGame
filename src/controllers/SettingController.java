@@ -1,5 +1,6 @@
 package controllers;
 
+import com.google.java.contract.Invariant;
 import helpers.reactions.Reaction;
 import helpers.reactions.ReactionLevel;
 import helpers.reactions.ReactionManager;
@@ -11,6 +12,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
+@Invariant({"boardSize >= 6", "pieceCount > 1"})
 public class SettingController
 {
     private int boardSize = 10;

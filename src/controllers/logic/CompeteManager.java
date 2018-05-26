@@ -10,6 +10,12 @@ import models.player.Player;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Compete logic manager, for calculating move/attack range offsets
+ *
+ * @author Ming Hu
+ * @since Assignment 2
+ */
 public class CompeteManager
 {
     private GameLogic gameLogic;

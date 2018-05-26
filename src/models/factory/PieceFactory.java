@@ -1,5 +1,7 @@
 package models.factory;
 
+import com.google.java.contract.Ensures;
+import com.google.java.contract.Requires;
 import models.coordinate.Coordinate;
 import models.factory.command.PieceCreator;
 import models.piece.Piece;
@@ -49,6 +51,8 @@ public class PieceFactory extends AbstractBoardFactory
     }
 
     @Override
+    @Requires("!creatorCommands.isEmpty()")
+    @Ensures("result != null")
     public Piece createPiece(CharacterType characterType, Coordinate coordinate)
     {
         Piece newPiece = this.creatorCommands.get(characterType).createPiece();

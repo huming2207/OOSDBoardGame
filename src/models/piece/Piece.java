@@ -81,10 +81,24 @@ public interface Piece
      */
     RoleType getRoleType();
 
+    /**
+     * Get character type of current piece
+     * @return character type of current piece
+     */
     CharacterType getCharacterType();
 
+    /**
+     * Get move range offset allowance, a 2D array containing offset payloads for logic code to evaluate.
+     * Pieces are ONLY allowed to move in these ranges
+     * @return 2d array of offset
+     */
     int[][] getMoveRangeOffset();
 
+    /**
+     * Get attack range offset allowance, a 2D array containing offset payloads for logic code to evaluate.
+     * Enemy pieces will be attacked in these ranges
+     * @return 2d array of offset
+     */
     int[][] getAttackZoneOffset();
 
     @Override

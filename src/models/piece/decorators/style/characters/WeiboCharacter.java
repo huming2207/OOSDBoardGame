@@ -5,6 +5,13 @@ import models.piece.Piece;
 import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 
+/**
+ * Weibo character decorator
+ * It adds Weibo icon and character type to a certain piece
+ *
+ * @author Ming Hu
+ * @since Assignment 2
+ */
 public class WeiboCharacter extends Character
 {
     public WeiboCharacter(Piece piece)

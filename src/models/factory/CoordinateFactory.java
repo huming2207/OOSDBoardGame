@@ -1,5 +1,7 @@
 package models.factory;
 
+import com.google.java.contract.Ensures;
+import com.google.java.contract.Requires;
 import models.coordinate.Coordinate;
 import models.piece.Piece;
 import models.piece.type.CharacterType;
@@ -17,6 +19,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class CoordinateFactory extends AbstractBoardFactory
 {
     @Override
+    @Requires("boardSize >= 6")
     public Coordinate createCoordinate(int boardSize)
     {
         int posX = ThreadLocalRandom.current().nextInt(0, boardSize);

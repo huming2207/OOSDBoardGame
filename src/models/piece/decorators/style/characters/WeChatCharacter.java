@@ -5,6 +5,13 @@ import models.piece.Piece;
 import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 
+/**
+ * WeChat character decorator
+ * It adds WeChat icon and character type to a certain piece
+ *
+ * @author Ming Hu
+ * @since Assignment 2
+ */
 public class WeChatCharacter extends Character
 {
     public WeChatCharacter(Piece piece)

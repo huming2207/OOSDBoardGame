@@ -5,6 +5,13 @@ import models.piece.Piece;
 import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 
+/**
+ * Range Type C decorator
+ * It sets specific attack ranges and move ranges offset
+ *
+ * @author Ming Hu
+ * @since Assignment 2
+ */
 public class RangeC extends Range
 {
     public RangeC(Piece piece)

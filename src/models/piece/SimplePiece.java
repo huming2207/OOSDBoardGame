@@ -1,5 +1,6 @@
 package models.piece;
 
+import com.google.java.contract.Invariant;
 import helpers.CloneHelper;
 import models.coordinate.Coordinate;
 import models.piece.type.CharacterType;
@@ -8,6 +9,14 @@ import models.piece.type.RoleType;
 import java.io.IOException;
 import java.io.Serializable;
 
+/**
+ * Simple piece placeholder
+ * Useless, just for prototype/decorator patterns
+ *
+ * @author Ming Hu
+ * @since Assignment 2
+ */
+@Invariant({"mark > 0", "coordinate != null"})
 public class SimplePiece implements Piece, Cloneable, Serializable
 {
     private Coordinate coordinate;

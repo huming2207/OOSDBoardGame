@@ -30,5 +30,11 @@ public abstract class AbstractBoardFactory
      */
     public abstract Piece createPiece(CharacterType characterType, Coordinate coordinate);
 
+    /**
+     * Create a new player with specified role type and name
+     * @param playerName Player's nick name
+     * @param roleType Role type
+     * @return new player
+     */
     public abstract Player createPlayer(String playerName, RoleType roleType);
 }

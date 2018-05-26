@@ -1,5 +1,6 @@
 package controllers;
 
+import com.google.java.contract.Ensures;
 import com.google.java.contract.Requires;
 import controllers.logic.GameLogic;
 import helpers.BoardButtonHelper;
@@ -325,6 +326,7 @@ public class HomeController
      * Get board size, e.g. 8 for 8x8 board or 10 for 10x10 board
      * @return board size
      */
+    @Ensures("result >= 6")
     public int getBoardSize()
     {
         return this.boardSize;

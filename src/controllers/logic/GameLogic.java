@@ -1,5 +1,7 @@
 package controllers.logic;
 
+import com.google.java.contract.Ensures;
+import com.google.java.contract.Invariant;
 import com.google.java.contract.Requires;
 import controllers.HomeController;
 import helpers.exceptions.DuplicatedPieceException;
@@ -238,6 +240,7 @@ public class GameLogic implements ListChangeListener<Piece>
      * Get status manager instance
      * @return status manager instance
      */
+    @Ensures("result != null")
     public StatusManager getStatusManager()
     {
         return statusManager;
@@ -247,6 +250,7 @@ public class GameLogic implements ListChangeListener<Piece>
      * Set board instance
      * @param board board instance
      */
+    @Requires("board != null")
     public void setBoard(Board board)
     {
         this.board = board;
@@ -256,6 +260,7 @@ public class GameLogic implements ListChangeListener<Piece>
      * Get board instance
      * @return board instance
      */
+    @Ensures("result != null")
     public Board getBoard()
     {
         return this.board;
