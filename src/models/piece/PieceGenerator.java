@@ -1,9 +1,10 @@
 package models.piece;
 
+import com.google.java.contract.Ensures;
 import models.coordinate.Coordinate;
-import models.factory.AbstractBoardFactory;
-import models.factory.CoordinateFactory;
-import models.factory.PieceFactory;
+import models.factory.*;
+import models.factory.generator.FactoryGenerator;
+import models.factory.type.FactoryType;
 import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 
@@ -24,7 +25,7 @@ import java.util.List;
  * @author Ming Hu (s3554025)
  * @since Assignment 2
  */
-public class PiecePrototype
+public class PieceGenerator
 {
     private HashMap<CharacterType, Piece> pieceMap;
     private int capitalismScore = 0;
@@ -34,7 +35,7 @@ public class PiecePrototype
      * Constructor of Piece Prototype Generator
      * @param boardSize Board size of a certain board
      */
-    public PiecePrototype(int boardSize, int pieceCount)
+    public PieceGenerator(int boardSize, int pieceCount)
     {
         this.pieceMap = new HashMap<>();
         this.generateNewPieces(boardSize, pieceCount);
@@ -44,10 +45,11 @@ public class PiecePrototype
      *(Re)generate new pieces for the prototype map.
      * If a new random coordinate is necessary, then this method should be used.
      */
+    @Ensures({"boardSize >= 6", "pieceCount > 1"})
     private void generateNewPieces(int boardSize, int pieceCount)
     {
-        AbstractBoardFactory pieceFactory = new PieceFactory(boardSize);
-        AbstractBoardFactory coordinateFactory = new CoordinateFactory(boardSize);
+        AbstractBoardFactory pieceFactory = FactoryGenerator.getFactory(FactoryType.PIECE);
+        AbstractBoardFactory coordinateFactory = FactoryGenerator.getFactory(FactoryType.COORDINATE);
 
         // Iterate through all types of characters and add them into the piece map
         EnumSet.allOf(CharacterType.class).stream().limit(pieceCount).forEach(characterType ->{
@@ -56,7 +58,7 @@ public class PiecePrototype
 
             // Make sure no conflicts on coordinates
             do {
-                coordinate = coordinateFactory.createCoordinate();
+                coordinate = coordinateFactory.createCoordinate(boardSize);
             } while (checkExistingCoordinate(coordinate));
 
             // Add into piece map

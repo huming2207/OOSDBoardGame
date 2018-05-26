@@ -1,36 +1,27 @@
 package models.factory;
 
 import com.google.java.contract.Ensures;
-import com.google.java.contract.Requires;
 import models.coordinate.Coordinate;
 import models.piece.Piece;
 import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
+import models.player.CapitalismPlayer;
+import models.player.CommunismPlayer;
 import models.player.Player;
 
-import java.util.concurrent.ThreadLocalRandom;
-
-/**
- * Coordinate factory
- *
- * @author Ming Hu
- * @since Assignment 2
- */
-public class CoordinateFactory extends AbstractBoardFactory
+public class PlayerFactory extends AbstractBoardFactory
 {
+
     @Override
-    @Requires("boardSize >= 6")
     public Coordinate createCoordinate(int boardSize)
     {
-        int posX = ThreadLocalRandom.current().nextInt(0, boardSize);
-        int posY = ThreadLocalRandom.current().nextInt(0, boardSize);
-        return new Coordinate(posX, posY);
+        return null;
     }
 
     @Override
     public Coordinate createCoordinate(int x, int y)
     {
-        return new Coordinate(x, y);
+        return null;
     }
 
     @Override
@@ -40,8 +31,13 @@ public class CoordinateFactory extends AbstractBoardFactory
     }
 
     @Override
+    @Ensures("result != null")
     public Player createPlayer(String playerName, RoleType roleType)
     {
-        return null;
+        if(roleType == RoleType.COMMUNISM_PIECE) {
+            return new CommunismPlayer(playerName);
+        } else {
+            return new CapitalismPlayer(playerName);
+        }
     }
 }

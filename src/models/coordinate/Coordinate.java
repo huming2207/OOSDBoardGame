@@ -6,7 +6,7 @@ import com.google.java.contract.Requires;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Coordinate implements ICoordinate, Serializable
+public class Coordinate implements Serializable
 {
     private int posX;
     private int posY;

@@ -1,5 +1,7 @@
 package controllers.logic;
 
+import com.google.java.contract.Ensures;
+import com.google.java.contract.Invariant;
 import com.google.java.contract.Requires;
 import controllers.HomeController;
 import helpers.exceptions.DuplicatedPieceException;
@@ -11,9 +13,8 @@ import javafx.collections.ListChangeListener;
 import javafx.scene.control.Alert;
 import models.coordinate.Coordinate;
 import models.board.Board;
-import models.coordinate.BoardCellCoordinate;
 import models.piece.Piece;
-import models.piece.PiecePrototype;
+import models.piece.PieceGenerator;
 import models.piece.type.RoleType;
 import models.player.Player;
 
@@ -44,7 +45,7 @@ public class GameLogic implements ListChangeListener<Piece>
                 homeController.getSettings().getCapitalismPlayerName());
 
         // Initialize piece generator
-        PiecePrototype piecePrototype = new PiecePrototype(
+        PieceGenerator pieceGenerator = new PieceGenerator(
                 homeController.getBoardSize(),
                 homeController.getSettings().getPieceCount());
 
@@ -52,9 +53,9 @@ public class GameLogic implements ListChangeListener<Piece>
         this.statusManager = new StatusManager(this);
 
         // Add all from random piece factory
-        this.board.getPieceList().addAll(piecePrototype.getPieceList());
-        this.board.getCommunismPlayer().setScore(piecePrototype.getCommunismScore());
-        this.board.getCapitalismPlayer().setScore(piecePrototype.getCapitalismScore());
+        this.board.getPieceList().addAll(pieceGenerator.getPieceList());
+        this.board.getCommunismPlayer().setScore(pieceGenerator.getCommunismScore());
+        this.board.getCapitalismPlayer().setScore(pieceGenerator.getCapitalismScore());
 
         // First turn: communism player (player A)
         this.board.setCurrentPlayer(this.board.getCommunismPlayer());
@@ -70,17 +71,17 @@ public class GameLogic implements ListChangeListener<Piece>
 
     /**
      * Commit changes to game map
-     * @param buttonEvent Supplied click result information
+     * @param clickedCoordinate Supplied click result information
      */
-    @Requires({"buttonEvent.getPosX() > 0", "buttonEvent.getPosY() > 0"})
-    public void commitMapChanges(BoardCellCoordinate buttonEvent)
+    @Requires({"clickedCoordinate.getPosX() > 0", "clickedCoordinate.getPosY() > 0"})
+    public void commitMapChanges(Coordinate clickedCoordinate)
             throws DuplicatedPieceException, InvalidPieceSelectionException
     {
-        if(buttonEvent == null) return;
+        if(clickedCoordinate == null) return;
 
         Coordinate coordinate = new Coordinate(
-                buttonEvent.getPosX(),
-                buttonEvent.getPosY());
+                clickedCoordinate.getPosX(),
+                clickedCoordinate.getPosY());
 
         // Firstly, try find the piece
         Piece pieceInList = this.board.getPieceFromList(coordinate.getPosX(), coordinate.getPosY());
@@ -239,6 +240,7 @@ public class GameLogic implements ListChangeListener<Piece>
      * Get status manager instance
      * @return status manager instance
      */
+    @Ensures("result != null")
     public StatusManager getStatusManager()
     {
         return statusManager;
@@ -248,6 +250,7 @@ public class GameLogic implements ListChangeListener<Piece>
      * Set board instance
      * @param board board instance
      */
+    @Requires("board != null")
     public void setBoard(Board board)
     {
         this.board = board;
@@ -257,6 +260,7 @@ public class GameLogic implements ListChangeListener<Piece>
      * Get board instance
      * @return board instance
      */
+    @Ensures("result != null")
     public Board getBoard()
     {
         return this.board;

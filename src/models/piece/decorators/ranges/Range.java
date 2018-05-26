@@ -6,6 +6,13 @@ import models.piece.Piece;
 import java.io.IOException;
 import java.io.Serializable;
 
+/**
+ * Range decorators
+ * It sets specific attack ranges and move ranges offset
+ *
+ * @author Ming Hu
+ * @since Assignment 2
+ */
 public abstract class Range implements Piece, Cloneable, Serializable
 {
     protected Piece decoratePiece;

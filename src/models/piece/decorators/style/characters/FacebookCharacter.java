@@ -5,6 +5,13 @@ import models.piece.Piece;
 import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 
+/**
+ * Facebook character decorator
+ * It adds Facebook icon and character type to a certain piece
+ *
+ * @author Ming Hu
+ * @since Assignment 2
+ */
 public class FacebookCharacter extends Character
 {
     public FacebookCharacter(Piece piece)

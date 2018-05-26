@@ -1,5 +1,6 @@
 package controllers;
 
+import com.google.java.contract.Ensures;
 import com.google.java.contract.Requires;
 import controllers.logic.GameLogic;
 import helpers.BoardButtonHelper;
@@ -13,16 +14,14 @@ import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.TilePane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import models.misc.GenericSettings;
-import models.player.Player;
-import models.coordinate.BoardCellCoordinate;
 import models.coordinate.Coordinate;
+import models.player.Player;
 
 import java.io.*;
 
@@ -58,9 +57,6 @@ public class HomeController
 
     @FXML
     private Label capitalismPlayerScore;
-
-    @FXML
-    private ToggleButton defensiveToggle;
 
     /**
      * Set the FXML Control map from the main class (i.e. from loader.getNamespace()) and initialize game logic.
@@ -223,7 +219,7 @@ public class HomeController
      */
     private void handleBoardButtonClick(ActionEvent clickEvent)
     {
-        BoardCellCoordinate buttonResult = BoardButtonHelper.parseClickResult(clickEvent);
+        Coordinate buttonResult = BoardButtonHelper.parseClickResult(clickEvent);
 
         try {
             this.gameLogic.commitMapChanges(buttonResult);
@@ -330,6 +326,7 @@ public class HomeController
      * Get board size, e.g. 8 for 8x8 board or 10 for 10x10 board
      * @return board size
      */
+    @Ensures("result >= 6")
     public int getBoardSize()
     {
         return this.boardSize;

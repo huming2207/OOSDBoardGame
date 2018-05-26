@@ -1,5 +1,7 @@
 package models.factory;
 
+import com.google.java.contract.Ensures;
+import com.google.java.contract.Requires;
 import models.coordinate.Coordinate;
 import models.factory.command.PieceCreator;
 import models.piece.Piece;
@@ -11,6 +13,8 @@ import models.piece.decorators.style.characters.*;
 import models.piece.decorators.style.roles.CapitalismRole;
 import models.piece.decorators.style.roles.CommunismRole;
 import models.piece.type.CharacterType;
+import models.piece.type.RoleType;
+import models.player.Player;
 
 import java.util.HashMap;
 
@@ -28,15 +32,14 @@ public class PieceFactory extends AbstractBoardFactory
 {
     private final HashMap<CharacterType, PieceCreator> creatorCommands;
 
-    public PieceFactory(int boardSize)
+    public PieceFactory()
     {
-        super(boardSize);
         this.creatorCommands = new HashMap<>();
         this.initPieceCreationCommands();
     }
 
     @Override
-    public Coordinate createCoordinate()
+    public Coordinate createCoordinate(int boardSize)
     {
         return null;
     }
@@ -48,12 +51,20 @@ public class PieceFactory extends AbstractBoardFactory
     }
 
     @Override
+    @Requires("!creatorCommands.isEmpty()")
+    @Ensures("result != null")
     public Piece createPiece(CharacterType characterType, Coordinate coordinate)
     {
         Piece newPiece = this.creatorCommands.get(characterType).createPiece();
         newPiece.setCoordinate(coordinate);
 
         return newPiece;
+    }
+
+    @Override
+    public Player createPlayer(String playerName, RoleType roleType)
+    {
+        return null;
     }
 
     private void initPieceCreationCommands()
