@@ -29,6 +29,7 @@ public class CapitalismPlayer implements Player, Serializable
      * Get selected piece
      * @return selected piece
      */
+    @Ensures("result != null")
     public Piece getSelectedPiece()
     {
         return selectedPiece;
@@ -38,6 +39,7 @@ public class CapitalismPlayer implements Player, Serializable
      * Set selected piece
      * @param selectedPiece piece picked by user
      */
+    @Requires("!playerName.isEmpty()")
     public void setSelectedPiece(Piece selectedPiece)
     {
         this.selectedPiece = selectedPiece;
@@ -76,6 +78,7 @@ public class CapitalismPlayer implements Player, Serializable
      * Get current score of a player
      * @return current score
      */
+    @Ensures("result > 0")
     public int getScore()
     {
         return score;
@@ -85,6 +88,7 @@ public class CapitalismPlayer implements Player, Serializable
      * Set current score of a player
      * @param score new score
      */
+    @Requires("score > 0")
     public void setScore(int score)
     {
         this.score = score;

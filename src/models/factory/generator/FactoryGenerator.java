@@ -1,4 +1,10 @@
-package models.factory;
+package models.factory.generator;
+
+import models.factory.AbstractBoardFactory;
+import models.factory.CoordinateFactory;
+import models.factory.PieceFactory;
+import models.factory.PlayerFactory;
+import models.factory.type.FactoryType;
 
 public class FactoryGenerator
 {

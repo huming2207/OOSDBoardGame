@@ -4,7 +4,7 @@ import com.google.java.contract.Ensures;
 import com.google.java.contract.Requires;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
-import models.coordinate.BoardCellCoordinate;
+import models.coordinate.Coordinate;
 
 public class BoardButtonHelper
 {
@@ -15,7 +15,7 @@ public class BoardButtonHelper
      */
     @Requires("actionEvent != null")
     @Ensures({"result.getPosX() > 0", "result.getPosY() > 0"})
-    public static BoardCellCoordinate parseClickResult(ActionEvent actionEvent)
+    public static Coordinate parseClickResult(ActionEvent actionEvent)
     {
         if(actionEvent == null) return null;
 
@@ -28,6 +28,6 @@ public class BoardButtonHelper
         int posX = Integer.valueOf(splitedId[1]);
         int posY = Integer.valueOf(splitedId[2]);
 
-        return new BoardCellCoordinate(posX, posY, buttonClicked);
+        return new Coordinate(posX, posY);
     }
 }

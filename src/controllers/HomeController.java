@@ -19,7 +19,6 @@ import javafx.scene.layout.TilePane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import models.misc.GenericSettings;
-import models.coordinate.BoardCellCoordinate;
 import models.coordinate.Coordinate;
 import models.player.Player;
 
@@ -219,7 +218,7 @@ public class HomeController
      */
     private void handleBoardButtonClick(ActionEvent clickEvent)
     {
-        BoardCellCoordinate buttonResult = BoardButtonHelper.parseClickResult(clickEvent);
+        Coordinate buttonResult = BoardButtonHelper.parseClickResult(clickEvent);
 
         try {
             this.gameLogic.commitMapChanges(buttonResult);

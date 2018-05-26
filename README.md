@@ -88,6 +88,9 @@ Assignment 2 has implemented/refactored with 5 design patterns, which are:
     - `PieceFactory::createRandomPieceList`
     - `PieceFactory::createRandomCoordinateQueue`
 - `models`
+    - `models.player`
+        - `CommunismPlayer`
+        - `CapitalismPlayer`
     - `Board::getPieceList`
         - useful for detecting logic issues in PieceFactory
     - `Board::setPieceList`
@@ -104,8 +107,6 @@ Assignment 2 has implemented/refactored with 5 design patterns, which are:
     - `Piece::getCoordinate`
     - `Piece::setCoordinate`
     - `Player`
-    - `Player::getPlayerName`
-    - `Player::setPlayerName`
 
 ## GRASP principles
 

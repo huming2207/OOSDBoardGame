@@ -1,4 +1,4 @@
-package models.factory;
+package models.factory.type;
 
 public enum FactoryType
 {

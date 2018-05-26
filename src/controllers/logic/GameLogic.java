@@ -11,7 +11,6 @@ import javafx.collections.ListChangeListener;
 import javafx.scene.control.Alert;
 import models.coordinate.Coordinate;
 import models.board.Board;
-import models.coordinate.BoardCellCoordinate;
 import models.piece.Piece;
 import models.piece.PieceGenerator;
 import models.piece.type.RoleType;
@@ -70,17 +69,17 @@ public class GameLogic implements ListChangeListener<Piece>
 
     /**
      * Commit changes to game map
-     * @param buttonEvent Supplied click result information
+     * @param clickedCoordinate Supplied click result information
      */
-    @Requires({"buttonEvent.getPosX() > 0", "buttonEvent.getPosY() > 0"})
-    public void commitMapChanges(BoardCellCoordinate buttonEvent)
+    @Requires({"clickedCoordinate.getPosX() > 0", "clickedCoordinate.getPosY() > 0"})
+    public void commitMapChanges(Coordinate clickedCoordinate)
             throws DuplicatedPieceException, InvalidPieceSelectionException
     {
-        if(buttonEvent == null) return;
+        if(clickedCoordinate == null) return;
 
         Coordinate coordinate = new Coordinate(
-                buttonEvent.getPosX(),
-                buttonEvent.getPosY());
+                clickedCoordinate.getPosX(),
+                clickedCoordinate.getPosY());
 
         // Firstly, try find the piece
         Piece pieceInList = this.board.getPieceFromList(coordinate.getPosX(), coordinate.getPosY());

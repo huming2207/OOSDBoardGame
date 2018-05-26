@@ -27,6 +27,7 @@ public class CommunismPlayer implements Player,Serializable
      * Get selected piece
      * @return selected piece
      */
+    @Ensures("result != null")
     public Piece getSelectedPiece()
     {
         return selectedPiece;
@@ -36,6 +37,7 @@ public class CommunismPlayer implements Player,Serializable
      * Set selected piece
      * @param selectedPiece piece picked by user
      */
+    @Requires("selectedPiece != null")
     public void setSelectedPiece(Piece selectedPiece)
     {
         this.selectedPiece = selectedPiece;

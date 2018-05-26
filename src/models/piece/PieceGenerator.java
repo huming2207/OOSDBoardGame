@@ -2,6 +2,8 @@ package models.piece;
 
 import models.coordinate.Coordinate;
 import models.factory.*;
+import models.factory.generator.FactoryGenerator;
+import models.factory.type.FactoryType;
 import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 
