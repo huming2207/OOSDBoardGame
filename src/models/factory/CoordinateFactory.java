@@ -3,6 +3,8 @@ package models.factory;
 import models.coordinate.Coordinate;
 import models.piece.Piece;
 import models.piece.type.CharacterType;
+import models.piece.type.RoleType;
+import models.player.Player;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -14,16 +16,11 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class CoordinateFactory extends AbstractBoardFactory
 {
-    public CoordinateFactory(int boardSize)
-    {
-        super(boardSize);
-    }
-
     @Override
-    public Coordinate createCoordinate()
+    public Coordinate createCoordinate(int boardSize)
     {
-        int posX = ThreadLocalRandom.current().nextInt(0, super.boardSize);
-        int posY = ThreadLocalRandom.current().nextInt(0, super.boardSize);
+        int posX = ThreadLocalRandom.current().nextInt(0, boardSize);
+        int posY = ThreadLocalRandom.current().nextInt(0, boardSize);
         return new Coordinate(posX, posY);
     }
 
@@ -35,6 +32,12 @@ public class CoordinateFactory extends AbstractBoardFactory
 
     @Override
     public Piece createPiece(CharacterType characterType, Coordinate coordinate)
+    {
+        return null;
+    }
+
+    @Override
+    public Player createPlayer(String playerName, RoleType roleType)
     {
         return null;
     }

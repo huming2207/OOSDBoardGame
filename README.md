@@ -109,8 +109,6 @@ Assignment 2 has implemented/refactored with 5 design patterns, which are:
 
 ## GRASP principles
 
-**The following Design Principle sections are just a for a reference as it was written for a draft by Ming Hu for other group members. If there is any conflicts against with the Design Principle section in the report, please refer to the report instead, not this README.**
-
 ### Low coupling
 
 - Original Piece class is abstract class with different style/type of pieces extends it.

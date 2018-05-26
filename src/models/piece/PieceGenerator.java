@@ -44,8 +44,8 @@ public class PieceGenerator
      */
     private void generateNewPieces(int boardSize, int pieceCount)
     {
-        AbstractBoardFactory pieceFactory = FactoryGenerator.getFactory(FactoryType.PIECE, boardSize);
-        AbstractBoardFactory coordinateFactory = FactoryGenerator.getFactory(FactoryType.COORDINATE, boardSize);
+        AbstractBoardFactory pieceFactory = FactoryGenerator.getFactory(FactoryType.PIECE);
+        AbstractBoardFactory coordinateFactory = FactoryGenerator.getFactory(FactoryType.COORDINATE);
 
         // Iterate through all types of characters and add them into the piece map
         EnumSet.allOf(CharacterType.class).stream().limit(pieceCount).forEach(characterType ->{
@@ -54,12 +54,10 @@ public class PieceGenerator
 
             // Make sure no conflicts on coordinates
             do {
-                assert coordinateFactory != null;
-                coordinate = coordinateFactory.createCoordinate();
+                coordinate = coordinateFactory.createCoordinate(boardSize);
             } while (checkExistingCoordinate(coordinate));
 
             // Add into piece map
-            assert pieceFactory != null;
             Piece piece = pieceFactory.createPiece(characterType, coordinate);
             this.pieceMap.put(characterType, piece);
 

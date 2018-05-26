@@ -3,22 +3,16 @@ package models.factory;
 import models.coordinate.Coordinate;
 import models.piece.Piece;
 import models.piece.type.CharacterType;
+import models.piece.type.RoleType;
 import models.player.Player;
 
 public abstract class AbstractBoardFactory
 {
-    protected int boardSize;
-
-    protected AbstractBoardFactory(int boardSize)
-    {
-        this.boardSize = boardSize;
-    }
-
     /**
      * Create a coordinate with a random axis
      * @return new coordinate
      */
-    public abstract Coordinate createCoordinate();
+    public abstract Coordinate createCoordinate(int boardSize);
 
     /**
      * Create a coordinate with specified axis
@@ -35,4 +29,6 @@ public abstract class AbstractBoardFactory
      * @return new piece
      */
     public abstract Piece createPiece(CharacterType characterType, Coordinate coordinate);
+
+    public abstract Player createPlayer(String playerName, RoleType roleType);
 }

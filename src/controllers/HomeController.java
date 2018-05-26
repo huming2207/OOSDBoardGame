@@ -13,16 +13,15 @@ import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.TilePane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import models.misc.GenericSettings;
-import models.player.Player;
 import models.coordinate.BoardCellCoordinate;
 import models.coordinate.Coordinate;
+import models.player.Player;
 
 import java.io.*;
 
@@ -58,9 +57,6 @@ public class HomeController
 
     @FXML
     private Label capitalismPlayerScore;
-
-    @FXML
-    private ToggleButton defensiveToggle;
 
     /**
      * Set the FXML Control map from the main class (i.e. from loader.getNamespace()) and initialize game logic.

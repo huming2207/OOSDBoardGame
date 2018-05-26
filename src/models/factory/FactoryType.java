@@ -3,5 +3,6 @@ package models.factory;
 public enum FactoryType
 {
     PIECE,
-    COORDINATE
+    COORDINATE,
+    PLAYER
 }

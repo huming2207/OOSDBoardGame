@@ -3,16 +3,16 @@ package models.factory;
 import models.coordinate.Coordinate;
 import models.piece.Piece;
 import models.piece.type.CharacterType;
+import models.piece.type.RoleType;
+import models.player.CapitalismPlayer;
+import models.player.CommunismPlayer;
+import models.player.Player;
 
 public class PlayerFactory extends AbstractBoardFactory
 {
-    protected PlayerFactory(int boardSize)
-    {
-        super(boardSize);
-    }
 
     @Override
-    public Coordinate createCoordinate()
+    public Coordinate createCoordinate(int boardSize)
     {
         return null;
     }
@@ -27,5 +27,15 @@ public class PlayerFactory extends AbstractBoardFactory
     public Piece createPiece(CharacterType characterType, Coordinate coordinate)
     {
         return null;
+    }
+
+    @Override
+    public Player createPlayer(String playerName, RoleType roleType)
+    {
+        if(roleType == RoleType.COMMUNISM_PIECE) {
+            return new CommunismPlayer(playerName);
+        } else {
+            return new CapitalismPlayer(playerName);
+        }
     }
 }

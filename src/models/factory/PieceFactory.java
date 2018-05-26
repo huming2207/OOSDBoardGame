@@ -11,6 +11,8 @@ import models.piece.decorators.style.characters.*;
 import models.piece.decorators.style.roles.CapitalismRole;
 import models.piece.decorators.style.roles.CommunismRole;
 import models.piece.type.CharacterType;
+import models.piece.type.RoleType;
+import models.player.Player;
 
 import java.util.HashMap;
 
@@ -28,15 +30,14 @@ public class PieceFactory extends AbstractBoardFactory
 {
     private final HashMap<CharacterType, PieceCreator> creatorCommands;
 
-    public PieceFactory(int boardSize)
+    public PieceFactory()
     {
-        super(boardSize);
         this.creatorCommands = new HashMap<>();
         this.initPieceCreationCommands();
     }
 
     @Override
-    public Coordinate createCoordinate()
+    public Coordinate createCoordinate(int boardSize)
     {
         return null;
     }
@@ -54,6 +55,12 @@ public class PieceFactory extends AbstractBoardFactory
         newPiece.setCoordinate(coordinate);
 
         return newPiece;
+    }
+
+    @Override
+    public Player createPlayer(String playerName, RoleType roleType)
+    {
+        return null;
     }
 
     private void initPieceCreationCommands()
