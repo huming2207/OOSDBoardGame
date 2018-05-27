@@ -7,12 +7,12 @@ OOSD Board Game, for Object Oriented Software Design (ISYS1083), Group G3.
  * Please refer to PDF version of this document if you can't render markdown in your environment.
  * Please be aware that our group contribution are not equal, i.e. not everyone has 25%. The rate is listed below:
  
-    | Member | Rate |
-    | --- | --- |
-    | Ming Hu  | 45% |
-    | Yixiong Shen | 18.3% |
-    | Xuan Gia Khanh Nguyen | 18.3% |
-    | Tuan Manh Nguyen | 18.3% |
+    | Member | Rate | Works done |
+    | --- | --- | --- |
+    | Ming Hu  | 45% | All coding works, including this README file; Diagram corrections; Presentation slide corrections |
+    | Yixiong Shen | 18.3% | Presentation slides |
+    | Xuan Gia Khanh Nguyen | 18.3% | Class diagrams |
+    | Tuan Manh Nguyen | 18.3% | Final report |
     
     Please refer to the contribution confirmation sheet for more details.
 
@@ -68,24 +68,29 @@ You may also need to set Cofoja separately before compile. Please refer to [this
 Assignment 2 has implemented/refactored with 5 design patterns, which are:
 
 - Prototype 
-    - located in `PiecePrototype` class
-    - for creating pieces correctly
+    - located in `models.piece.PieceGenerator` class
+        - It is used for creating pieces correctly
+        - prevents using unnecessary initialization code.
 - Command
     - located in `PieceFactory`, `PieceCreator` class
-    - for shortening the code using lambda (no more if-else or switch-case needed)
-    - simplify the process for adding new pieces/characters 
+        - It shortens the code with lambda (no more if-else or switch-case needed)
+        - simplify the process for adding new pieces/characters 
 - Decorator
     - located in package `models.pieces`
-    - simplify the process for adding new pieces/characters
-    - decouple piece model
+        - It simplifies the process for adding new pieces/characters
+        - It allows flexible extension to a existing piece
 - Chain of Responsibility
     - located in `helpers.reactions` package
-    - simplify & decouple the reaction when for notification/logging
+        - It simplifies & decouples the request when the app creates notification/logging
 - Abstract Factory
     - located in `models.factory` package (together with command pattern)
-    - Limit direct access for concrete classes.
+        - It limits direct access for concrete classes.
 
 ## Methods/Constructors with Cofoja (DbC as required)
+
+NOTICE: Since Cofoja may not work correctly on Intellij IDEA and the program may be failed to compile. The development environment follows the configurations in [this tutorial](https://stackoverflow.com/questions/31235078/using-cofoja-annotations-in-intellij) and the project can pass compiling and testing with no issue. 
+
+These code mentioned below are using Cofoja:
 
 - controllers
     - logic
@@ -93,34 +98,45 @@ Assignment 2 has implemented/refactored with 5 design patterns, which are:
         - `GameLogic`
         - `StatusManager`
     - `HomeController`
+    - `SettingController`
 - helpers
     - reactions
         - `CrashReactions`
         - `DebugReactions`
         - `WarningReactions`
+    - `BoardButtonHelper`
 - models
     - board
         - `Board`
     - coordinate
         - `Coordinate`
     - factory
-        
+        - `PieceFactory`
+        - `PlayerFactory`
+        - `CoordinateFactory`
+    - piece
+        - some decorator classes
+        - `PieceGenerator`
+        - `SimplePiece`
+    - player
+        - `CommunismPlayer`
+        - `CapitalismPlayer`
+
+
         
 
 ## GRASP principles
 
 ### Low coupling
 
-- Original Piece class is abstract class with different style/type of pieces extends it.
-- Buttons in the board are automatically generated, not directly written into FXML. It also allows 
-    - Same as name
+- Piece model classes are using Decorator design pattern. The properties in a certain piece are decorated by decorator classes.
+- Buttons in the board are automatically generated, not directly written into FXML. It also allows users to change the size of board between 6x6 to 18x18 dynamically.
 
 ### High cohesion
 
 - `GameLogic` class and `HomeController` class
-    - No method with long branch of code
+    - No method with long section of code
     - Well categorised, `GameLogic` in charge of game logic only, while `HomeController` handles UI stuff.
-    - But they also need to work together anyway...
 
 - `Board` class, `Piece` class and `Coordinate` class
     - Model classes to store game status, with levels
