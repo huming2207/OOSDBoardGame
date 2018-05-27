@@ -52,8 +52,8 @@
                 </accelerator>
             </MenuItem>
         </Menu>
-        <Menu onAction="#handleAboutAction" text="Help">
-            <MenuItem text="About"/>
+        <Menu text="Help">
+            <MenuItem text="About" onAction="#handleAboutAction"/>
         </Menu>
     </MenuBar>
 

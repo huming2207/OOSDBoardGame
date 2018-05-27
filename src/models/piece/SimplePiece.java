@@ -10,8 +10,8 @@ import java.io.IOException;
 import java.io.Serializable;
 
 /**
- * Simple piece placeholder
- * Useless, just for prototype/decorator patterns
+ * Simple plain piece placeholder
+ * Useless, just for prototype/decorator patterns (i.e. the class to be decorated)
  *
  * @author Ming Hu
  * @since Assignment 2

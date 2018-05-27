@@ -16,7 +16,7 @@ OOSD Board Game, for Object Oriented Software Design (ISYS1083), Group G3.
     
     Please refer to the contribution confirmation sheet for more details.
 
- * **This README file is just a reference for team member to understand the code and help them for designing diagram, presentation slide and reports. It is also a reference fully based on the ideas of main contributor (Ming Hu) on the code.**
+ * **This README file is a reference for team member to understand the code and help them for designing diagram, presentation slide and reports. If there is any conflicting content with the final report, please refer to that document first.**
 
 
 ## Author (Assignment 2 branch)
@@ -40,28 +40,32 @@ You may also need to set Cofoja separately before compile. Please refer to [this
 
 - [x] Basics
     - [x] JavaFX GUI
+    - [x] Menu bar
     - [x] MVC design structure
-- [ ] Gameplay
+- [x] Gameplay
     - [x] Round based game demo
     - [x] Countdown timeout for each turn
-    - [ ] Capture phrases (Assignment 2)
+    - [x] Capture phrases (Assignment 2)
     - [x] Defensive mode (Assignment 2)
-    - [ ] Grade/win state (Assignment 2)
+    - [x] Grade/win state (Assignment 2)
 - [x] Board
     - [x] 8x8 board, 64 cells
     - [x] Un-do/Re-do support (Assignment 2)
     - [x] Status save/reload (Assignment 2)
-    - [x] Board resizing (Assignment 2)
-    - [x] Customize piece count 
+    - [x] Board resizing (Assignment 2) 
 - [x] Piece
     - [x] CSS styled
     - [x] Movable
 - [x] Settings (Assignment 2)
-    - [x] Board size
+    - [x] Variable board size
+    - [x] Variable piece count
     - [x] Custom player name
 - [x] Player
     - [x] Initial mark deduction info
     - [x] Turn based
+- [x] "About" window
+- [x] Hotkey bindings on menu bar
+    
 
 ## Design patterns
 
@@ -121,9 +125,6 @@ These code mentioned below are using Cofoja:
     - player
         - `CommunismPlayer`
         - `CapitalismPlayer`
-
-
-        
 
 ## GRASP principles
 
