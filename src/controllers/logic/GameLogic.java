@@ -1,7 +1,6 @@
 package controllers.logic;
 
 import com.google.java.contract.Ensures;
-import com.google.java.contract.Invariant;
 import com.google.java.contract.Requires;
 import controllers.HomeController;
 import helpers.exceptions.DuplicatedPieceException;
@@ -13,6 +12,9 @@ import javafx.collections.ListChangeListener;
 import javafx.scene.control.Alert;
 import models.coordinate.Coordinate;
 import models.board.Board;
+import models.factory.BoardFactory;
+import models.factory.generator.FactoryGenerator;
+import models.factory.type.FactoryType;
 import models.piece.Piece;
 import models.piece.PieceGenerator;
 import models.piece.type.RoleType;
@@ -40,9 +42,14 @@ public class GameLogic implements ListChangeListener<Piece>
         this.homeController = homeController;
         
         // Initialize board model
-        this.board = new Board(this,
-                homeController.getSettings().getCommunismPlayerName(),
-                homeController.getSettings().getCapitalismPlayerName());
+        this.board = new Board(this);
+
+        // Create two players
+        BoardFactory boardFactory = FactoryGenerator.getFactory(FactoryType.PLAYER);
+        this.board.setCommunismPlayer(boardFactory.createPlayer(
+                        homeController.getSettings().getCommunismPlayerName(), RoleType.COMMUNISM_PIECE));
+        this.board.setCapitalismPlayer(boardFactory.createPlayer(
+                        homeController.getSettings().getCapitalismPlayerName(), RoleType.CAPITALISM_PIECE));
 
         // Initialize piece generator
         PieceGenerator pieceGenerator = new PieceGenerator(

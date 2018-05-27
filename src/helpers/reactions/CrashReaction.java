@@ -1,6 +1,5 @@
 package helpers.reactions;
 
-import com.google.java.contract.Ensures;
 import com.google.java.contract.Requires;
 
 import java.text.SimpleDateFormat;

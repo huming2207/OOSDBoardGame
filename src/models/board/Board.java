@@ -11,11 +11,7 @@ import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.Duration;
-import models.factory.BoardFactory;
-import models.factory.generator.FactoryGenerator;
-import models.factory.type.FactoryType;
 import models.piece.Piece;
-import models.piece.type.RoleType;
 import models.player.Player;
 
 import java.io.IOException;
@@ -46,19 +42,12 @@ public class Board implements Serializable
     /**
      * Create a new board
      * @param gameLogic Game logic controller
-     * @param communismPlayerName Communism player's nick name
-     * @param capitalismPlayerName Capitalism player's nick name
      */
-    @Requires({"gameLogic != null", "!communismPlayerName.isEmpty()", "!capitalismPlayerName.isEmpty()"})
-    public Board(GameLogic gameLogic, String communismPlayerName, String capitalismPlayerName)
+    @Requires("gameLogic != null")
+    public Board(GameLogic gameLogic)
     {
         // Set game logic controller
         this.gameLogic = gameLogic;
-
-        // Create two players
-        BoardFactory boardFactory = FactoryGenerator.getFactory(FactoryType.PLAYER);
-        this.communismPlayer = boardFactory.createPlayer(communismPlayerName, RoleType.COMMUNISM_PIECE);
-        this.capitalismPlayer = boardFactory.createPlayer(capitalismPlayerName, RoleType.CAPITALISM_PIECE);
 
         // Initialize piece list
         this.pieceList = FXCollections.observableArrayList();
