@@ -6,13 +6,13 @@ import models.piece.type.CharacterType;
 import models.piece.type.RoleType;
 import models.player.Player;
 
-public abstract class AbstractBoardFactory
+public interface BoardFactory
 {
     /**
      * Create a coordinate with a random axis
      * @return new coordinate
      */
-    public abstract Coordinate createCoordinate(int boardSize);
+    Coordinate createCoordinate(int boardSize);
 
     /**
      * Create a coordinate with specified axis
@@ -20,7 +20,7 @@ public abstract class AbstractBoardFactory
      * @param y y-axis value
      * @return new coordinate
      */
-    public abstract Coordinate createCoordinate(int x, int y);
+    Coordinate createCoordinate(int x, int y);
 
     /**
      * Create a new piece with specified type and coordinate
@@ -28,7 +28,7 @@ public abstract class AbstractBoardFactory
      * @param coordinate Coordinate of this piece
      * @return new piece
      */
-    public abstract Piece createPiece(CharacterType characterType, Coordinate coordinate);
+    Piece createPiece(CharacterType characterType, Coordinate coordinate);
 
     /**
      * Create a new player with specified role type and name
@@ -36,5 +36,5 @@ public abstract class AbstractBoardFactory
      * @param roleType Role type
      * @return new player
      */
-    public abstract Player createPlayer(String playerName, RoleType roleType);
+    Player createPlayer(String playerName, RoleType roleType);
 }

@@ -48,8 +48,8 @@ public class PieceGenerator
     @Ensures({"boardSize >= 6", "pieceCount > 1"})
     private void generateNewPieces(int boardSize, int pieceCount)
     {
-        AbstractBoardFactory pieceFactory = FactoryGenerator.getFactory(FactoryType.PIECE);
-        AbstractBoardFactory coordinateFactory = FactoryGenerator.getFactory(FactoryType.COORDINATE);
+        BoardFactory pieceFactory = FactoryGenerator.getFactory(FactoryType.PIECE);
+        BoardFactory coordinateFactory = FactoryGenerator.getFactory(FactoryType.COORDINATE);
 
         // Iterate through all types of characters and add them into the piece map
         EnumSet.allOf(CharacterType.class).stream().limit(pieceCount).forEach(characterType ->{

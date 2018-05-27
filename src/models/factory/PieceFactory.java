@@ -28,7 +28,7 @@ import java.util.HashMap;
  * @author Ming Hu
  * @since assignment 2
  */
-public class PieceFactory extends AbstractBoardFactory
+public class PieceFactory implements BoardFactory
 {
     private final HashMap<CharacterType, PieceCreator> creatorCommands;
 
