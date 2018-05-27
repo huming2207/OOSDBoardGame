@@ -7,12 +7,12 @@ OOSD Board Game, for Object Oriented Software Design (ISYS1083), Group G3.
  * Please refer to PDF version of this document if you can't render markdown in your environment.
  * Please be aware that our group contribution are not equal, i.e. not everyone has 25%. The rate is listed below:
  
-    | Member | Rate | Works done |
+    | Member name & student ID | Contribution Rate | Works done |
     | --- | --- | --- |
-    | Ming Hu  | 45% | All coding works, including this README file; Diagram corrections; Presentation slide corrections |
-    | Yixiong Shen | 18.3% | Presentation slides |
-    | Xuan Gia Khanh Nguyen | 18.3% | Class diagrams |
-    | Tuan Manh Nguyen | 18.3% | Final report |
+    | Ming Hu (s3554025)  | 45% | All coding works, including this README file; Diagram corrections; Presentation slide corrections |
+    | Yixiong Shen (s3700889) | 18.3% | Presentation slides |
+    | Xuan Gia Khanh Nguyen (s3636905) | 18.3% | Class diagrams |
+    | Tuan Manh Nguyen (s3574923) | 18.3% | Final report |
     
     Please refer to the contribution confirmation sheet for more details.
 
