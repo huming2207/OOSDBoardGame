@@ -1,6 +1,6 @@
 package models.factory.generator;
 
-import models.factory.AbstractBoardFactory;
+import models.factory.BoardFactory;
 import models.factory.CoordinateFactory;
 import models.factory.PieceFactory;
 import models.factory.PlayerFactory;
@@ -8,7 +8,7 @@ import models.factory.type.FactoryType;
 
 public class FactoryGenerator
 {
-    public static AbstractBoardFactory getFactory(FactoryType type)
+    public static BoardFactory getFactory(FactoryType type)
     {
         switch (type)
         {

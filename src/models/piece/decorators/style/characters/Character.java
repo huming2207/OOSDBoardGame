@@ -1,5 +1,6 @@
 package models.piece.decorators.style.characters;
 
+import com.google.java.contract.Invariant;
 import helpers.CloneHelper;
 import models.piece.Piece;
 
@@ -13,6 +14,7 @@ import java.io.Serializable;
  * @author Ming Hu
  * @since Assignment 2
  */
+@Invariant({"mark >= 0"})
 public abstract class Character implements Piece, Cloneable, Serializable
 {
     protected Piece decoratePiece;

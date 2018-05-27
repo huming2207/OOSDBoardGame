@@ -4,8 +4,20 @@ OOSD Board Game, for Object Oriented Software Design (ISYS1083), Group G3.
 
 ## IMPORTANT NOTICE FOR TEACHERS 
 
- * Please refer to PDF version of this document if you can't render markdown in your environment. Thanks.
- * **This README file is just a reference for team member to understand the code and help them for designing diagram, presentation slide and reports. If there is any conflicted content, please refer to those documents first.**
+ * Please refer to PDF version of this document if you can't render markdown in your environment.
+ * Please be aware that our group contribution are not equal, i.e. not everyone has 25%. The rate is listed below:
+ 
+    | Member | Rate | Works done |
+    | --- | --- | --- |
+    | Ming Hu  | 45% | All coding works, including this README file; Diagram corrections; Presentation slide corrections |
+    | Yixiong Shen | 18.3% | Presentation slides |
+    | Xuan Gia Khanh Nguyen | 18.3% | Class diagrams |
+    | Tuan Manh Nguyen | 18.3% | Final report |
+    
+    Please refer to the contribution confirmation sheet for more details.
+
+ * **This README file is just a reference for team member to understand the code and help them for designing diagram, presentation slide and reports. It is also a reference fully based on the ideas of main contributor (Ming Hu) on the code.**
+
 
 ## Author (Assignment 2 branch)
 
@@ -56,116 +68,135 @@ You may also need to set Cofoja separately before compile. Please refer to [this
 Assignment 2 has implemented/refactored with 5 design patterns, which are:
 
 - Prototype 
-    - located in `PiecePrototype` class
-    - for creating pieces correctly
+    - located in `models.piece.PieceGenerator` class
+        - It is used for creating pieces correctly
+        - prevents using unnecessary initialization code.
 - Command
     - located in `PieceFactory`, `PieceCreator` class
-    - for shortening the code using lambda (no more if-else or switch-case needed)
-    - simplify the process for adding new pieces/characters 
+        - It shortens the code with lambda (no more if-else or switch-case needed)
+        - simplify the process for adding new pieces/characters 
 - Decorator
     - located in package `models.pieces`
-    - simplify the process for adding new pieces/characters
-    - decouple piece model
+        - It simplifies the process for adding new pieces/characters
+        - It allows flexible extension to a existing piece
 - Chain of Responsibility
     - located in `helpers.reactions` package
-    - simplify & decouple the reaction when for notification/logging
+        - It simplifies & decouples the request when the app creates notification/logging
 - Abstract Factory
     - located in `models.factory` package (together with command pattern)
-    - shorten the code
+        - It limits direct access for concrete classes.
 
 ## Methods/Constructors with Cofoja (DbC as required)
 
-- `controllers` 
-    - `GameLogic::commitMapChanges`
-    - `GameLogic::timeout`
-    - `GameLogic::selectPiece`
-    - `GameLogic::placePiece`
-    - `HomeController::commitUIChanges`
-    - `HomeController::commitPlayerSelection`
-        - useful for some misuse cases
-- `helpers`
-    - `BoardButtonHelper::parseClickResult`
-    - `PieceFactory::createRandomPieceList`
-    - `PieceFactory::createRandomCoordinateQueue`
-- `models`
-    - `models.player`
+NOTICE: Since Cofoja may not work correctly on Intellij IDEA and the program may be failed to compile. The development environment follows the configurations in [this tutorial](https://stackoverflow.com/questions/31235078/using-cofoja-annotations-in-intellij) and the project can pass compiling and testing with no issue. 
+
+These code mentioned below are using Cofoja:
+
+- controllers
+    - logic
+        - `CompeteManager`
+        - `GameLogic`
+        - `StatusManager`
+    - `HomeController`
+    - `SettingController`
+- helpers
+    - reactions
+        - `CrashReactions`
+        - `DebugReactions`
+        - `WarningReactions`
+    - `BoardButtonHelper`
+- models
+    - board
+        - `Board`
+    - coordinate
+        - `Coordinate`
+    - factory
+        - `PieceFactory`
+        - `PlayerFactory`
+        - `CoordinateFactory`
+    - piece
+        - some decorator classes
+        - `PieceGenerator`
+        - `SimplePiece`
+    - player
         - `CommunismPlayer`
         - `CapitalismPlayer`
-    - `Board::getPieceList`
-        - useful for detecting logic issues in PieceFactory
-    - `Board::setPieceList`
-        - useful for detecting logic issues in PieceFactory
-    - `BoardCellCoordinates`
-    - `Coordinate`
-    - `Coordinate::getPosX`
-    - `Coordinate::getPosY`
-    - `Coordinate::setPosX`
-    - `Coordinate::setPosY`
-    - `Piece::getStyle`
-    - `Piece::getAttackLevel`
-    - `Piece::applyAttack`
-    - `Piece::getCoordinate`
-    - `Piece::setCoordinate`
-    - `Player`
+
+
+        
 
 ## GRASP principles
 
 ### Low coupling
 
-- Original Piece class is abstract class with different style/type of pieces extends it.
-- UI controls are in a `Map<String, Object>`, where the strings are UI controls' ID and the objects are their references. Later in Assignment 2, if we need to increase the board size, we just need to draw the UI and adjust some logics, no need to care about models.
+- Piece model classes are using Decorator design pattern. The properties in a certain piece are decorated by decorator classes.
+- Buttons in the board are automatically generated, not directly written into FXML. It also allows users to change the size of board between 6x6 to 18x18 dynamically.
 
 ### High cohesion
 
 - `GameLogic` class and `HomeController` class
-    - No method with long branch of code
+    - No method with long section of code
     - Well categorised, `GameLogic` in charge of game logic only, while `HomeController` handles UI stuff.
-    - But they also need to work together anyway...
 
 - `Board` class, `Piece` class and `Coordinate` class
     - Model classes to store game status, with levels
     - Different level has its own responsibility, but they need to work together.
     - `Board` contains a list of `Piece`, each `Piece` has its own `Coordinate`
 
+### Creator
+
+- Abstract factory pattern is used in this project for creating contents in the board.
+
 ### Controller
 
 - This app is based on MVC design structures, so it has controllers
-- Controllers are `GameLogic` which controls gameplay logic and `HomeController` which controls GUI ***(it also sounds like Pure Fabrication to some extent???)***
+- Controllers are `GameLogic` which controls gameplay logic and `HomeController` which controls GUI. ***(it also sounds like Pure Fabrication to some extent???)***
 
 ### Polymorphism
 
-- `ICoordinate` interface for `Coordinate` and `BoardButtonCoordinate`
+- `Piece` interface for piece models
+- `Player` interface for player models
+- `PieceGenerator` interface for generating
     
 ### Indirection
 
 - `GameLogic` controls gameplay logic and `HomeController` controls GUI.  
-- If models need to control UI, they need to talk to `HomeController` first to ensure no invalid data is updated to UI.
+    - If models need to control UI, they need to talk to `HomeController` first to ensure no invalid data is updated to UI.
+- Also for `CompeteManager` and `StatusManager`. If the data is invalid, then it won't be updated to UI. Instead, there will be a proper warning message/debug log will be shown.
     
-
 ## SOLID principles
 
-**The following Design Principle sections are just a for a reference as it was written for a draft by Ming Hu for other group members. If there is any conflicts against with the Design Principle section in the report, please refer to the report instead, not this README.**
+### Single Responsibility Principle
+
+- Game logic code are separated to three classes, which are `GameLogic`, `CompeteManager` and `StatusManager`.
+    - `GameLogic` only responsible the low-level logics
+    - `CompeteManager` handles the move range and attack range evaluation
+    - `StatusManager` saves or restores the status or the board
 
 ### Open/Close Principle
 - `GameLogic::selectPiece` and `GameLogic::placePiece` are in **private** level
     - These two methods should not be changed and misused by others
-- All the pieces extends an abstract Piece class
-- Piece's attack level, total marks, styling string are in **final** to prevent design flaws caused by misuses.
+- Piece models are in proper
 
 ### Liskov Substitution Principle
 
-- The `Board` contains a list of `Piece`
-- Each `Piece` contains a `Coordinate`
+- `SimplePiece` has the correct implementation under `Piece`
+
+### Interface segregation principle
+
+- All piece methods in `Piece` interface are in use
 
 ### Dependency Inversion Principle
 
-- `ICoordinate` interface and `Piece` abstract class
+- `Piece` interface for piece models
+- `Player` interface for player models
+- `PieceGenerator` interface for generating
 - The way of `GameLogic` class and piece list in `Board` class dealing with different pieces.
 
 
 ### The Don’t Repeat Yourself Principle
 
-- `Piece` is abstract class, not interface. Common attributes (e.g. coordinates, marks, attack level) can stays in abstract class without re-implement them again in the sub-classes. 
-- It significantly reduces extra code.
+- Piece models are using decorator pattern and command pattern with lambda. It significantly reduces extra code in the initialization.
+
 
 

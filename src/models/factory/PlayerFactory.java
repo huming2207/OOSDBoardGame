@@ -9,7 +9,7 @@ import models.player.CapitalismPlayer;
 import models.player.CommunismPlayer;
 import models.player.Player;
 
-public class PlayerFactory extends AbstractBoardFactory
+public class PlayerFactory implements BoardFactory
 {
 
     @Override

@@ -31,68 +31,40 @@ public class CommunismPlayer implements Player,Serializable
         this.playerName = playerName;
     }
 
-    /**
-     * Get selected piece
-     * @return selected piece
-     */
     @Ensures("result != null")
     public Piece getSelectedPiece()
     {
         return selectedPiece;
     }
 
-    /**
-     * Set selected piece
-     * @param selectedPiece piece picked by user
-     */
     @Requires("selectedPiece != null")
     public void setSelectedPiece(Piece selectedPiece)
     {
         this.selectedPiece = selectedPiece;
     }
 
-    /**
-     * Get player name
-     * @return player name in String
-     */
     @Ensures("!result.isEmpty()")
     public String getPlayerName()
     {
         return playerName;
     }
 
-    /**
-     * Set player name
-     * @param playerName player name in string
-     */
     @Requires("!playerName.isEmpty()")
     public void setPlayerName(String playerName)
     {
         this.playerName = playerName;
     }
 
-    /**
-     * Get role type
-     * @return role type
-     */
     public RoleType getRoleType()
     {
         return RoleType.COMMUNISM_PIECE;
     }
 
-    /**
-     * Get current score of a player
-     * @return current score
-     */
     public int getScore()
     {
         return score;
     }
 
-    /**
-     * Set current score of a player
-     * @param score new score
-     */
     public void setScore(int score)
     {
         this.score = score;

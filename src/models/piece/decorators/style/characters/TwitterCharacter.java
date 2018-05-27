@@ -1,5 +1,6 @@
 package models.piece.decorators.style.characters;
 
+import com.google.java.contract.Invariant;
 import models.coordinate.Coordinate;
 import models.piece.Piece;
 import models.piece.type.CharacterType;
@@ -12,6 +13,7 @@ import models.piece.type.RoleType;
  * @author Ming Hu
  * @since Assignment 2
  */
+@Invariant({"mark >= 0"})
 public class TwitterCharacter extends Character
 {
     public TwitterCharacter(Piece piece)

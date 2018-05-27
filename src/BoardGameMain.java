@@ -26,6 +26,7 @@ public class BoardGameMain extends Application
             Scene scene = new Scene(loader.load());
 
             // Load main CSS for home view
+            // This CSS theme file below is not complete.
             // scene.getStylesheets().add(getClass().getResource("views/css/BoardButton.css").toExternalForm());
             primaryStage.setScene(scene);
 

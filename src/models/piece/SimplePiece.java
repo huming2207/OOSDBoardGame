@@ -16,7 +16,7 @@ import java.io.Serializable;
  * @author Ming Hu
  * @since Assignment 2
  */
-@Invariant({"mark > 0", "coordinate != null"})
+@Invariant({"mark >= 0", "coordinate != null"})
 public class SimplePiece implements Piece, Cloneable, Serializable
 {
     private Coordinate coordinate;

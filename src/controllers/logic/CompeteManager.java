@@ -1,5 +1,7 @@
 package controllers.logic;
 
+import com.google.java.contract.Ensures;
+import com.google.java.contract.Requires;
 import helpers.reactions.Reaction;
 import helpers.reactions.ReactionLevel;
 import helpers.reactions.ReactionManager;
@@ -50,6 +52,7 @@ public class CompeteManager
      * @param currentPlayer Current player who perform the attack
      * @return the piece that HAS BEEN ATTACKED BY OTHER PIECE
      */
+    @Ensures("result != null")
     protected Piece performPossibleAttack(Player currentPlayer)
     {
         // Generate dead zone
@@ -80,6 +83,8 @@ public class CompeteManager
         return null;
     }
 
+    @Requires("offsets.length > 0")
+    @Ensures("!result.isEmpty()")
     private List<Coordinate> generateTargetCoordinates(Player currentPlayer, int[][] offsets)
     {
         // Generate dead zone

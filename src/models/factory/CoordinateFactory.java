@@ -1,6 +1,5 @@
 package models.factory;
 
-import com.google.java.contract.Ensures;
 import com.google.java.contract.Requires;
 import models.coordinate.Coordinate;
 import models.piece.Piece;
@@ -16,7 +15,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * @author Ming Hu
  * @since Assignment 2
  */
-public class CoordinateFactory extends AbstractBoardFactory
+public class CoordinateFactory implements BoardFactory
 {
     @Override
     @Requires("boardSize >= 6")

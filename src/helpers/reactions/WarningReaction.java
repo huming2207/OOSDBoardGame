@@ -1,5 +1,6 @@
 package helpers.reactions;
 
+import com.google.java.contract.Requires;
 import javafx.scene.control.Alert;
 
 import java.text.SimpleDateFormat;
@@ -19,6 +20,7 @@ public class WarningReaction extends Reaction
     }
 
     @Override
+    @Requires("!message.isEmpty()")
     protected void performReaction(String message)
     {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");

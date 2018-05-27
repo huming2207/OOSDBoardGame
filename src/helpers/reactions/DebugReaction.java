@@ -1,5 +1,7 @@
 package helpers.reactions;
 
+import com.google.java.contract.Requires;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -17,6 +19,7 @@ public class DebugReaction extends Reaction
     }
 
     @Override
+    @Requires("!message.isEmpty()")
     protected void performReaction(String message)
     {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
