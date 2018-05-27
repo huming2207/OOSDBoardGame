@@ -10,7 +10,6 @@ import java.util.Stack;
 
 /**
  * Status manager for board model, provides un-do/re-do/save/reload functionality
- * The code below does work, but smells like durian.
  *
  * @author Ming Hu (s3554025)
  * @since Assignment 2
